@@ -224,11 +224,8 @@ You might also like to install `ms-vscode.live-server` for live debugging in Cod
 
 **Q**: Does this script disable the caps lock key? I've noticed that it works during login but after that it stops working altogether.
 
-**A**: It makes the caps lock into delete for touch typing purposes, to change it modify this line in `install.yml`:
+**A**: It makes the caps lock into delete for touch typing purposes, to change it modify this line in `install-setup.bash`:
 
 ```yml
-- {
-    key: "/org/gnome/desktop/input-sources/xkb-options",
-    value: "['caps:backspace', 'terminate:ctrl_alt_bksp', 'lv3:rwin_switch', 'altwin:meta_alt']",
-  }
+capslock_delete="false"
 ```
