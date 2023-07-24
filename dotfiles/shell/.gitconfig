@@ -1,0 +1,12 @@
+[delta]
+    syntax-theme = "Visual Studio Dark+"
+    side-by-side = true
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[commit]
+	gpgsign = true

@@ -1,0 +1,7 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never
+
+refresher:
+  refreshInterval: 5
