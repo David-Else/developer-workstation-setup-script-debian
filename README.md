@@ -38,9 +38,8 @@ Select Gnome as the desktop environment. During the installation, do not provide
 3. Clone the repository and navigate to it:
 
    ```sh
-   git clone https://github.com/David-Else/developer-workstation-setup-script
-   cd developer-workstation-setup-script
-   git switch debian12
+   git clone https://github.com/David-Else/developer-workstation-setup-script-debian
+   cd developer-workstation-setup-script-debian
    ```
 
 4. Customize the software selection by modifying the `install.yml` and `install-setup.bash` scripts according to your preferences.
