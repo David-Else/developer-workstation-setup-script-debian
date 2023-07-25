@@ -39,6 +39,7 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # ytfzf
 export video_pref="bestvideo[height<=?2160]+bestaudio/best"
+alias ytfzf='ytfzf -T kitty'
 
 # zoxide
 eval "$(zoxide init bash)"
