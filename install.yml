@@ -27,7 +27,6 @@
       - gnome-shell-extension-caffeine
       - gnome-software-plugin-flatpak
       - gnome-tweaks
-      - gthumb
       - handbrake
       - heif-gdk-pixbuf
       - heif-thumbnailer
