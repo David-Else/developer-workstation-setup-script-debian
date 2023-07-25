@@ -29,6 +29,8 @@
       - gnome-tweaks
       - gthumb
       - handbrake
+      - heif-gdk-pixbuf
+      - heif-thumbnailer
       - imagemagick
       - keepassxc
       - kitty
