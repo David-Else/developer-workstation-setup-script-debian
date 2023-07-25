@@ -150,10 +150,10 @@ To set the available sample rates for your audio interface, follow these steps:
    mkdir -p ~/.config/pipewire/jack.conf.d/
    cat >~/.config/pipewire/jack.conf.d/jack.conf <<EOF
    jack.properties = {
-        node.latency       = 256/96000
+        node.latency       = 512/96000
         node.rate          = 1/96000
-        node.quantum       = 256/96000
-        node.force-quantum = 256
+        node.quantum       = 512/96000
+        node.force-quantum = 512
    }
    EOF
    ```
