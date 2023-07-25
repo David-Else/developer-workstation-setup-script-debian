@@ -114,7 +114,7 @@
     - name: Update and upgrade all packages
       become: true
       ansible.builtin.apt:
-        upgrade: true
+        upgrade: dist
         update_cache: true
 
     - name: Install packages
