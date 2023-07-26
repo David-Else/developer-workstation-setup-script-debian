@@ -157,7 +157,7 @@ To set the available sample rates for your audio interface, follow these steps:
    }
    EOF
    ```
-To make PipeWire JACK run by default when JACK is called:
+To make [PipeWire JACK run by default when JACK is called](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#installation):
 
 ```sh
 sudo cp /usr/share/doc/pipewire/examples/ld.so.conf.d/pipewire-jack-*.conf /etc/ld.so.conf.d/
