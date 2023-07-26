@@ -157,6 +157,8 @@ To set the available sample rates for your audio interface, follow these steps:
    }
    EOF
    ```
+   > More info can be found at: [docs.pipewire.org configuration-file-jackconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#configuration-file-jackconf)
+
 To make [PipeWire JACK run by default when JACK is called](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#installation):
 
 ```sh
@@ -165,8 +167,6 @@ sudo ldconfig
 ```
 
 This is needed by Reaper if using `Audio system: JACK`.
-
-   > More info can be found at: [docs.pipewire.org configuration-file-jackconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#configuration-file-jackconf)
 
 ### General
 
