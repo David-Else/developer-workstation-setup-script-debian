@@ -5,3 +5,6 @@ git:
 
 refresher:
   refreshInterval: 5
+
+gui:
+  nerdFontsVersion: "3"
