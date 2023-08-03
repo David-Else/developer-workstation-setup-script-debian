@@ -51,6 +51,7 @@
       - shellcheck
       - shfmt
       - stow
+      - tesseract-ocr
       - thunderbird
       - tldr
       - trash-cli
