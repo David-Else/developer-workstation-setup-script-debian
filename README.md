@@ -168,6 +168,8 @@ sudo ldconfig
 
 This is needed by Reaper if using `Audio system: JACK`.
 
+You can run `rtcqs` to analyze your system and detect possible bottlenecks that could have a negative impact on the performance of your system when working with Linux audio.
+
 ### General
 
 To perform general tweaks, follow these steps:
