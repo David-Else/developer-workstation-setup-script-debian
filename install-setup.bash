@@ -61,6 +61,7 @@ fi
 #==============================================================================
 pipx install shell-gpt
 pipx install yt-dlp
+pipx install rtcqs
 pipx ensurepath
 
 curl -fsSL https://deno.land/x/install/install.sh | sh
