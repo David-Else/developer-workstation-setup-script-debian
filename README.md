@@ -228,7 +228,7 @@ from langchain.chat_models import ChatOpenAI
 
 query = sys.argv[1]
 
-loader = TextLoader("./index.md")
+loader = TextLoader("./yourdata.txt")
 loader.load()
 
 index = VectorstoreIndexCreator().from_loaders([loader])
