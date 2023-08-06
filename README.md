@@ -212,6 +212,7 @@ pipx install langchain
 pipx inject langchain openai
 pipx inject langchain chromadb
 pipx inject langchain tiktoken
+pipx injext langchain "unstructured[md]"
 ```
 
 ```sh
@@ -222,17 +223,19 @@ deactivate
 ```python
 import sys
 from langchain.document_loaders import TextLoader
+from langchain.document_loaders import DirectoryLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 
 query = sys.argv[1]
 
-loader = TextLoader("./yourdata.txt")
+# loader = TextLoader("./index.txt")
+loader = DirectoryLoader("/home/user/src/", glob="*.md")
 loader.load()
 
-index = VectorstoreIndexCreator().from_loaders([loader])
 # print(index.query(query, llm=ChatOpenAI()))
+index = VectorstoreIndexCreator().from_loaders([loader])
 print(index.query(query))
 ```
 
