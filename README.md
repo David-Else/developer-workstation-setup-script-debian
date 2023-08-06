@@ -203,6 +203,8 @@ To perform general tweaks, follow these steps:
   git config --global commit.gpgsign true
   ```
 
+- Remove the apt version of `yt-dlp` that may have been auto installed, a newer version was installed using pipx.
+
 # FAQ
 
 If you would like to use Code for things that Helix still struggles with (like debugging), and still use all the modal keyboard shortcuts, I suggest installing `silverquark.dancehelix` or `asvetliakov.vscode-neovim` and using these settings:
