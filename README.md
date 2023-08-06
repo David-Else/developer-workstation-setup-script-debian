@@ -212,6 +212,7 @@ pipx install langchain
 pipx inject langchain openai
 pipx inject langchain chromadb
 pipx inject langchain tiktoken
+pipx injext langchain bs4
 pipx injext langchain "unstructured[md]"
 ```
 
@@ -224,6 +225,7 @@ deactivate
 import sys
 from langchain.document_loaders import TextLoader
 from langchain.document_loaders import DirectoryLoader
+from langchain.document_loaders import WebBaseLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
