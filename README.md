@@ -234,9 +234,10 @@ query = sys.argv[1]
 loader = DirectoryLoader("/home/user/src/", glob="*.md")
 loader.load()
 
-# print(index.query(query, llm=ChatOpenAI()))
 index = VectorstoreIndexCreator().from_loaders([loader])
-print(index.query(query))
+
+# print(index.query(query))
+print(index.query(query, llm=ChatOpenAI()))
 ```
 
 # FAQ
