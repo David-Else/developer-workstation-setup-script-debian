@@ -205,6 +205,34 @@ To perform general tweaks, follow these steps:
 
 - Remove the apt version of `yt-dlp` that may have been auto installed, a newer version was installed using pipx.
 
+- Install `langchain`:
+
+```sh
+pipx install langchain
+pipx inject langchain openai
+pipx inject langchain chromadb
+pipx inject langchain tiktoken
+```
+
+```sh
+source /home/[username]/.local/pipx/venvs/langchain/bin/activate
+deactivate
+```
+
+```python
+import sys
+from langchain.document_loaders import TextLoader
+from langchain.indexes import VectorstoreIndexCreator
+
+query = sys.argv[1]
+
+loader = TextLoader("./yourdata.txt")
+loader.load()
+
+index = VectorstoreIndexCreator().from_loaders([loader])
+print(index.query(query))
+```
+
 # FAQ
 
 If you would like to use Code for things that Helix still struggles with (like debugging), and still use all the modal keyboard shortcuts, I suggest installing `silverquark.dancehelix` or `asvetliakov.vscode-neovim` and using these settings:
