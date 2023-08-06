@@ -1,5 +1,5 @@
 [language-server]
-pyright = { command = "pyright-langserver", args = ["--stdio"] }
+pyright = { command = "pyright-langserver", args = ["--stdio"], config = {} }
 
 [language-server.ltex-ls]
 command = "ltex-ls"
