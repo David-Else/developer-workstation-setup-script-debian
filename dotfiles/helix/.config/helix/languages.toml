@@ -59,4 +59,5 @@ language-servers = [ "ltex-ls" ]
 name = "python"
 formatter = { command = "black", args = ["--quiet", "-"] }
 auto-format = true
+roots = ["pyproject.toml"]
 language-servers = [ "pyright" ]
