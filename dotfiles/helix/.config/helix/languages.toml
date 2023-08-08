@@ -1,7 +1,10 @@
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
-config = {} # buggy behaviour, you need a pyproject.toml and pyrightconfig.json
+config = {}
+# pyproject.toml
+# [tool.pyright]
+# typeCheckingMode  = "strict"
 
 [language-server.ltex-ls]
 command = "ltex-ls"
