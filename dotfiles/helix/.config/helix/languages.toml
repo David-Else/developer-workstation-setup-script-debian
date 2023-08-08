@@ -1,9 +1,7 @@
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
-
-[language-server.pyright.config.python.analysis]
-typeCheckingMode = "strict"
+config = {} # buggy behaviour, you need a pyproject.toml and pyrightconfig.json
 
 [language-server.ltex-ls]
 command = "ltex-ls"
