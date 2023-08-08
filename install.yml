@@ -14,6 +14,7 @@
       - adb
       - android-sdk-platform-tools-common
       - bat
+      - black
       - blender
       - borgbackup
       - build-essential
