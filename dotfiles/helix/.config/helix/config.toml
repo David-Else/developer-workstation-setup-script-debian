@@ -8,6 +8,8 @@ Z = { Z = ":wq", Q = ":q!" } # vim
 
 [keys.normal.space]
 w = ":write"
+Z = ":set gutters.line-numbers.min-width 3"
+z = ":set gutters.line-numbers.min-width 48"
 l = ":toggle soft-wrap.enable"
 i = ":toggle lsp.display-inlay-hints"
 c = { r = ":sh kitty @ send-text --match 'title:^Terminal' cargo run \\\\n", t = ":sh kitty @ send-text --match 'title:^Terminal' 'clear \\ncargo test \\n'" }
