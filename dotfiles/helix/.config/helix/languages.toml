@@ -1,5 +1,9 @@
-[language-server]
-pyright = { command = "pyright-langserver", args = ["--stdio"], config = {} }
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "strict"
 
 [language-server.ltex-ls]
 command = "ltex-ls"
