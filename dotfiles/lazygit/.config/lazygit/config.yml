@@ -1,10 +1,12 @@
 git:
   paging:
-    colorArg: always
     pager: delta --paging=never
 
 refresher:
-  refreshInterval: 5
+  refreshInterval: 3
 
 gui:
   nerdFontsVersion: "3"
+
+os:
+  editPreset: 'helix'
