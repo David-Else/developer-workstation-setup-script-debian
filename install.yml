@@ -53,7 +53,6 @@
       - shfmt
       - stow
       - tesseract-ocr
-      - thunderbird
       - tldr
       - trash-cli
       - xclip
@@ -65,6 +64,7 @@
       - com.obsproject.Studio
       - com.obsproject.Studio.Plugin.DroidCam
       - com.obsproject.Studio.Plugin.MoveTransition
+      - org.mozilla.Thunderbird
       - org.signal.Signal
       - com.github.tchx84.Flatseal
     npm_packages:
