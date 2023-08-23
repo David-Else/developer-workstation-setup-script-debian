@@ -1,21 +1,3 @@
-[language-server.ltex-ls]
-command = "ltex-ls"
-
-[language-server.ltex-ls.config]
-ltex.disabledRules = { "en-US" = [
-  "PROFANITY",
-], "en-GB" = [
-  "PROFANITY",
-] }
-ltex.dictionary = { "en-US" = [
-  "builtin",
-], "en-GB" = [
-  "builtin",
-] } 
-
-[language-server.rust-analyzer.config]
-checkOnSave = { command = "clippy" }
-
 [[language]]
 name = "markdown"
 text-width = 80
@@ -56,3 +38,18 @@ language-servers = [ "pyright" ]
 # pyproject.toml
 # [tool.pyright]
 # typeCheckingMode  = "strict"
+
+[language-server.ltex-ls.config]
+ltex.disabledRules = { "en-US" = [
+  "PROFANITY",
+], "en-GB" = [
+  "PROFANITY",
+] }
+ltex.dictionary = { "en-US" = [
+  "builtin",
+], "en-GB" = [
+  "builtin",
+] }
+
+[language-server.rust-analyzer.config]
+checkOnSave = { command = "clippy" }
