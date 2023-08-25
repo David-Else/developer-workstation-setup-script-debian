@@ -34,7 +34,7 @@ export NNN_FIFO=/tmp/nnn.fifo
 export BAT_THEME="Visual Studio Dark+"
 
 # fzf
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,.wine}"'
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # ytfzf
