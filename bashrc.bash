@@ -33,6 +33,10 @@ export NNN_FIFO=/tmp/nnn.fifo
 # bat
 export BAT_THEME="Visual Studio Dark+"
 export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+alias bathelp='batcat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
 
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,.wine}"'
