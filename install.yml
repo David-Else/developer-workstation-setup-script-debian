@@ -70,9 +70,9 @@
     npm_packages:
       - bash-language-server@4.10.1
       - prettier@3.0.2
-      - pyright@1.1.323
+      - pyright@1.1.324
       - typescript-language-server@3.3.2
-      - typescript@5.1.6
+      - typescript@5.2.2
       - vscode-langservers-extracted@4.7.0
       - yaml-language-server@1.11.0
 
