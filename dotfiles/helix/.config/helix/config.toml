@@ -8,7 +8,7 @@ Z = { Z = ":wq", Q = ":q!" } # vim
 
 [keys.normal.space]
 w = ":write"
-t = { "@" = ["select_all", ":pipe sort -t@ -k2,2"], "+" = ["select_all", ":pipe sort -t+ -k2,2"], f = ":toggle auto-format", i = ":toggle lsp.display-inlay-hints", s = ":toggle soft-wrap.enable", w = ":toggle whitespace.render all none", z = ":toggle gutters.line-numbers.min-width 48 3" }
+t = { "@" = ["select_all", ":pipe sort -t@ -k2,2"], "+" = ["select_all", ":pipe sort -t+ -k2,2"], f = ":toggle auto-format", i = ":toggle lsp.display-inlay-hints", l = ":toggle line-number absolute relative", s = ":toggle soft-wrap.enable", w = ":toggle whitespace.render all none", z = ":toggle gutters.line-numbers.min-width 48 3" }
 c = { r = ":sh kitty @ send-text --match 'title:^Terminal' cargo run \\\\n", t = ":sh kitty @ send-text --match 'title:^Terminal' 'clear \\ncargo test \\n'" }
 "." = "file_picker_in_current_buffer_directory"
 
