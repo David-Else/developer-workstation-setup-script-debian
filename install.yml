@@ -69,6 +69,7 @@
       - com.github.tchx84.Flatseal
     npm_packages:
       - bash-language-server@4.10.1
+      - browser-sync@2.29.3
       - prettier@3.0.2
       - pyright@1.1.325
       - typescript-language-server@3.3.2
