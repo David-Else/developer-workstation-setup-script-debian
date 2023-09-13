@@ -69,7 +69,6 @@
       - com.github.tchx84.Flatseal
     npm_packages:
       - bash-language-server@4.10.1
-      - browser-sync@2.29.3
       - prettier@3.0.2
       - pyright@1.1.325
       - typescript-language-server@3.3.2
@@ -195,6 +194,10 @@
         - name: Download and install delta
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.16.5/git-delta_0.16.5_amd64.deb
+
+        - name: Download and install hugo
+          ansible.builtin.apt:
+            deb: https://github.com/gohugoio/hugo/releases/download/v0.118.2/hugo_0.118.2_linux-amd64.deb
 
         - name: Download and install ltex-ls
           ansible.builtin.unarchive:
