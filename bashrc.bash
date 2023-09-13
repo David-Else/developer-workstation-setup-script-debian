@@ -6,6 +6,8 @@ export PATH
 alias ls="ls -ltha --color --group-directories-first --hyperlink=auto"
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
 alias hg="kitty +kitten hyperlinked_grep" # https://sw.kovidgoyal.net/kitty/kittens/hyperlinked_grep/
+alias ai="sgpt"
+alias ai4="sgpt --model='gpt-4'"
 
 # Functions
 clip() { xclip -sel clip -rmlastnl; }
