@@ -5,6 +5,7 @@ export PATH
 # Aliases
 alias ls="ls -ltha --color --group-directories-first --hyperlink=auto"
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
+alias ebrc='hx ~/.bashrc && source ~/.bashrc'
 alias ai="sgpt"
 alias ai4="sgpt --model='gpt-4'"
 
