@@ -1,3 +1,18 @@
+[language-server.rust-analyzer.config]
+checkOnSave = { command = "clippy" }
+
+[language-server.ltex-ls.config]
+ltex.disabledRules = { "en-US" = [
+  "PROFANITY",
+], "en-GB" = [
+  "PROFANITY",
+] }
+ltex.dictionary = { "en-US" = [
+  "builtin",
+], "en-GB" = [
+  "builtin",
+] }
+
 [[language]]
 name = "markdown"
 text-width = 80
@@ -12,9 +27,16 @@ formatter = { command = 'prettier', args = [
 # auto-format = true
 
 [[language]]
-name = "bash"
-formatter = { command = 'shfmt', args = ["-i", "4"] }
-auto-format = true
+name = "html"
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["--parser", "css"] }
 
 [[language]]
 name = "javascript"
@@ -24,6 +46,11 @@ auto-format = true
 [[language]]
 name = "typescript"
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts"] }
+auto-format = true
+
+[[language]]
+name = "bash"
+formatter = { command = 'shfmt', args = ["-i", "4"] }
 auto-format = true
 
 [[language]]
@@ -38,18 +65,3 @@ language-servers = [ "pyright" ]
 # pyproject.toml
 # [tool.pyright]
 # typeCheckingMode  = "strict"
-
-[language-server.ltex-ls.config]
-ltex.disabledRules = { "en-US" = [
-  "PROFANITY",
-], "en-GB" = [
-  "PROFANITY",
-] }
-ltex.dictionary = { "en-US" = [
-  "builtin",
-], "en-GB" = [
-  "builtin",
-] }
-
-[language-server.rust-analyzer.config]
-checkOnSave = { command = "clippy" }
