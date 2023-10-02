@@ -2,27 +2,19 @@
 checkOnSave = { command = "clippy" }
 
 [language-server.ltex-ls.config]
-ltex.disabledRules = { "en-US" = [
-  "PROFANITY",
-], "en-GB" = [
-  "PROFANITY",
-] }
-ltex.dictionary = { "en-US" = [
-  "builtin",
-], "en-GB" = [
-  "builtin",
-] }
+ltex.disabledRules = { "en-US" = ["PROFANITY"], "en-GB" = ["PROFANITY"] }
+ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
 
 [[language]]
 name = "markdown"
 text-width = 80
 soft-wrap = { wrap-at-text-width = true }
-language-servers = [ "ltex-ls", "marksman" ]
+language-servers = ["ltex-ls", "marksman"]
 formatter = { command = 'prettier', args = [
   "--parser",
   "markdown",
   "--prose-wrap",
-  "never",        # <always|never|preserve>
+  "never", # <always|never|preserve>
 ] }
 # auto-format = true
 
@@ -60,13 +52,13 @@ auto-format = true
 
 [[language]]
 name = "git-commit"
-language-servers = [ "ltex-ls" ]
+language-servers = ["ltex-ls"]
 
 [[language]]
 name = "python"
 formatter = { command = "black", args = ["--quiet", "-"] }
 auto-format = true
-language-servers = [ "pyright" ]
+language-servers = ["pyright"]
 # pyproject.toml
 # [tool.pyright]
 # typeCheckingMode  = "strict"
