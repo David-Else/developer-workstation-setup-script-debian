@@ -22,8 +22,8 @@ G = "goto_file_end" # vim
 [editor]
 color-modes = true
 
-# [editor.cursor-shape]
-# insert = "bar" # change cursor shape in insert mode
+[editor.cursor-shape]
+insert = "bar" # change cursor shape in insert mode
 
 [editor.file-picker]
 hidden = false # don't ignore hidden files
