@@ -39,6 +39,11 @@ name = "css"
 formatter = { command = 'prettier', args = ["--parser", "css"] }
 
 [[language]]
+name = "yaml"
+formatter = { command = 'prettier', args = ["--parser", "yaml"] }
+auto-format = true
+
+[[language]]
 name = "javascript"
 formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js"] }
 auto-format = true
