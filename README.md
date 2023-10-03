@@ -174,6 +174,12 @@ You can run `rtcqs` to analyze your system and detect possible bottlenecks that 
 
 To perform general tweaks, follow these steps:
 
+- Set Signal Desktop Flatpak to Wayland do allow drag and drop to work, you still need to set allowed directories in Flatseal:
+
+```sh
+flatpak override --user --env=SIGNAL_USE_WAYLAND=1 org.signal.Signal
+```
+
 - Set up Deno by creating or updating shell completions. Run the following command:
 
   ```sh
