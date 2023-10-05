@@ -42,12 +42,12 @@ Select Gnome as the desktop environment. During the installation, do not provide
    cd developer-workstation-setup-script-debian
    ```
 
-4. Customize the software selection by modifying the `install.yml` and `install-setup.bash` scripts according to your preferences.
+4. Customize the software selection by modifying the `install-playbook.yml` and `install-setup.bash` scripts according to your preferences.
 
 5. Run the setup scripts:
 
    ```sh
-   ansible-playbook ./install.yml -K
+   ansible-playbook ./install-playbook.yml -K
    ```
     
    ```sh
