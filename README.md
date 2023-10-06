@@ -212,43 +212,6 @@ flatpak override --user --env=SIGNAL_USE_WAYLAND=1 org.signal.Signal
 - Remove the apt version of `yt-dlp` that may have been auto installed, a newer version was installed using pipx.
 - Install `gh extension install yusukebe/gh-markdown-preview`
 
-- Install `langchain`:
-
-```sh
-pipx install langchain
-pipx inject langchain openai
-pipx inject langchain chromadb
-pipx inject langchain tiktoken
-pipx injext langchain bs4
-pipx injext langchain "unstructured[md]"
-```
-
-```sh
-source /home/[username]/.local/pipx/venvs/langchain/bin/activate
-deactivate
-```
-
-```python
-import sys
-from langchain.document_loaders import TextLoader
-from langchain.document_loaders import DirectoryLoader
-from langchain.document_loaders import WebBaseLoader
-from langchain.indexes import VectorstoreIndexCreator
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-
-query = sys.argv[1]
-
-# loader = TextLoader("./index.txt")
-loader = DirectoryLoader("/home/user/src/", glob="*.md")
-loader.load()
-
-index = VectorstoreIndexCreator().from_loaders([loader])
-
-# print(index.query(query))
-print(index.query(query, llm=ChatOpenAI()))
-```
-
 # FAQ
 
 If you would like to use Code for things that Helix still struggles with (like debugging), and still use all the modal keyboard shortcuts, I suggest installing `silverquark.dancehelix` or `asvetliakov.vscode-neovim` and using these settings:
