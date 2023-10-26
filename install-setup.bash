@@ -17,7 +17,7 @@ confirm_user_is 'normal'
 
 idle_delay=1200
 title_bar_buttons_on="true"
-capslock_delete="true"
+capslock_delete="false"
 night_light="true"
 
 helix_src_folder="$HOME/src/helix"
