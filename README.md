@@ -174,6 +174,15 @@ You can run `rtcqs` to analyze your system and detect possible bottlenecks that 
 
 To perform general tweaks, follow these steps:
 
+- Copy the `interception-caps2esc` config file to use Caps Lock as Escape when tapped, and Ctrl when held:
+
+```sh
+sudo cp ./systemfiles/udevmon.yaml /etc/interception/
+sudo systemctl restart udevmon.service
+```
+
+   > Note: This might be a packaging bug and fixed in the future, the service points to a file that does not exist by default
+
 - Set Signal Desktop Flatpak to Wayland do allow drag and drop to work, you still need to set allowed directories in Flatseal:
 
 ```sh

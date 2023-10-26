@@ -32,6 +32,7 @@
       - heif-gdk-pixbuf
       - heif-thumbnailer
       - imagemagick
+      - interception-caps2esc
       - keepassxc
       - kitty
       - krita
