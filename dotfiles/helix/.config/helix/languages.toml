@@ -5,6 +5,9 @@ checkOnSave = { command = "clippy" }
 ltex.disabledRules = { "en-US" = ["PROFANITY"], "en-GB" = ["PROFANITY"] }
 ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
 
+[language-server.yaml-language-server.config.yaml]
+schemas = { "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook" = "*play*.{yml,yaml}" }
+
 [[language]]
 name = "markdown"
 text-width = 80
