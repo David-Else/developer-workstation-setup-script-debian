@@ -1,34 +1,26 @@
 theme = "dark_plus"
 
-# Normal Mode
-
 [keys.normal]
 G = "goto_file_end" # vim
 Z = { Z = ":wq", Q = ":q!" } # vim
-"*" = ["move_prev_word_start", "move_next_word_end", "search_selection"] # vim
 "#" = "toggle_comments"
 "F5" = ":reload"
 
-# Insert Mode
-
-[keys.insert]
-j = { k = "normal_mode" }
-C-backspace = "delete_word_backward"
-
-# Select Mode
-
 [keys.select]
 G = "goto_file_end" # vim
-
-# Space Mode
 
 [keys.normal.space]
 w = ":write"
 "." = "file_picker_in_current_buffer_directory"
 "@" = ["select_all", ":pipe sort -t@ -k2,2"]
 "+" = ["select_all", ":pipe sort -t+ -k2,2"]
-l = ":sh kitty @ focus-window --match 'title:Lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=Lazygit lazygit"
-T = ":sh kitty @ focus-window --match 'title:Terminal and state:parent_active' || kitty @ launch --no-response --cwd=current --title=Terminal"
+
+[keys.normal.C-t]
+l = ":sh kitty @ focus-window --match 'title:hx-lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=hx-lazygit lazygit"
+t = ":sh kitty @ focus-window --match 'title:hx-terminal and state:parent_active' || kitty @ launch --no-response --cwd=current --title=hx-terminal"
+i = ":sh kitty @ signal_child --match 'title:hx-lazygit and state:parent_active' SIGINT"
+m = { r = ":sh kitty @ send-text --match 'title:hx-terminal and state:arent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'clear\nmake test\n'"}
+s = ":pipe-to xargs -I {} kitty @ send-text --match title:hx-terminal '{}\n'"
 
 [keys.normal.space.t]
 f = ":toggle auto-format"
@@ -36,13 +28,6 @@ i = ":toggle lsp.display-inlay-hints"
 s = ":toggle soft-wrap.enable"
 w = ":toggle whitespace.render all none"
 z = ":toggle gutters.line-numbers.min-width 48 3"
-
-[keys.normal.space.c]
-r = ":sh kitty @ send-text --match title:Terminal 'cargo run\n'"
-t = ":sh kitty @ send-text --match title:Terminal 'clear\ncargo test\n'"
-T = ":pipe-to xargs -I {} kitty @ send-text --match title:Terminal 'cargo test {}\n'"
-
-# Editor
 
 [editor]
 color-modes = true
