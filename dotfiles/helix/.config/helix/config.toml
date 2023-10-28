@@ -19,7 +19,7 @@ w = ":write"
 l = ":sh kitty @ focus-window --match 'title:hx-lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=hx-lazygit lazygit"
 t = ":sh kitty @ focus-window --match 'title:hx-terminal and state:parent_active' || kitty @ launch --no-response --cwd=current --title=hx-terminal"
 i = ":sh kitty @ signal_child --match 'title:hx-lazygit and state:parent_active' SIGINT"
-m = { r = ":sh kitty @ send-text --match 'title:hx-terminal and state:arent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'clear\nmake test\n'"}
+m = { r = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'clear\nmake test\n'"}
 s = ":pipe-to xargs -I {} kitty @ send-text --match title:hx-terminal '{}\n'"
 
 [keys.normal.space.t]
