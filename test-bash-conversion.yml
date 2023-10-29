@@ -1,72 +1,17 @@
 - hosts: localhost
-  vars:
-    helix_src_folder: "{{ ansible_env.HOME }}/src/helix"
-    helix_config_folder: "{{ ansible_env.HOME }}/.config/helix"
-    terminal_program: kitty
   tasks:
-    - name: Install shell-gpt, yt-dlp with pipx
+    - name: Install shell-gpt and yt-dlp with pipx
       ansible.builtin.command: pipx install {{ item }}
       loop:
         - shell-gpt
         - yt-dlp
-      changed_when: "'already seems to be installed' not in command_output.stdout"
 
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
-      changed_when: "'All pipx binary directories have been added to PATH' not in command_output.stdout"
 
     - name: Install Rust and rust-analyzer
       block:
-        - name: Install Rust
-          ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        - name: Install Rust and Rust Analyzer
+          ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . "{{ ansible_env.HOME }}/.cargo/env" && rustup component add rust-analyzer
           args:
             creates: "{{ ansible_env.HOME }}/.cargo/env"
-
-        - name: Source cargo env
-          ansible.builtin.command: source "{{ ansible_env.HOME }}/.cargo/env"
-          changed_when: false
-
-        - name: Install rust-analyzer
-          ansible.builtin.command: rustup component add rust-analyzer
-          changed_when: false
-
-    - name: Install and setup Helix from source
-      block:
-        - name: Clone Helix repository
-          ansible.builtin.git:
-            repo: "https://github.com/helix-editor/helix"
-            dest: "{{ helix_src_folder }}"
-            version: 23.10
-            update: false
-
-        - name: Install Helix
-          ansible.builtin.command: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
-          args:
-            creates: "{{ ansible_env.HOME }}/.cargo/bin/hx"
-
-        - name: Create Helix config folder
-          ansible.builtin.file:
-            path: "{{ helix_config_folder }}"
-            state: directory
-
-        - name: Create symlink to Helix runtime
-          ansible.builtin.file:
-            src: "{{ helix_src_folder }}/runtime"
-            dest: "{{ helix_config_folder }}/runtime"
-            state: link
-            force: true
-
-        - name: Copy Helix icon and desktop file
-          ansible.builtin.copy:
-            src: "{{ helix_src_folder }}/contrib/{{ item }}"
-            dest: "{{ ansible_env.HOME }}/.local/share/applications"
-          loop:
-            - helix.png
-            - Helix.desktop
-
-        - name: Update Helix desktop file
-          ansible.builtin.replace:
-            path: "{{ ansible_env.HOME }}/.local/share/applications/Helix.desktop"
-            regexp: "Exec=hx %F"
-            replace: "Exec={{ terminal_program }} hx %F"
-            backup: true
