@@ -20,6 +20,7 @@
       - build-essential
       - curl
       - default-jdk-headless
+      - entr
       - ffmpeg
       - fzf
       - gh
