@@ -14,6 +14,7 @@ w = ":write"
 "." = "file_picker_in_current_buffer_directory"
 "@" = ["select_all", ":pipe sort -t@ -k2,2"]
 "+" = ["select_all", ":pipe sort -t+ -k2,2"]
+G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
 
 [keys.normal.C-t]
 l = ":sh kitty @ focus-window --match 'title:hx-lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=hx-lazygit lazygit"
