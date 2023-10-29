@@ -59,18 +59,7 @@ fi
 #==============================================================================
 # Install and setup various programs
 #==============================================================================
-pipx install shell-gpt
-pipx install yt-dlp
-pipx install rtcqs
-pipx ensurepath
-
 curl -fsSL https://deno.land/x/install/install.sh | sh
-
-if ! [ -x "$(command -v cargo)" ]; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    source "$HOME/.cargo/env"
-    rustup component add rust-analyzer
-fi
 
 # TODO this can only be run once as the helix src folder will exist, needs more checks
 if ! [ -x "$(command -v hx)" ]; then
