@@ -228,9 +228,12 @@
       loop:
         - shell-gpt
         - yt-dlp
+      args:
+        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
 
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
+      changed_when: false
 
     - name: Install the latest stable rust and rust-analyzer
       ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . "{{ ansible_env.HOME }}/.cargo/env" && rustup component add rust-analyzer
