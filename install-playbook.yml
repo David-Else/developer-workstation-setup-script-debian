@@ -41,6 +41,7 @@
       - mediainfo
       - mkvtoolnix-gui
       - mpv
+      - mpv-mpris
       - nnn
       - nodejs
       - npm
