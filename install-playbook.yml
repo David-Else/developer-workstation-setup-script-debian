@@ -27,6 +27,7 @@
       - gnome-boxes
       - gnome-shell-extension-autohidetopbar
       - gnome-shell-extension-caffeine
+      - gnome-shell-pomodoro
       - gnome-software-plugin-flatpak
       - gnome-tweaks
       - handbrake
