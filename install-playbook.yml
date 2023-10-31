@@ -43,7 +43,6 @@
       - mkvtoolnix-gui
       - mpv
       - mpv-mpris
-      - nnn
       - nodejs
       - npm
       - pandoc
@@ -143,6 +142,10 @@
     # =========================================================================
     # Install binaries
     # =========================================================================
+    - name: Install nnn with nerd font 3 support
+      ansible.builtin.apt:
+        deb: ./extras/nnn_4.9-1_amd64.deb
+
     - name: Check packages
       ansible.builtin.package_facts:
         manager: auto
