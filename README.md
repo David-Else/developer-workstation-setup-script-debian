@@ -174,7 +174,7 @@ You can run `rtcqs` to analyze your system and detect possible bottlenecks that 
 
 To perform general tweaks, follow these steps:
 
-- Set Signal Desktop Flatpak to Wayland do allow drag and drop to work, you still need to set allowed directories in Flatseal:
+- (In the future when it works properly) set Signal Desktop Flatpak to Wayland do allow drag and drop to work, you still need to set allowed directories in Flatseal:
 
 ```sh
 flatpak override --user --env=SIGNAL_USE_WAYLAND=1 org.signal.Signal
@@ -241,10 +241,3 @@ If you would like to use Code for things that Helix still struggles with (like d
 
 You might also like to install `ms-vscode.live-server` for live debugging in Code or the browser.
 
-**Q**: Does this script disable the caps lock key? I've noticed that it works during login but after that it stops working altogether.
-
-**A**: It makes the caps lock into delete for touch typing purposes, to change it modify this line in `install-setup.bash`:
-
-```yml
-capslock_delete="false"
-```
