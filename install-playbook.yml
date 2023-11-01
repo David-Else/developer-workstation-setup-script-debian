@@ -142,40 +142,72 @@
     # =========================================================================
     # Install binaries
     # =========================================================================
-    - name: Install nnn with nerd font 3 support
-      ansible.builtin.apt:
-        deb: ./extras/nnn_4.9-1_amd64.deb
+    - name: Install keyd from source
+      become: true
+      block:
+        - name: Download the keyd tar.gz file from GitHub
+          ansible.builtin.get_url:
+            url: https://github.com/rvaiya/keyd/archive/refs/tags/v2.4.3.tar.gz
+            dest: /tmp/v2.4.3.tar.gz
 
-    - name: Check packages
-      ansible.builtin.package_facts:
-        manager: auto
+        - name: Unarchive the tar.gz file
+          ansible.builtin.unarchive:
+            src: /tmp/v2.4.3.tar.gz
+            dest: /tmp
+            remote_src: true
 
-    - name: Download the latest nnn plugins
-      when: "'nnn' in ansible_facts.packages"
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs
-        dest: /tmp/getplugs
-        mode: "0755"
+        - name: Compile and install the software
+          community.general.make:
+            chdir: /tmp/keyd-2.4.3
+            target: install
+          ignore_errors: true
 
-    - name: Install nnn plugins
-      when: "'nnn' in ansible_facts.packages"
-      ansible.builtin.command: /tmp/getplugs
-      args:
-        creates: "{{ lookup('env', 'HOME') }}/.config/nnn/plugins"
+        - name: Copy default.conf to /etc/keyd/
+          ansible.builtin.copy:
+            src: ./default.conf
+            dest: /etc/keyd/default.conf
+            owner: root
+            group: root
+            mode: "0644"
 
-    - name: Create ~/.local/share/fonts directory
-      ansible.builtin.file:
-        path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/fonts"
-        state: directory
+        - name: Enable and start the keyd service
+          ansible.builtin.systemd:
+            name: keyd
+            enabled: true
+            state: started
 
-    - name: Copy nerd fonts symbols only
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/extras/SymbolsNerdFontMono-Regular.ttf"
-        dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf"
+    - name: Install nnn
+      block:
+        - name: Install nnn with nerd font 3 support
+          ansible.builtin.apt:
+            deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
-    - name: Refresh font cache
-      ansible.builtin.command: fc-cache -vf
-      changed_when: false
+        - name: Download the latest nnn plugins
+          ansible.builtin.get_url:
+            url: https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs
+            dest: /tmp/getplugs
+            mode: "0755"
+
+        - name: Install nnn plugins
+          ansible.builtin.command: /tmp/getplugs
+          args:
+            creates: "{{ lookup('env', 'HOME') }}/.config/nnn/plugins"
+
+    - name: Install nerd fonts
+      block:
+        - name: Create ~/.local/share/fonts directory
+          ansible.builtin.file:
+            path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/fonts"
+            state: directory
+
+        - name: Copy nerd fonts symbols only
+          ansible.builtin.copy:
+            src: "{{ playbook_dir }}/extras/SymbolsNerdFontMono-Regular.ttf"
+            dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf"
+
+        - name: Refresh font cache
+          ansible.builtin.command: fc-cache -vf
+          changed_when: false
 
     - name: Download and install GitHub binaries
       become: true
@@ -201,10 +233,6 @@
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.16.5/git-delta_0.16.5_amd64.deb
 
-        - name: Download and install hugo
-          ansible.builtin.apt:
-            deb: https://github.com/gohugoio/hugo/releases/download/v0.118.2/hugo_0.118.2_linux-amd64.deb
-
         - name: Download and install ltex-ls
           ansible.builtin.unarchive:
             src: https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0.tar.gz
@@ -228,7 +256,7 @@
             remote_src: true
             include: vale
 
-    - name: Install shell-gpt and yt-dlp with pipx
+    - name: Install Python applications
       ansible.builtin.command: pipx install {{ item }}
       loop:
         - shell-gpt
