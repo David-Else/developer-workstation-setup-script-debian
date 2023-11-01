@@ -9,4 +9,4 @@ gui:
   nerdFontsVersion: "3"
 
 os:
-  editPreset: 'helix'
+  editPreset: "helix"
