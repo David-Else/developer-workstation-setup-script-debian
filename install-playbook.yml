@@ -122,7 +122,7 @@
         upgrade: dist
         update_cache: true
 
-    - name: Install packages
+    - name: Install Debian packages
       become: true
       ansible.builtin.apt:
         name: "{{ packages_to_install }}"
@@ -138,6 +138,18 @@
       community.general.npm:
         name: "{{ item }}"
         global: true
+
+    - name: Install Python packages
+      ansible.builtin.command: pipx install {{ item }}
+      loop:
+        - shell-gpt
+        - yt-dlp
+      args:
+        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
+
+    - name: Run pipx ensurepath
+      ansible.builtin.command: pipx ensurepath
+      changed_when: false
 
     # =========================================================================
     # Install binaries
@@ -255,18 +267,6 @@
             dest: "{{ user_programs }}"
             remote_src: true
             include: vale
-
-    - name: Install Python applications
-      ansible.builtin.command: pipx install {{ item }}
-      loop:
-        - shell-gpt
-        - yt-dlp
-      args:
-        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
-
-    - name: Run pipx ensurepath
-      ansible.builtin.command: pipx ensurepath
-      changed_when: false
 
     - name: Install the latest stable rust and rust-analyzer
       ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . "{{ ansible_env.HOME }}/.cargo/env" && rustup component add rust-analyzer
