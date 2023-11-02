@@ -73,38 +73,34 @@
       - bash-language-server@5.0.0
       - prettier@3.0.3
       - pyright@1.1.333
+      - "@tailwindcss/language-server@0.0.14"
       - typescript-language-server@4.0.0
       - typescript@5.2.2
       - vscode-langservers-extracted@4.8.0
       - yaml-language-server@1.14.0
+    python_packages:
+      - shell-gpt
+      - yt-dlp
 
   tasks:
-    # =========================================================================
-    # Add user to groups
-    # =========================================================================
-    - name: Create pipewire group
-      become: true
-      ansible.builtin.group:
-        name: pipewire
-
     - name: Add user to the pipewire group
       become: true
-      ansible.builtin.user:
-        name: "{{ lookup('env', 'USER') }}"
-        groups: pipewire
-        append: true
+      block:
+        - name: Create pipewire group
+          ansible.builtin.group:
+            name: pipewire
 
-    # =========================================================================
-    # Add and enable repositories
-    # =========================================================================
+        - name: Add user to the pipewire group
+          ansible.builtin.user:
+            name: "{{ lookup('env', 'USER') }}"
+            groups: pipewire
+            append: true
+
     - name: Add the Flathub repository
       community.general.flatpak_remote:
         name: flathub
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
-    # =========================================================================
-    # Remove packages
-    # =========================================================================
     - name: Remove unwanted desktop apps
       become: true
       ansible.builtin.apt:
@@ -113,37 +109,31 @@
         autoremove: true
         purge: true
 
-    # =========================================================================
-    # Install packages
-    # =========================================================================
-    - name: Update and upgrade all packages
+    - name: Install Packages
       become: true
-      ansible.builtin.apt:
-        upgrade: dist
-        update_cache: true
+      block:
+        - name: Update and upgrade all Debian packages
+          ansible.builtin.apt:
+            upgrade: dist
+            update_cache: true
 
-    - name: Install Debian packages
-      become: true
-      ansible.builtin.apt:
-        name: "{{ packages_to_install }}"
+        - name: Install Debian packages
+          ansible.builtin.apt:
+            name: "{{ packages_to_install }}"
 
-    - name: Install Flatpak packages
-      become: true
-      community.general.flatpak:
-        name: "{{ flatpak_packages }}"
+        - name: Install Flatpak packages
+          community.general.flatpak:
+            name: "{{ flatpak_packages }}"
 
-    - name: Install NPM global packages
-      become: true
-      loop: "{{ npm_packages }}"
-      community.general.npm:
-        name: "{{ item }}"
-        global: true
+        - name: Install NPM global packages
+          loop: "{{ npm_packages }}"
+          community.general.npm:
+            name: "{{ item }}"
+            global: true
 
     - name: Install Python packages
       ansible.builtin.command: pipx install {{ item }}
-      loop:
-        - shell-gpt
-        - yt-dlp
+      loop: "{{ python_packages }}"
       args:
         creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
 
@@ -273,29 +263,24 @@
       args:
         creates: "{{ ansible_env.HOME }}/.cargo/env"
 
-    # =========================================================================
-    # Stow dotfiles
-    # =========================================================================
-
     # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
-    - name: Create ~/.dotfile directory
-      ansible.builtin.file:
-        path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles"
-        state: directory
+    - name: Stow dotfiles
+      block:
+        - name: Create ~/.dotfile directory
+          ansible.builtin.file:
+            path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles"
+            state: directory
 
-    - name: Copy dotfiles
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/dotfiles/"
-        dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles/"
+        - name: Copy dotfiles
+          ansible.builtin.copy:
+            src: "{{ playbook_dir }}/dotfiles/"
+            dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles/"
 
-    - name: Run stow
-      ansible.builtin.command: "stow --dir={{ ansible_env.HOME }}/.dotfiles --target {{ ansible_env.HOME }} autostart helix mpv shell pandoc kitty lazygit --verbose=2"
-      register: result
-      changed_when: 'result.stderr is search("LINK: ")'
+        - name: Run stow
+          ansible.builtin.command: "stow --dir={{ ansible_env.HOME }}/.dotfiles --target {{ ansible_env.HOME }} autostart helix mpv shell pandoc kitty lazygit --verbose=2"
+          register: result
+          changed_when: 'result.stderr is search("LINK: ")'
 
-    # =========================================================================
-    # Append extra settings to config files
-    # =========================================================================
     - name: Update .bashrc
       ansible.builtin.blockinfile:
         block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
