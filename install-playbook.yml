@@ -1,4 +1,4 @@
-- name: Install packages and binaries for Debian 12
+- name: Setup Debian 12
   hosts: localhost
   vars:
     user_programs: /usr/local/bin
@@ -83,6 +83,11 @@
       - yt-dlp
 
   tasks:
+    - name: Check if OS is Debian and version is 12
+      fail:
+        msg: "This playbook can only be run on Debian 12"
+      when: ansible_os_family != 'Debian' or ansible_distribution_version != '12'
+
     - name: Add user to the pipewire group
       become: true
       block:
