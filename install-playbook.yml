@@ -171,7 +171,7 @@
 
         - name: Copy default.conf to /etc/keyd/
           ansible.builtin.copy:
-            src: ./default.conf
+            src: "{{ playbook_dir }}/extras/default.conf"
             dest: /etc/keyd/default.conf
             owner: root
             group: root
