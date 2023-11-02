@@ -10,7 +10,7 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 Before running the setup script, follow these steps to install Debian 12 and configure the desktop environment:
 
-1. Install a fresh copy of Debian 12.
+1. Install a fresh copy of Debian 12. Tested with https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-12.2.0-amd64-DVD-1.iso.torrent
 
 > If you use the default guided partitioner in the Debian installer, [you will get a swap partition of only 1 GB](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=987503). To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
 >
@@ -180,14 +180,14 @@ To perform general tweaks, follow these steps:
 flatpak override --user --env=SIGNAL_USE_WAYLAND=1 org.signal.Signal
 ```
 
-- Set up Deno by creating or updating shell completions. Run the following command:
+- Setup Deno by creating or updating shell completions. Run the following command:
 
   ```sh
   deno completions bash > deno.sh
   sudo mv deno.sh /etc/profile.d
   ```
 
-- Set up Vale by changing the global `.vale.ini` file in your `$HOME` directory. Update the `StylesPath` to point to an empty directory where you want to store your styles. For example:
+- Setup Vale by changing the global `.vale.ini` file in your `$HOME` directory. Update the `StylesPath` to point to an empty directory where you want to store your styles. For example:
 
   ```sh
   StylesPath = ~/Documents/styles
