@@ -10,23 +10,23 @@ local settings = {
   key_showplaylist = "SHIFT+ENTER",
 
   -- dynamic keys - to bind multiple keys separate them by a space
-  key_moveup = "UP",
-  key_movedown = "DOWN",
+  key_moveup = "UP k",
+  key_movedown = "DOWN j",
   key_movepageup = "PGUP",
   key_movepagedown = "PGDWN",
   key_movebegin = "HOME",
   key_moveend = "END",
-  key_selectfile = "RIGHT LEFT",
+  key_selectfile = "RIGHT LEFT l h",
   key_unselectfile = "",
   key_playfile = "ENTER",
-  key_removefile = "BS",
+  key_removefile = "BS d",
   key_closeplaylist = "ESC",
 
   -- extra functionality keys
   key_sortplaylist = "",
   key_shuffleplaylist = "",
   key_reverseplaylist = "",
-  key_loadfiles = "P",
+  key_loadfiles = "p",
   key_saveplaylist = "",
 
   --replaces matches on filenames based on extension, put as empty string to not replace anything
@@ -133,10 +133,10 @@ local settings = {
   resolve_title_timeout = 15,
 
   --osd timeout on inactivity, with high value on this open_toggles is good to be true
-  playlist_display_timeout = 5,
+  playlist_display_timeout = 10,
 
   --amount of entries to show before slicing. Optimal value depends on font/video size etc.
-  showamount = 16,
+  showamount = 24,
 
   --font size scales by window, if false requires larger font and padding sizes
   scale_playlist_by_window=true,
@@ -145,7 +145,7 @@ local settings = {
   --read http://docs.aegisub.org/3.2/ASS_Tags/ for reference of tags
   --undeclared tags will use default osd settings
   --these styles will be used for the whole playlist
-  style_ass_tags = "{}",
+  style_ass_tags = "{\\fs10}",
   --paddings from top left corner
   text_padding_x = 10,
   text_padding_y = 30,
