@@ -47,5 +47,5 @@ alias ytfzf='ytfzf -T kitty'
 # zoxide
 eval "$(zoxide init bash)"
 
-stty -ixon      # disable terminal flow control to free ctrl-s for shortcut
-stty werase \^H # set ctrl-backspace to delete previous word instead of ctrl-w
+stty -ixon # disable terminal flow control to free ctrl-s for shortcut
+export OPENAI_API_KEY="enter your key here"
