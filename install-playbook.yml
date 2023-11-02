@@ -37,7 +37,8 @@
       - keepassxc
       - kitty
       - krita
-      - libvirt-daemon-system # needed for gnome-boxes
+      - libvirt-daemon-system # dependency for gnome-boxes
+      - lua-socket # dependency for simple-mpv-webui
       - lshw
       - mediainfo
       - mkvtoolnix-gui
