@@ -71,6 +71,7 @@
       - com.github.tchx84.Flatseal
     npm_packages:
       - bash-language-server@5.0.0
+      - browser-sync@2.29.3
       - prettier@3.0.3
       - pyright@1.1.333
       - "@tailwindcss/language-server@0.0.14"
