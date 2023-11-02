@@ -86,7 +86,7 @@
     - name: Check if OS is Debian and version is 12
       fail:
         msg: "This playbook can only be run on Debian 12"
-      when: ansible_os_family != 'Debian' or ansible_distribution_version != '12'
+      when: ansible_os_family != 'Debian' or ansible_distribution_major_version != '12'
 
     - name: Add user to the pipewire group
       become: true
@@ -183,6 +183,7 @@
     - name: Install nnn
       block:
         - name: Install nnn with nerd font 3 support
+          become: true
           ansible.builtin.apt:
             deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
