@@ -146,9 +146,6 @@
       ansible.builtin.command: pipx ensurepath
       changed_when: false
 
-    # =========================================================================
-    # Install binaries
-    # =========================================================================
     - name: Install keyd from source
       become: true
       block:
