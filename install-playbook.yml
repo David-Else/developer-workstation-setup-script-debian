@@ -43,7 +43,6 @@
       - mediainfo
       - mkvtoolnix-gui
       - mpv
-      - mpv-mpris
       - nodejs
       - npm
       - pandoc
