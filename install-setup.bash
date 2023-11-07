@@ -65,7 +65,7 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 if ! [ -x "$(command -v hx)" ]; then
     mkdir -p "$helix_src_folder"
     git clone https://github.com/helix-editor/helix "$helix_src_folder"
-    git -C "$helix_src_folder" checkout 23.10
+    git -C "$helix_src_folder" checkout 2fddc2a4fcd3b8d9415e35994af3049d6960b23a
     cargo install --locked --path "$helix_src_folder"/helix-term
     [ ! -e "$helix_config_folder"/runtime ] && ln -s "$helix_src_folder"/runtime "$helix_config_folder" # if there is no symlink create one to the source directory
 
