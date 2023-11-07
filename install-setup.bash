@@ -17,12 +17,12 @@ confirm_user_is 'normal'
 
 idle_delay=1200
 title_bar_buttons_on="true"
-capslock_delete="false"
+# capslock_delete="false"
 night_light="true"
 
-helix_src_folder="$HOME/src/helix"
-helix_config_folder="$HOME/.config/helix"
-terminal_program=kitty # terminal program to use for desktop integration
+# helix_src_folder="$HOME/src/helix"
+# helix_config_folder="$HOME/.config/helix"
+# terminal_program=kitty # terminal program to use for desktop integration
 
 #==============================================================================
 # Optional sub-pixel rendering
@@ -46,10 +46,10 @@ if [[ "${title_bar_buttons_on}" == "true" ]]; then
         button-layout 'appmenu:minimize,maximize,close'
 fi
 
-if [[ "${capslock_delete}" == "true" ]]; then
-    gsettings set org.gnome.desktop.input-sources \
-        xkb-options "['caps:backspace', 'terminate:ctrl_alt_bksp']"
-fi
+# if [[ "${capslock_delete}" == "true" ]]; then
+#     gsettings set org.gnome.desktop.input-sources \
+#         xkb-options "['caps:backspace', 'terminate:ctrl_alt_bksp']"
+# fi
 
 if [[ "${night_light}" == "true" ]]; then
     gsettings set org.gnome.settings-daemon.plugins.color \
@@ -62,18 +62,18 @@ fi
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
 # TODO this can only be run once as the helix src folder will exist, needs more checks
-if ! [ -x "$(command -v hx)" ]; then
-    mkdir -p "$helix_src_folder"
-    git clone https://github.com/helix-editor/helix "$helix_src_folder"
-    git -C "$helix_src_folder" checkout 2fddc2a4fcd3b8d9415e35994af3049d6960b23a
-    cargo install --locked --path "$helix_src_folder"/helix-term
-    [ ! -e "$helix_config_folder"/runtime ] && ln -s "$helix_src_folder"/runtime "$helix_config_folder" # if there is no symlink create one to the source directory
+# if ! [ -x "$(command -v hx)" ]; then
+#     mkdir -p "$helix_src_folder"
+#     git clone https://github.com/helix-editor/helix "$helix_src_folder"
+#     git -C "$helix_src_folder" checkout 2fddc2a4fcd3b8d9415e35994af3049d6960b23a
+#     cargo install --locked --path "$helix_src_folder"/helix-term
+#     [ ! -e "$helix_config_folder"/runtime ] && ln -s "$helix_src_folder"/runtime "$helix_config_folder" # if there is no symlink create one to the source directory
 
-    mkdir -p "$HOME/.icons/"
-    cp "$helix_src_folder"/contrib/helix.png "$HOME/.icons/"
-    cp "$helix_src_folder"/contrib/Helix.desktop "$HOME/.local/share/applications"
-    sed -i "s|Exec=hx %F|Exec=$terminal_program hx %F|g;s|Terminal=true|Terminal=false|g" "$HOME/.local/share/applications/Helix.desktop"
-fi
+#     mkdir -p "$HOME/.icons/"
+#     cp "$helix_src_folder"/contrib/helix.png "$HOME/.icons/"
+#     cp "$helix_src_folder"/contrib/Helix.desktop "$HOME/.local/share/applications"
+#     sed -i "s|Exec=hx %F|Exec=$terminal_program hx %F|g;s|Terminal=true|Terminal=false|g" "$HOME/.local/share/applications/Helix.desktop"
+# fi
 
 touch "$HOME/Templates/text-file.txt" # create template file for nautilus
 

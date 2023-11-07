@@ -2,6 +2,10 @@
   hosts: localhost
   vars:
     user_programs: /usr/local/bin
+    helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
+    helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
+    terminal_program: kitty
+    helix_git_version: "2fddc2a4fcd3b8d9415e35994af3049d6960b23a"
     packages_to_remove:
       - gnome-games
       - gnome-music
@@ -85,7 +89,7 @@
 
   tasks:
     - name: Check if OS is Debian and version is 12
-      fail:
+      ansible.builtin.fail:
         msg: "This playbook can only be run on Debian 12"
       when: ansible_os_family != 'Debian' or ansible_distribution_major_version != '12'
 
@@ -197,19 +201,19 @@
         - name: Install nnn plugins
           ansible.builtin.command: /tmp/getplugs
           args:
-            creates: "{{ lookup('env', 'HOME') }}/.config/nnn/plugins"
+            creates: "{{ ansible_facts['user_dir'] }}/.config/nnn/plugins"
 
     - name: Install nerd fonts
       block:
         - name: Create ~/.local/share/fonts directory
           ansible.builtin.file:
-            path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/fonts"
+            path: "{{ ansible_facts['user_dir'] }}/.local/share/fonts"
             state: directory
 
         - name: Copy nerd fonts symbols only
           ansible.builtin.copy:
             src: "{{ playbook_dir }}/extras/SymbolsNerdFontMono-Regular.ttf"
-            dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf"
+            dest: "{{ ansible_facts['user_dir'] }}/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf"
 
         - name: Refresh font cache
           ansible.builtin.command: fc-cache -vf
@@ -267,18 +271,68 @@
       args:
         creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
 
+    - name: Clone Helix editor from GitHub
+      ansible.builtin.git:
+        repo: https://github.com/helix-editor/helix
+        dest: "{{ helix_src_folder }}"
+        version: "{{ helix_git_version }}"
+        clone: yes
+        update: false
+      register: helix_cloned
+
+    - name: Compile Helix editor
+      ansible.builtin.shell: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
+      args:
+        executable: /bin/bash
+      when: helix_cloned.changed
+
+    - name: Create Helix editor config symlink
+      ansible.builtin.file:
+        src: "{{ helix_src_folder }}/runtime"
+        dest: "{{ helix_config_folder }}/runtime"
+        state: link
+      when: helix_cloned.changed
+
+    - name: Copy Helix editor icons
+      ansible.builtin.copy:
+        src: "{{ helix_src_folder }}/contrib/helix.png"
+        dest: "{{ ansible_facts['user_dir'] }}/.icons/helix.png"
+      when: helix_cloned.changed
+
+    - name: Copy Helix editor desktop file and modify it
+      block:
+        - name: Copy desktop file
+          ansible.builtin.copy:
+            src: "{{ helix_src_folder }}/contrib/Helix.desktop"
+            dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
+          when: helix_cloned.changed
+
+        - name: Modify desktop file to use a different terminal
+          ansible.builtin.lineinfile:
+            path: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
+            regexp: "^Exec=hx %F"
+            line: "Exec={{ terminal_program }} hx %F"
+          when: helix_cloned.changed
+
+        - name: Modify desktop file to use Terminal=false
+          ansible.builtin.lineinfile:
+            path: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
+            regexp: "^Terminal=true"
+            line: "Terminal=false"
+          when: helix_cloned.changed
+
     # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
     - name: Stow dotfiles
       block:
         - name: Create ~/.dotfile directory
           ansible.builtin.file:
-            path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles"
+            path: "{{ ansible_facts['user_dir'] }}/.dotfiles"
             state: directory
 
         - name: Copy dotfiles
           ansible.builtin.copy:
             src: "{{ playbook_dir }}/dotfiles/"
-            dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles/"
+            dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
 
         - name: Run stow
           ansible.builtin.command: "stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit --verbose=2"
@@ -288,5 +342,5 @@
     - name: Update .bashrc
       ansible.builtin.blockinfile:
         block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
-        path: "{{ lookup('env', 'HOME') }}/.bashrc"
+        path: "{{ ansible_facts['user_dir'] }}/.bashrc"
         backup: true
