@@ -98,7 +98,7 @@
 
         - name: Add user to the pipewire group
           ansible.builtin.user:
-            name: "{{ lookup('env', 'USER') }}"
+            name: "{{ ansible_facts['user_id'] }}"
             groups: pipewire
             append: true
 
@@ -141,7 +141,7 @@
       ansible.builtin.command: pipx install {{ item }}
       loop: "{{ python_packages }}"
       args:
-        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
+        creates: "{{ ansible_facts['user_dir'] }}/.local/pipx/venvs/{{ item }}"
 
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
@@ -263,9 +263,9 @@
             include: vale
 
     - name: Install the latest stable rust and rust-analyzer
-      ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . "{{ ansible_env.HOME }}/.cargo/env" && rustup component add rust-analyzer
+      ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . "{{ ansible_facts['user_dir'] }}/.cargo/env" && rustup component add rust-analyzer
       args:
-        creates: "{{ ansible_env.HOME }}/.cargo/env"
+        creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
 
     # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
     - name: Stow dotfiles
@@ -281,7 +281,7 @@
             dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.dotfiles/"
 
         - name: Run stow
-          ansible.builtin.command: "stow --dir={{ ansible_env.HOME }}/.dotfiles --target {{ ansible_env.HOME }} autostart helix mpv shell pandoc kitty lazygit --verbose=2"
+          ansible.builtin.command: "stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit --verbose=2"
           register: result
           changed_when: 'result.stderr is search("LINK: ")'
 
