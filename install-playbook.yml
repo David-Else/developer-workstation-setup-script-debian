@@ -293,6 +293,12 @@
         state: link
       when: helix_cloned.changed
 
+    - name: Ensure the icons directory exists
+      ansible.builtin.file:
+        path: "{{ ansible_facts['user_dir'] }}/.icons"
+        state: directory
+        mode: "0755"
+
     - name: Copy Helix editor icons
       ansible.builtin.copy:
         src: "{{ helix_src_folder }}/contrib/helix.png"
