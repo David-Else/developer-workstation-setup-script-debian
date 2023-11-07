@@ -283,7 +283,9 @@
     - name: Install Helix
       block:
         - name: Compile Helix editor
-          ansible.builtin.shell: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
+          community.general.cargo:
+            locked: true
+            path: "{{ helix_src_folder }}/helix-term"
 
         - name: Create Helix editor config symlink
           ansible.builtin.file:
