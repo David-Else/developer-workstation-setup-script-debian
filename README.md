@@ -42,21 +42,27 @@ Select Gnome as the desktop environment. During the installation, do not provide
    cd developer-workstation-setup-script-debian
    ```
 
-4. Customize the software selection by modifying the `install-playbook.yml` and `install-setup.bash` scripts according to your preferences.
+4. Customize the software selection by modifying the `packages.yml` file according to your preferences.
 
-5. Run the setup scripts:
+5. Run the playbook:
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
-   ```
-    
-   ```sh
-   ./install-setup.bash
    ```
 
    > Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
 6. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
+
+7. Install Firefox extensions:
+
+```sh
+
+    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
+        https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
+        https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
+        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
+```
 
 ## Optional Tweaks
 
@@ -174,19 +180,6 @@ You can run `rtcqs` to analyze your system and detect possible bottlenecks that 
 
 To perform general tweaks, follow these steps:
 
-- (In the future when it works properly) set Signal Desktop Flatpak to Wayland do allow drag and drop to work, you still need to set allowed directories in Flatseal:
-
-```sh
-flatpak override --user --env=SIGNAL_USE_WAYLAND=1 org.signal.Signal
-```
-
-- Setup Deno by creating or updating shell completions. Run the following command:
-
-  ```sh
-  deno completions bash > deno.sh
-  sudo mv deno.sh /etc/profile.d
-  ```
-
 - Setup Vale by changing the global `.vale.ini` file in your `$HOME` directory. Update the `StylesPath` to point to an empty directory where you want to store your styles. For example:
 
   ```sh
@@ -210,6 +203,7 @@ flatpak override --user --env=SIGNAL_USE_WAYLAND=1 org.signal.Signal
   ```
 
 - Remove the apt version of `yt-dlp` that may have been auto installed, a newer version was installed using pipx.
+
 - Install `gh extension install yusukebe/gh-markdown-preview`
 
 # FAQ
