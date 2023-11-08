@@ -258,9 +258,3 @@
         key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
         value: "true"
         state: present
-
-    - name: Set GNOME idle delay to 1200
-      community.general.dconf:
-        key: "/org/gnome/desktop/session/idle-delay"
-        value: "uint32 1200"
-        state: present
