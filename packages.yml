@@ -59,6 +59,7 @@ packages_to_install:
   - zathura
   - zoxide
 flatpak_packages:
+  - com.github.Eloston.UngoogledChromium
   - com.github.tchx84.Flatseal
   - com.obsproject.Studio
   - com.obsproject.Studio.Plugin.DroidCam
