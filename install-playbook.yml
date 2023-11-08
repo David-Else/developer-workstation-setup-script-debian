@@ -197,11 +197,12 @@
         repo: https://github.com/helix-editor/helix
         dest: "{{ helix_src_folder }}"
         version: "{{ helix_git_version }}"
-        clone: yes
+        clone: true
         update: false
       register: helix_cloned
 
     - name: Install Helix
+      when: helix_cloned.changed
       block:
         - name: Compile Helix editor
           ansible.builtin.shell: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
@@ -240,8 +241,6 @@
             regexp: "^Terminal=true"
             line: "Terminal=false"
 
-      when: helix_cloned.changed
-
     # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
     - name: Stow dotfiles
       block:
@@ -267,13 +266,13 @@
         backup: true
 
     - name: Enable GNOME Night Light
-      ansible.builtin.dconf:
+      community.general.dconf:
         key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
         value: "true"
         state: present
 
     - name: Set GNOME idle delay to 1200
-      ansible.builtin.dconf:
+      community.general.dconf:
         key: "/org/gnome/desktop/session/idle-delay"
         value: "uint32 1200"
         state: present
