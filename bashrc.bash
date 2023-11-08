@@ -5,12 +5,10 @@ export PATH
 # Aliases
 alias ls="ls -ltha --color --group-directories-first --hyperlink=auto"
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
-alias ebrc='hx ~/.bashrc && source ~/.bashrc'
+alias ebrc='xdg-open ~/.bashrc && source ~/.bashrc'
 alias ai="sgpt --model='gpt-4-1106-preview'"
 
 # Functions
-clip() { xclip -sel clip -rmlastnl; }
-
 md() {
     filename="${1##*/}"
     pandoc --self-contained "$1" -o /tmp/"$filename".html
@@ -46,5 +44,5 @@ alias ytfzf='ytfzf -T kitty'
 # zoxide
 eval "$(zoxide init bash)"
 
-stty -ixon # disable terminal flow control to free ctrl-s for shortcut
+stty -ixon # disable terminal flow control
 export OPENAI_API_KEY="enter your key here"
