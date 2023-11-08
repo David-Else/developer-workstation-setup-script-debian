@@ -265,3 +265,15 @@
         block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
         path: "{{ ansible_facts['user_dir'] }}/.bashrc"
         backup: true
+
+    - name: Enable GNOME Night Light
+      ansible.builtin.dconf:
+        key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+        value: "true"
+        state: present
+
+    - name: Set GNOME idle delay to 1200
+      ansible.builtin.dconf:
+        key: "/org/gnome/desktop/session/idle-delay"
+        value: "uint32 1200"
+        state: present
