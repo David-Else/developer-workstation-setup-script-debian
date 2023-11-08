@@ -23,6 +23,7 @@ formatter = { command = 'prettier', args = [
 
 [[language]]
 name = "html"
+language-servers = [ "vscode-html-language-server", "tailwindcss-ls" ]
 formatter = { command = 'prettier', args = ["--parser", "html"] }
 
 [[language]]
@@ -31,6 +32,7 @@ formatter = { command = 'prettier', args = ["--parser", "json"] }
 
 [[language]]
 name = "css"
+language-servers = [ "vscode-css-language-server", "tailwindcss-ls" ]
 formatter = { command = 'prettier', args = ["--parser", "css"] }
 
 [[language]]
