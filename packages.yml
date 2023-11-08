@@ -1,10 +1,10 @@
 ---
 packages_to_remove:
+  - cheese
+  - evolution
   - gnome-games
   - gnome-music
   - gnome-sound-recorder
-  - cheese
-  - evolution
   - rhythmbox
   - totem
 packages_to_install:
@@ -35,8 +35,8 @@ packages_to_install:
   - kitty
   - krita
   - libvirt-daemon-system # dependency for gnome-boxes
-  - lua-socket # dependency for simple-mpv-webui
   - lshw
+  - lua-socket # dependency for simple-mpv-webui
   - mediainfo
   - mkvtoolnix-gui
   - mpv
@@ -53,24 +53,24 @@ packages_to_install:
   - tesseract-ocr
   - tldr
   - trash-cli
-  - xclip
+  - wl-clipboard
   - xdg-desktop-portal-gnome
   - ytfzf
   - zathura
   - zoxide
 flatpak_packages:
+  - com.github.tchx84.Flatseal
   - com.obsproject.Studio
   - com.obsproject.Studio.Plugin.DroidCam
   - com.obsproject.Studio.Plugin.MoveTransition
   - org.mozilla.Thunderbird
   - org.signal.Signal
-  - com.github.tchx84.Flatseal
 npm_packages:
+  - "@tailwindcss/language-server@0.0.14"
   - bash-language-server@5.0.0
   - browser-sync@2.29.3
   - prettier@3.0.3
   - pyright@1.1.333
-  - "@tailwindcss/language-server@0.0.14"
   - typescript-language-server@4.0.0
   - typescript@5.2.2
   - vscode-langservers-extracted@4.8.0
