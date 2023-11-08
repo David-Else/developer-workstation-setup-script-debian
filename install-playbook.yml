@@ -4,89 +4,10 @@
     user_programs: /usr/local/bin
     helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
     helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
-    terminal_program: kitty
     helix_git_version: "2fddc2a4fcd3b8d9415e35994af3049d6960b23a"
-    packages_to_remove:
-      - gnome-games
-      - gnome-music
-      - gnome-sound-recorder
-      - cheese
-      - evolution
-      - rhythmbox
-      - totem
-    packages_to_install:
-      - adb
-      - android-sdk-platform-tools-common
-      - bat
-      - black
-      - blender
-      - borgbackup
-      - build-essential
-      - curl
-      - default-jdk-headless
-      - entr
-      - ffmpeg
-      - fzf
-      - gh
-      - gnome-boxes
-      - gnome-shell-extension-autohidetopbar
-      - gnome-shell-extension-caffeine
-      - gnome-shell-pomodoro
-      - gnome-software-plugin-flatpak
-      - gnome-tweaks
-      - handbrake
-      - heif-gdk-pixbuf
-      - heif-thumbnailer
-      - imagemagick
-      - keepassxc
-      - kitty
-      - krita
-      - libvirt-daemon-system # dependency for gnome-boxes
-      - lua-socket # dependency for simple-mpv-webui
-      - lshw
-      - mediainfo
-      - mkvtoolnix-gui
-      - mpv
-      - nodejs
-      - npm
-      - pandoc
-      - pipewire-jack
-      - pipx
-      - rclone
-      - ripgrep
-      - screenkey
-      - shellcheck
-      - shfmt
-      - stow
-      - tesseract-ocr
-      - tldr
-      - trash-cli
-      - xclip
-      - xdg-desktop-portal-gnome
-      - ytfzf
-      - zathura
-      - zoxide
-    flatpak_packages:
-      - com.obsproject.Studio
-      - com.obsproject.Studio.Plugin.DroidCam
-      - com.obsproject.Studio.Plugin.MoveTransition
-      - org.mozilla.Thunderbird
-      - org.signal.Signal
-      - com.github.tchx84.Flatseal
-    npm_packages:
-      - bash-language-server@5.0.0
-      - browser-sync@2.29.3
-      - prettier@3.0.3
-      - pyright@1.1.333
-      - "@tailwindcss/language-server@0.0.14"
-      - typescript-language-server@4.0.0
-      - typescript@5.2.2
-      - vscode-langservers-extracted@4.8.0
-      - yaml-language-server@1.14.0
-    python_packages:
-      - shell-gpt
-      - yt-dlp
-
+    helix_terminal_program: kitty
+  vars_files:
+    - packages.yml
   tasks:
     - name: Check if OS is Debian and version is 12
       ansible.builtin.fail:
@@ -224,7 +145,7 @@
       block:
         - name: Download and install Marksman language server
           ansible.builtin.get_url:
-            url: https://github.com/artempyanykh/marksman/releases/download/2023-07-01/marksman-linux-x64
+            url: https://github.com/artempyanykh/marksman/releases/download/2023-10-30/marksman-linux-x64
             dest: "{{ user_programs }}/marksman"
             mode: "0755"
 
@@ -311,7 +232,7 @@
           ansible.builtin.lineinfile:
             path: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
             regexp: "^Exec=hx %F"
-            line: "Exec={{ terminal_program }} hx %F"
+            line: "Exec={{ helix_terminal_program }} hx %F"
 
         - name: Modify desktop file to use Terminal=false
           ansible.builtin.lineinfile:
