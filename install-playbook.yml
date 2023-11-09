@@ -200,6 +200,12 @@
             dest: "{{ user_programs }}/ltex-ls"
             state: link
 
+        - name: Download and install yabridge
+          ansible.builtin.unarchive:
+            src: https://github.com/robbert-vdh/yabridge/releases/download/5.0.5/yabridge-5.0.5.tar.gz
+            dest: ~/.local/share
+            remote_src: yes
+
     - name: Install the latest stable rust and rust-analyzer
       ansible.builtin.shell: >
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
