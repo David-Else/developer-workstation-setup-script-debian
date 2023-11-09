@@ -295,3 +295,9 @@
         key: "/org/gnome/shell/extensions/auto-move-windows/application-list"
         value: "['org.signal.Signal.desktop:3', 'firefox-esr.desktop:2', 'org.mozilla.Thunderbird.desktop:3']"
         state: present
+
+    - name: Enable GNOME extensions
+      community.general.dconf:
+        key: "/org/gnome/shell/enabled-extensions"
+        value: "['auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'caffeine@patapon.info', 'hidetopbar@mathieu.bidon.ca']"
+        state: present
