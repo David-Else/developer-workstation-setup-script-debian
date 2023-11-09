@@ -235,3 +235,4 @@ If you would like to use Code for things that Helix still struggles with (like d
 
 You might also like to install `ms-vscode.live-server` for live debugging in Code or the browser.
 
+If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/
