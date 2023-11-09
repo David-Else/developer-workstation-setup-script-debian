@@ -4,7 +4,7 @@
     user_programs: /usr/local/bin
     helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
     helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
-    helix_git_version: "2fddc2a4fcd3b8d9415e35994af3049d6960b23a"
+    helix_git_version: "4229583631e0aedf6571e0479f574b5efd2eb98a"
     helix_terminal_program: kitty
   vars_files:
     - packages.yml
