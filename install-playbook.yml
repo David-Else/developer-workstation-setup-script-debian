@@ -296,9 +296,17 @@
         value: "['org.signal.Signal.desktop:3', 'firefox-esr.desktop:2', 'org.mozilla.Thunderbird.desktop:3']"
         state: present
 
-    - name: Enable GNOME extensions
-      ansible.builtin.command: "gnome-extensions enable {{ item }}"
-      loop:
-        - auto-move-windows@gnome-shell-extensions.gcampax.github.com
-        - hidetopbar@mathieu.bidon.ca
-        - caffeine@patapon.info
+    - name: Enable GNOME Shell Extensions
+      block:
+        - name: Check the status of GNOME Shell Extensions
+          command: gnome-extensions list --enabled
+          register: enabled_extensions
+          changed_when: false
+
+        - name: Enable GNOME Shell Extensions if not already enabled
+          command: gnome-extensions enable {{ item }}
+          loop:
+            - auto-move-windows@gnome-shell-extensions.gcampax.github.com
+            - hidetopbar@mathieu.bidon.ca
+            - caffeine@patapon.info
+          when: "'{{ item }}' not in enabled_extensions.stdout"
