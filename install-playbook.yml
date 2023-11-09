@@ -297,7 +297,8 @@
         state: present
 
     - name: Enable GNOME extensions
-      community.general.dconf:
-        key: "/org/gnome/shell/enabled-extensions"
-        value: "['auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'caffeine@patapon.info', 'hidetopbar@mathieu.bidon.ca']"
-        state: present
+      ansible.builtin.command: "gnome-extensions enable {{ item }}"
+      loop:
+        - auto-move-windows@gnome-shell-extensions.gcampax.github.com
+        - hidetopbar@mathieu.bidon.ca
+        - caffeine@patapon.info
