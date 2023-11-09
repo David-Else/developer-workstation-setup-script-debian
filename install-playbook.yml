@@ -221,7 +221,7 @@
       when: helix_cloned.changed
       block:
         - name: Compile Helix editor
-          ansible.builtin.shell: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
+          ansible.builtin.command: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
 
         - name: Create Helix editor config symlink
           ansible.builtin.file:
@@ -299,14 +299,14 @@
     - name: Enable GNOME Shell Extensions
       block:
         - name: Check the status of GNOME Shell Extensions
-          command: gnome-extensions list --enabled
+          ansible.builtin.command: gnome-extensions list --enabled
           register: enabled_extensions
           changed_when: false
 
         - name: Enable GNOME Shell Extensions if not already enabled
-          command: gnome-extensions enable {{ item }}
+          ansible.builtin.command: gnome-extensions enable {{ item }}
           loop:
             - auto-move-windows@gnome-shell-extensions.gcampax.github.com
             - hidetopbar@mathieu.bidon.ca
             - caffeine@patapon.info
-          when: "'{{ item }}' not in enabled_extensions.stdout"
+          when: item not in enabled_extensions.stdout
