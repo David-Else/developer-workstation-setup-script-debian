@@ -153,9 +153,20 @@
             dest: "{{ item.dest }}"
             mode: "{{ item.mode | default(omit) }}"
           loop:
-            - { url: 'https://github.com/artempyanykh/marksman/releases/download/2023-10-30/marksman-linux-x64', dest: "{{ user_programs }}/marksman", mode: "0755" }
-            - { url: 'https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux', dest: "{{ user_programs }}/tt", mode: "0755" }
-            - { url: 'https://github.com/lemnos/tt/releases/download/v0.4.2/tt.1.gz', dest: '/usr/share/man/man1/tt.1.gz' }
+            - {
+                url: "https://github.com/artempyanykh/marksman/releases/download/2023-10-30/marksman-linux-x64",
+                dest: "{{ user_programs }}/marksman",
+                mode: "0755",
+              }
+            - {
+                url: "https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux",
+                dest: "{{ user_programs }}/tt",
+                mode: "0755",
+              }
+            - {
+                url: "https://github.com/lemnos/tt/releases/download/v0.4.2/tt.1.gz",
+                dest: "/usr/share/man/man1/tt.1.gz",
+              }
 
         - name: Download and install ltex-ls, vale and lazygit
           ansible.builtin.unarchive:
@@ -165,9 +176,23 @@
             extra_opts: "{{ item.extra_opts | default(omit) }}"
             include: "{{ item.include | default(omit) }}"
           loop:
-            - { src: 'https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0.tar.gz', extra_opts: ["--strip-components=1", "ltex-ls-16.0.0/bin", "ltex-ls-16.0.0/lib"] }
-            - { src: 'https://github.com/errata-ai/vale/releases/download/v2.27.0/vale_2.27.0_Linux_64-bit.tar.gz', include: 'vale' }
-            - { src: 'https://github.com/jesseduffield/lazygit/releases/download/v0.40.2/lazygit_0.40.2_Linux_x86_64.tar.gz', include: 'lazygit' }
+            - {
+                src: "https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0.tar.gz",
+                extra_opts:
+                  [
+                    "--strip-components=1",
+                    "ltex-ls-16.0.0/bin",
+                    "ltex-ls-16.0.0/lib",
+                  ],
+              }
+            - {
+                src: "https://github.com/errata-ai/vale/releases/download/v2.27.0/vale_2.27.0_Linux_64-bit.tar.gz",
+                include: "vale",
+              }
+            - {
+                src: "https://github.com/jesseduffield/lazygit/releases/download/v0.40.2/lazygit_0.40.2_Linux_x86_64.tar.gz",
+                include: "lazygit",
+              }
 
         - name: Create symlink to ltex-ls binary
           ansible.builtin.file:
@@ -176,7 +201,10 @@
             state: link
 
     - name: Install the latest stable rust and rust-analyzer
-      ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . "{{ ansible_facts['user_dir'] }}/.cargo/env" && rustup component add rust-analyzer
+      ansible.builtin.shell: >
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        && . "{{ ansible_facts['user_dir'] }}/.cargo/env"
+        && rustup component add rust-analyzer
       args:
         creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
 
@@ -243,7 +271,10 @@
             dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
 
         - name: Run stow
-          ansible.builtin.command: "stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit --verbose=2"
+          ansible.builtin.command: >
+            stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles
+            --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc
+            --verbose=2
           register: result
           changed_when: 'result.stderr is search("LINK: ")'
 
@@ -254,7 +285,15 @@
         backup: true
 
     - name: Enable GNOME Night Light
+      become: true
       community.general.dconf:
         key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
         value: "true"
+        state: present
+
+    - name: Configure GNOME Auto Move Windows extension workspace rules
+      become: true
+      community.general.dconf:
+        key: "/org/gnome/shell/extensions/auto-move-windows/application-list"
+        value: "['org.signal.Signal.desktop:3', 'firefox-esr.desktop:2', 'org.mozilla.Thunderbird.desktop:3']"
         state: present
