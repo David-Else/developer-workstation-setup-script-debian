@@ -285,14 +285,12 @@
         backup: true
 
     - name: Enable GNOME Night Light
-      become: true
       community.general.dconf:
         key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
         value: "true"
         state: present
 
     - name: Configure GNOME Auto Move Windows extension workspace rules
-      become: true
       community.general.dconf:
         key: "/org/gnome/shell/extensions/auto-move-windows/application-list"
         value: "['org.signal.Signal.desktop:3', 'firefox-esr.desktop:2', 'org.mozilla.Thunderbird.desktop:3']"
