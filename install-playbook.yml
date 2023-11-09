@@ -203,8 +203,8 @@
         - name: Download and install yabridge
           ansible.builtin.unarchive:
             src: https://github.com/robbert-vdh/yabridge/releases/download/5.0.5/yabridge-5.0.5.tar.gz
-            dest: ~/.local/share
-            remote_src: yes
+            dest: "{{ ansible_facts['user_dir'] }}/.local/share"
+            remote_src: true
 
     - name: Install the latest stable rust and rust-analyzer
       ansible.builtin.shell: >
