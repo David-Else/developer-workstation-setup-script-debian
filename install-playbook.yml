@@ -206,14 +206,6 @@
             dest: "{{ ansible_facts['user_dir'] }}/.local/share"
             remote_src: true
 
-    - name: Install the latest stable rust and rust-analyzer
-      ansible.builtin.shell: >
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        && . "{{ ansible_facts['user_dir'] }}/.cargo/env"
-        && rustup component add rust-analyzer
-      args:
-        creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
-
     - name: Clone Helix editor from GitHub
       ansible.builtin.git:
         repo: https://github.com/helix-editor/helix
@@ -223,12 +215,18 @@
         update: false
       register: helix_cloned
 
-    - name: Install Helix
+    - name: Install the latest stable rust, rust-analyzer and helix
+      ansible.builtin.shell: >
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        && . "{{ ansible_facts['user_dir'] }}/.cargo/env"
+        && rustup component add rust-analyzer
+        && cargo install --locked --path "{{ helix_src_folder }}/helix-term"
+      args:
+        creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
+
+    - name: Setup Helix
       when: helix_cloned.changed
       block:
-        - name: Compile Helix editor
-          ansible.builtin.command: cargo install --locked --path "{{ helix_src_folder }}/helix-term"
-
         - name: Create Helix editor config symlink
           ansible.builtin.file:
             src: "{{ helix_src_folder }}/runtime"
