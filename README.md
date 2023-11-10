@@ -73,7 +73,7 @@ Select Gnome as the desktop environment. During the installation, do not provide
    ```sh
    cd extras
    unzip showmethekey-1.12.0-compiled.zip
-   cd showmethekey-1.12.0-compiled.zip
+   cd showmethekey-1.12.0-compiled
    sudo install-show-me-the-key.sh
    ```
 
