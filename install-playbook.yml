@@ -72,39 +72,26 @@
       ansible.builtin.command: pipx ensurepath
       changed_when: false
 
-    - name: Install keyd from source
-      become: true
+    - name: Download keyd source code for manual installation
       block:
         - name: Download the keyd tar.gz file from GitHub
           ansible.builtin.get_url:
             url: https://github.com/rvaiya/keyd/archive/refs/tags/v2.4.3.tar.gz
-            dest: /tmp/v2.4.3.tar.gz
+            dest: "{{ playbook_dir }}/v2.4.3.tar.gz"
 
         - name: Unarchive the tar.gz file
           ansible.builtin.unarchive:
-            src: /tmp/v2.4.3.tar.gz
-            dest: /tmp
+            src: "{{ playbook_dir }}/v2.4.3.tar.gz"
+            dest: "{{ playbook_dir }}"
             remote_src: true
 
-        - name: Compile and install the software
-          community.general.make:
-            chdir: /tmp/keyd-2.4.3
-            target: install
-          ignore_errors: true
-
-        - name: Copy default.conf to /etc/keyd/
+        - name: Copy keyd default.conf to /etc/keyd/
           ansible.builtin.copy:
             src: "{{ playbook_dir }}/extras/default.conf"
             dest: /etc/keyd/default.conf
             owner: root
             group: root
             mode: "0644"
-
-        - name: Enable and start the keyd service
-          ansible.builtin.systemd:
-            name: keyd
-            enabled: true
-            state: started
 
     - name: Install nnn
       block:
