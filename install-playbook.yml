@@ -76,9 +76,8 @@
     - name: Clone keyd from GitHub
       ansible.builtin.git:
         repo: https://github.com/rvaiya/keyd
-        dest: "{{ playbook_dir }}"
+        dest: "{{ playbook_dir }}/keyd"
         version: "{{ keyd_git_version }}"
-        clone: true
         update: false
 
     - name: Copy keyd default.conf to /etc/keyd/
