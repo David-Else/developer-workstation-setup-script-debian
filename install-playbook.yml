@@ -79,7 +79,7 @@
             url: https://github.com/rvaiya/keyd/archive/refs/tags/v2.4.3.tar.gz
             dest: "{{ playbook_dir }}/v2.4.3.tar.gz"
 
-        - name: Unarchive the tar.gz file
+        - name: Unarchive the keyd tar.gz file
           ansible.builtin.unarchive:
             src: "{{ playbook_dir }}/v2.4.3.tar.gz"
             dest: "{{ playbook_dir }}"
