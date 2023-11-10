@@ -60,15 +60,32 @@ Select Gnome as the desktop environment. During the installation, do not provide
 
 7. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
 
-8. Install Firefox extensions:
+8. Install keyd:
 
-```sh
+   ```sh
+   cd keyd
+   make && sudo make install
+   sudo systemctl enable keyd && sudo systemctl start keyd
+   ```
 
-    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
-        https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
-        https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
-        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
-```
+9. Install showmethekey:
+
+   ```sh
+   cd extras
+   unzip showmethekey-1.12.0-compiled.zip
+   cd showmethekey-1.12.0-compiled.zip
+   sudo install-show-me-the-key.sh
+   ```
+
+10. Install Firefox extensions:
+
+   ```sh
+
+       firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
+           https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
+           https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
+           https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
+   ```
 
 ## Optional Tweaks
 
