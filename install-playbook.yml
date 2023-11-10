@@ -215,34 +215,6 @@
             dest: "{{ helix_config_folder }}/runtime"
             state: link
 
-        - name: Ensure the icons directory exists
-          ansible.builtin.file:
-            path: "{{ ansible_facts['user_dir'] }}/.icons"
-            state: directory
-            mode: "0755"
-
-        - name: Copy Helix editor icons
-          ansible.builtin.copy:
-            src: "{{ helix_src_folder }}/contrib/helix.png"
-            dest: "{{ ansible_facts['user_dir'] }}/.icons/helix.png"
-
-        - name: Copy desktop file
-          ansible.builtin.copy:
-            src: "{{ helix_src_folder }}/contrib/Helix.desktop"
-            dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
-
-        - name: Modify desktop file to use a different terminal
-          ansible.builtin.lineinfile:
-            path: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
-            regexp: "^Exec=hx %F"
-            line: "Exec={{ helix_terminal_program }} hx %F"
-
-        - name: Modify desktop file to use Terminal=false
-          ansible.builtin.lineinfile:
-            path: "{{ ansible_facts['user_dir'] }}/.local/share/applications/Helix.desktop"
-            regexp: "^Terminal=true"
-            line: "Terminal=false"
-
     # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
     - name: Stow dotfiles
       block:
