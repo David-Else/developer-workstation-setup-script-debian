@@ -81,10 +81,10 @@ Select Gnome as the desktop environment. During the installation, do not provide
 
    ```sh
 
-       firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
-           https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
-           https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
-           https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
+   firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
+       https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
+       https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
+       https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
 11. Set Firefox to use Wayland:
