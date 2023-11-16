@@ -242,8 +242,8 @@
         path: "{{ ansible_facts['user_dir'] }}/.bashrc"
         backup: true
 
-    - name: Ensure environment variable is set for Wayland
-      lineinfile:
-        path: "{{ ansible_facts['user_dir'] }}/.config/environment.d/envvars.conf"
+    - name: Set MOZ_ENABLE_WAYLAND to 1 in /etc/environment
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/environment
         line: "MOZ_ENABLE_WAYLAND=1"
-        create: true
