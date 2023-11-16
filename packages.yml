@@ -51,6 +51,7 @@ packages_to_install:
   - shfmt
   - stow
   - tesseract-ocr
+  - thunderbird
   - tldr
   - trash-cli
   - wl-clipboard
@@ -64,7 +65,6 @@ flatpak_packages:
   - com.obsproject.Studio
   - com.obsproject.Studio.Plugin.DroidCam
   - com.obsproject.Studio.Plugin.MoveTransition
-  - org.mozilla.Thunderbird
   - org.signal.Signal
 npm_packages:
   - "@tailwindcss/language-server@0.0.14"
