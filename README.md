@@ -87,13 +87,6 @@ Select Gnome as the desktop environment. During the installation, do not provide
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
-11. Set Firefox to use Wayland:
-
-   ```sh
-   echo "export MOZ_ENABLE_WAYLAND=1" >> ~/.profile
-   source ~/.profile
-   ```
-
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:

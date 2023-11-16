@@ -241,3 +241,9 @@
         block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
         path: "{{ ansible_facts['user_dir'] }}/.bashrc"
         backup: true
+
+    - name: Add MOZ_ENABLE_WAYLAND to ~/.profile
+      ansible.builtin.lineinfile:
+        line: "export MOZ_ENABLE_WAYLAND=1"
+        path: "{{ ansible_facts['user_dir'] }}/.profile"
+        backup: true
