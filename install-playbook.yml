@@ -111,6 +111,7 @@
           ansible.builtin.file:
             path: "{{ ansible_facts['user_dir'] }}/.local/share/fonts"
             state: directory
+            mode: "0755"
 
         - name: Copy nerd fonts symbols only
           ansible.builtin.copy:
@@ -251,6 +252,7 @@
           ansible.builtin.file:
             path: "{{ ansible_facts['user_dir'] }}/.dotfiles"
             state: directory
+            mode: "0755"
 
         - name: Copy dotfiles
           ansible.builtin.copy:
