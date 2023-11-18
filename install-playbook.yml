@@ -79,7 +79,15 @@
         version: "{{ keyd_git_version }}"
         update: false
 
+    - name: Ensure the keyd directory exists
+      become: true
+      ansible.builtin.file:
+        path: /etc/keyd/
+        state: directory
+        mode: "0755"
+
     - name: Copy keyd default.conf to /etc/keyd/
+      become: true
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/extras/default.conf"
         dest: /etc/keyd/default.conf
@@ -206,6 +214,40 @@
       args:
         creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
 
+    # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
+    - name: Stow dotfiles
+      block:
+        - name: Create ~/.dotfile directory
+          ansible.builtin.file:
+            path: "{{ ansible_facts['user_dir'] }}/.dotfiles"
+            state: directory
+            mode: "0755"
+
+        - name: Copy dotfiles
+          ansible.builtin.copy:
+            src: "{{ playbook_dir }}/dotfiles/"
+            dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
+
+        - name: Run stow
+          ansible.builtin.command: >
+            stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles
+            --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc
+            --verbose=2
+          register: result
+          changed_when: 'result.stderr is search("LINK: ")'
+
+    - name: Update .bashrc
+      ansible.builtin.blockinfile:
+        block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
+        path: "{{ ansible_facts['user_dir'] }}/.bashrc"
+        backup: true
+
+    - name: Set MOZ_ENABLE_WAYLAND to 1 in /etc/environment
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/environment
+        line: "MOZ_ENABLE_WAYLAND=1"
+
     - name: Setup Helix
       when: helix_cloned.changed
       block:
@@ -244,37 +286,3 @@
         - name: Update the desktop database
           ansible.builtin.command: update-desktop-database "{{ ansible_facts['user_dir'] }}/.local/share/applications"
           changed_when: false
-
-    # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
-    - name: Stow dotfiles
-      block:
-        - name: Create ~/.dotfile directory
-          ansible.builtin.file:
-            path: "{{ ansible_facts['user_dir'] }}/.dotfiles"
-            state: directory
-            mode: "0755"
-
-        - name: Copy dotfiles
-          ansible.builtin.copy:
-            src: "{{ playbook_dir }}/dotfiles/"
-            dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
-
-        - name: Run stow
-          ansible.builtin.command: >
-            stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles
-            --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc
-            --verbose=2
-          register: result
-          changed_when: 'result.stderr is search("LINK: ")'
-
-    - name: Update .bashrc
-      ansible.builtin.blockinfile:
-        block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
-        path: "{{ ansible_facts['user_dir'] }}/.bashrc"
-        backup: true
-
-    - name: Set MOZ_ENABLE_WAYLAND to 1 in /etc/environment
-      become: true
-      ansible.builtin.lineinfile:
-        path: /etc/environment
-        line: "MOZ_ENABLE_WAYLAND=1"
