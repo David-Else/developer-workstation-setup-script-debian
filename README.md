@@ -225,8 +225,6 @@ To perform general tweaks, follow these steps:
   git config --global commit.gpgsign true
   ```
 
-- Remove the apt version of `yt-dlp` that may have been auto installed, a newer version was installed using pipx.
-
 - Install `gh extension install yusukebe/gh-markdown-preview`
 
 # FAQ
