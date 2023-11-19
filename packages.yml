@@ -56,7 +56,6 @@ packages_to_install:
   - trash-cli
   - wl-clipboard
   - xdg-desktop-portal-gnome
-  - ytfzf
   - zathura
   - zoxide
 flatpak_packages:
