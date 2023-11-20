@@ -11,6 +11,7 @@ G = "goto_file_end" # vim
 
 [keys.normal.space]
 w = ":write"
+q = ":quit"
 "." = "file_picker_in_current_buffer_directory"
 "@" = ["select_all", ":pipe sort -t@ -k2,2"]
 "+" = ["select_all", ":pipe sort -t+ -k2,2"]
@@ -25,6 +26,7 @@ s = ":pipe-to xargs -I {} kitty @ send-text --match title:hx-terminal and state:
 
 [keys.normal.space.t]
 f = ":toggle auto-format"
+"." = ":toggle file-picker.hidden"
 i = ":toggle lsp.display-inlay-hints"
 s = ":toggle soft-wrap.enable"
 w = ":toggle whitespace.render all none"
@@ -37,7 +39,6 @@ color-modes = true
 insert = "bar" # change cursor shape in insert mode
 
 [editor.file-picker]
-hidden = false # don't ignore hidden files
 follow-symlinks = false
 
 [editor.statusline]
