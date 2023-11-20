@@ -28,6 +28,8 @@ export NNN_PLUG='i:-!|mediainfo $nnn;d:dragdrop;f:fzcd;p:preview-tui;m:mtpmount;
 export NNN_BMS="d:~/Documents;p:~/Pictures;v:~/Videos;m:~/Music;h:~/;u:/run/media/$USERNAME;D:~/Downloads;M:${XDG_CONFIG_HOME:-$HOME/.config}/nnn/mounts"
 export NNN_TRASH=1 # use trash-cli: https://pypi.org/project/trash-cli/
 export NNN_FIFO=/tmp/nnn.fifo
+export NNN_BATTHEME="Visual Studio Dark+"
+export NNN_BATSTYLE="plain"
 
 # bat
 export BAT_THEME="Visual Studio Dark+"

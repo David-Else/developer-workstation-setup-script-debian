@@ -87,6 +87,12 @@ Select Gnome as the desktop environment. During the installation, do not provide
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
+11. Use `bat` instead of `batcat` to stop `nnn` getting confused:
+
+   ```sh
+   sudo ln -s /usr/bin/batcat /usr/local/bin/bat
+   ```
+
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
