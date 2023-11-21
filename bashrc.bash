@@ -12,7 +12,7 @@ alias n="nnn"
 # Functions
 md() {
     filename="${1##*/}"
-    pandoc --self-contained "$1" -o /tmp/"$filename".html
+    pandoc --self-contained --metadata title="Preview" "$1" -o /tmp/"$filename".html
     xdg-open /tmp/"$filename".html
 }
 
