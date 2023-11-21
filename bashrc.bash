@@ -7,6 +7,7 @@ alias ls="ls -ltha --color --group-directories-first --hyperlink=auto"
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
 alias ebrc='xdg-open ~/.bashrc && source ~/.bashrc'
 alias ai="sgpt --model='gpt-4-1106-preview'"
+alias n="nnn"
 
 # Functions
 md() {
