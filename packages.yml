@@ -69,10 +69,10 @@ npm_packages:
   - "@tailwindcss/language-server@0.0.14"
   - bash-language-server@5.0.0
   - browser-sync@2.29.3
-  - prettier@3.0.3
-  - pyright@1.1.335
-  - typescript-language-server@4.1.0
-  - typescript@5.2.2
+  - prettier@3.1.0
+  - pyright@1.1.338
+  - typescript-language-server@4.1.3
+  - typescript@5.3.2
   - vscode-langservers-extracted@4.8.0
   - yaml-language-server@1.14.0
 python_packages:
