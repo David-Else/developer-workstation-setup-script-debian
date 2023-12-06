@@ -35,6 +35,7 @@ packages_to_install:
   - kitty
   - krita
   - libvirt-daemon-system # dependency for gnome-boxes
+  - lldb-15 # to supply lldb-vscode-15 for Helix debugging
   - lshw
   - lua-socket # dependency for simple-mpv-webui
   - mediainfo
