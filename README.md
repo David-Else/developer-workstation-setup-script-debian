@@ -93,6 +93,13 @@ Select Gnome as the desktop environment. During the installation, do not provide
    sudo ln -s /usr/bin/batcat /usr/local/bin/bat
    ```
 
+12. Create a symbolic link for Helix to access debugging:
+
+   ```sh
+   cd $(dirname $(which lldb-vscode-15))
+   sudo ln -s lldb-vscode-15 lldb-vscode
+   ```
+
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
