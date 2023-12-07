@@ -18,11 +18,11 @@ q = ":quit"
 G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
 
 [keys.normal.C-t]
-l = ":sh kitty @ focus-window --match 'title:hx-lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=hx-lazygit --copy-env lazygit"
-t = ":sh kitty @ focus-window --match 'title:hx-terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=hx-terminal"
-i = ":sh kitty @ signal_child --match 'title:hx-terminal and state:parent_active' SIGINT"
-m = { r = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:hx-terminal and state:parent_active' 'clear\nmake test\n'"}
-s = ":pipe-to xargs -I {} kitty @ send-text --match title:hx-terminal and state:parent_active '{}\n'"
+l = ":sh kitty @ focus-window --match 'title:lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=lazygit --copy-env lazygit"
+t = ":sh kitty @ focus-window --match 'title:terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=terminal"
+i = ":sh kitty @ signal_child --match 'title:terminal and state:parent_active' SIGINT"
+m = { r = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'clear\nmake test\n'"}
+s = ":pipe-to xargs -I {} kitty @ send-text --match title:terminal and state:parent_active '{}\n'"
 
 [keys.normal.space.t]
 f = ":toggle auto-format"
@@ -34,6 +34,9 @@ z = ":toggle gutters.line-numbers.min-width 48 3"
 
 [editor]
 color-modes = true
+
+[editor.whitespace.render]
+newline = "all"
 
 [editor.cursor-shape]
 insert = "bar" # change cursor shape in insert mode
