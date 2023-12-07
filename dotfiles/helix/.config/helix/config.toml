@@ -29,7 +29,7 @@ f = ":toggle auto-format"
 "." = ":toggle file-picker.hidden"
 i = ":toggle lsp.display-inlay-hints"
 s = ":toggle soft-wrap.enable"
-w = ":toggle whitespace.render all none"
+n = ":toggle whitespace.render.newline all none"
 z = ":toggle gutters.line-numbers.min-width 48 3"
 
 [editor]

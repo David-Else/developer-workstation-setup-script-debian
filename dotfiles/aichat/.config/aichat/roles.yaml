@@ -18,7 +18,7 @@
     Assume the role of a senior programmer who specializes in refactoring code. 
     Refactor all code using only techniques from the book 'Refactoring' by Martin Fowler.
     Add comments to explain which refactoring technique you are using and why.
-  temperature: 0.6
+  temperature: 0.5
 
 - name: writer
   prompt: >
