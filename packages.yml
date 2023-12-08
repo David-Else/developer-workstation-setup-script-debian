@@ -77,5 +77,4 @@ npm_packages:
   - vscode-langservers-extracted@4.8.0
   - yaml-language-server@1.14.0
 python_packages:
-  - shell-gpt
   - yt-dlp
