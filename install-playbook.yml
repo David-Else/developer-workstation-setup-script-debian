@@ -144,7 +144,7 @@
             mode: "{{ item.mode | default(omit) }}"
           loop:
             - {
-                url: "https://github.com/artempyanykh/marksman/releases/download/2023-10-30/marksman-linux-x64",
+                url: "https://github.com/artempyanykh/marksman/releases/download/2023-12-09/marksman-linux-x64",
                 dest: "{{ user_programs }}/marksman",
                 mode: "0755",
               }
