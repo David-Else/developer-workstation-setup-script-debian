@@ -205,7 +205,7 @@
         update: false
       register: helix_cloned
 
-    - name: Install the latest stable rust, rust-analyzer and helix
+    - name: Install the latest stable rust, rust-analyzer, helix and AI Chat
       ansible.builtin.shell: >
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
         && . "{{ ansible_facts['user_dir'] }}/.cargo/env"
