@@ -239,6 +239,7 @@ To perform general tweaks, follow these steps:
   ```
 
 - Install `gh extension install yusukebe/gh-markdown-preview`
+- `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
 
 # FAQ
 
