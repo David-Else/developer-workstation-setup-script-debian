@@ -68,6 +68,7 @@ flatpak_packages:
   - org.signal.Signal
 npm_packages:
   - "@tailwindcss/language-server@0.0.14"
+  - "@biomejs/biome@1.5.0"
   - bash-language-server@5.0.0
   - browser-sync@2.29.3
   - prettier@3.1.0
