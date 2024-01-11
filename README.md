@@ -216,6 +216,27 @@ You can run `rtcqs` to analyze your system and detect possible bottlenecks that 
 
 To perform general tweaks, follow these steps:
 
+- Setup default applications:
+
+```sh
+cp ~/.config/mimeapps.list ~/.config/mimeapps.list.backup
+cat > ~/.config/mimeapps.list << EOF
+[Default Applications]
+video/x-matroska=mpv.desktop
+video/mp4=mpv.desktop
+text/html=helix.desktop
+audio/x-opus+ogg=mpv.desktop
+application/toml=helix.desktop
+text/plain=helix.desktop
+text/x-python=helix.desktop
+application/json=helix.desktop
+application/javascript=helix.desktop
+
+[Added Associations]
+EOF
+update-desktop-database ~/.local/share/applications/
+```
+
 - Setup Vale by changing the global `.vale.ini` file in your `$HOME` directory. Update the `StylesPath` to point to an empty directory where you want to store your styles. For example:
 
   ```sh
