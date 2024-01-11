@@ -59,6 +59,7 @@ packages_to_install:
   - xdg-desktop-portal-gnome
   - zathura
   - zoxide
+  - zsh
 flatpak_packages:
   - com.github.Eloston.UngoogledChromium
   - com.github.tchx84.Flatseal
