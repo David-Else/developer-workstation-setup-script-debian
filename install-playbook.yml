@@ -282,7 +282,7 @@
               Comment=Open in Helix using the Kitty terminal
               Icon=helix
               Categories=Utility;TerminalEmulator;
-              MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+              MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;text/html;application/toml;text/x-python;application/json;application/javascript;
 
         - name: Update the desktop database
           ansible.builtin.command: update-desktop-database "{{ ansible_facts['user_dir'] }}/.local/share/applications"
