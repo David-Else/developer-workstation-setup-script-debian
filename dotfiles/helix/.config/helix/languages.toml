@@ -1,3 +1,14 @@
+[language-server]
+biome = { command = "biome", args = ["lsp-proxy"] }
+
+[[language-server.vscode-json-language-server.config.json.schemas]]
+fileMatch = ["tsconfig.json", "tsconfig.*.json"]
+url = "https://json.schemastore.org/tsconfig.json"
+
+[[language-server.vscode-json-language-server.config.json.schemas]]
+fileMatch = [ "package.json" ]
+url = "https://json.schemastore.org/package.json"
+
 [language-server.rust-analyzer.config]
 check.command = "clippy"
 
