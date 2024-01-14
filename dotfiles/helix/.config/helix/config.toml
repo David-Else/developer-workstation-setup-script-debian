@@ -1,6 +1,8 @@
 theme = "dark_plus"
 
 [keys.normal]
+"tab" = "expand_selection"
+"S-tab" = "shrink_selection"
 G = "goto_file_end" # vim
 Z = { Z = ":wq", Q = ":q!" } # vim
 "#" = "toggle_comments"
