@@ -40,6 +40,7 @@ packages_to_install:
   - lshw
   - lua-socket # dependency for simple-mpv-webui
   - mediainfo
+  - minidlna
   - mkvtoolnix-gui
   - mpv
   - nodejs
