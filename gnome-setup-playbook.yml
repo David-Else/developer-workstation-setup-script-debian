@@ -10,7 +10,7 @@
     - name: Configure GNOME Auto Move Windows extension workspace rules
       community.general.dconf:
         key: "/org/gnome/shell/extensions/auto-move-windows/application-list"
-        value: "['org.signal.Signal.desktop:3', 'firefox-esr.desktop:2', 'thunderbird.desktop:3']"
+        value: "['org.signal.Signal.desktop:2', 'thunderbird.desktop:2']"
         state: present
 
     - name: Enable GNOME Shell Extensions

@@ -2,6 +2,7 @@
 packages_to_remove:
   - cheese
   - evolution
+  - firefox-esr
   - gnome-games
   - gnome-music
   - gnome-sound-recorder
