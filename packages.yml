@@ -52,6 +52,7 @@ packages_to_install:
   - rclone
   - ripgrep
   - shellcheck
+  - sidplayfp
   - shfmt
   - stow
   - tesseract-ocr
