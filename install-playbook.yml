@@ -232,7 +232,7 @@
         - name: Run stow
           ansible.builtin.command: >
             stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles
-            --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc aichat
+            --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc aichat sidplayfp
             --verbose=2
           register: result
           changed_when: 'result.stderr is search("LINK: ")'
