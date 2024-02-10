@@ -13,7 +13,6 @@ packages_to_install:
   - android-sdk-platform-tools-common
   - bat
   - black
-  - blender
   - borgbackup
   - build-essential
   - curl
