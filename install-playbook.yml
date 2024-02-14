@@ -288,29 +288,32 @@
           ansible.builtin.command: update-desktop-database "{{ ansible_facts['user_dir'] }}/.local/share/applications"
           changed_when: false
 
-    - name: Download Mozilla's GPG key
-      ansible.builtin.get_url:
-        url: https://packages.mozilla.org/apt/repo-signing-key.gpg
-        dest: /etc/apt/keyrings/packages.mozilla.org.asc
-        mode: "0644"
+    - name: Install Firefox
+      become: true
+      block:
+        - name: Download Mozilla's GPG key
+          ansible.builtin.get_url:
+            url: https://packages.mozilla.org/apt/repo-signing-key.gpg
+            dest: /etc/apt/keyrings/packages.mozilla.org.asc
+            mode: "0644"
 
-    - name: Add Mozilla apt repository
-      ansible.builtin.apt_repository:
-        repo: deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
-        filename: mozilla
-        state: present
+        - name: Add Mozilla apt repository
+          ansible.builtin.apt_repository:
+            repo: deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
+            filename: mozilla
+            state: present
 
-    - name: Set pin preference for Mozilla packages
-      ansible.builtin.copy:
-        dest: /etc/apt/preferences.d/mozilla
-        content: |
-          Package: *
-          Pin: origin packages.mozilla.org
-          Pin-Priority: 1000
-        mode: "0644"
+        - name: Set pin preference for Mozilla packages
+          ansible.builtin.copy:
+            dest: /etc/apt/preferences.d/mozilla
+            content: |
+              Package: *
+              Pin: origin packages.mozilla.org
+              Pin-Priority: 1000
+            mode: "0644"
 
-    - name: Update apt cache and install Firefox
-      ansible.builtin.apt:
-        name: firefox
-        update_cache: true
-        state: present
+        - name: Update apt cache and install Firefox
+          ansible.builtin.apt:
+            name: firefox
+            update_cache: true
+            state: present
