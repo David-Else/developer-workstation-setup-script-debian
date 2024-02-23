@@ -48,7 +48,6 @@ packages_to_install:
   - pandoc
   - pipewire-jack
   - pipx
-  - rclone
   - ripgrep
   - shellcheck
   - sidplayfp

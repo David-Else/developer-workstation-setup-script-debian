@@ -137,6 +137,10 @@
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.16.5/git-delta_0.16.5_amd64.deb
 
+        - name: Download and install rclone
+          ansible.builtin.apt:
+            deb: https://github.com/rclone/rclone/releases/download/v1.65.2/rclone-v1.65.2-linux-amd64.deb
+
         - name: Download and install marksman and tt
           ansible.builtin.get_url:
             url: "{{ item.url }}"
