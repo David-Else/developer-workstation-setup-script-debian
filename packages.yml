@@ -45,7 +45,6 @@ packages_to_install:
   - nodejs
   - npm
   - pandoc
-  - pipewire-jack
   - pipx
   - ripgrep
   - shellcheck
