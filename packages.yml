@@ -5,6 +5,8 @@ packages_to_remove:
   - firefox-esr
   - gnome-games
   - gnome-music
+  - gnome-software
+  - gnome-text-editor
   - gnome-sound-recorder
   - rhythmbox
   - totem
