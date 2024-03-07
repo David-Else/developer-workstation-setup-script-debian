@@ -6,7 +6,7 @@ bindkey -v
 zstyle :compinstall filename "$HOME/.zshrc"
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' formats '%F{#888888} (%F{#888888} %b)%f'
+zstyle ':vcs_info:git:*' formats '%F{#888888} (%F{#888888}󰘬 %b)%f'
 precmd() { vcs_info }
 PROMPT='%n@%m:%~${vcs_info_msg_0_}%(!.#.$) '
 
