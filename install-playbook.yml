@@ -133,6 +133,7 @@
     - name: Download and install GitHub binaries
       become: true
       block:
+        # Included in Debian 13 https://tracker.debian.org/pkg/git-delta
         - name: Download and install delta
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.16.5/git-delta_0.16.5_amd64.deb
@@ -201,6 +202,7 @@
             remote_src: true
 
     - name: Clone Helix editor from GitHub
+      # Maybe included in Debian 13 https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1024683
       ansible.builtin.git:
         repo: https://github.com/helix-editor/helix
         dest: "{{ helix_src_folder }}"
