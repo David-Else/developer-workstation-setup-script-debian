@@ -48,6 +48,7 @@ packages_to_install:
   - npm
   - pandoc
   - pipx
+  - qpwgraph
   - ripgrep
   - shellcheck
   - sidplayfp
