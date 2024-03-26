@@ -212,15 +212,25 @@
         update: false
       register: helix_cloned
 
-    - name: Install the latest stable rust, rust-analyzer, helix and AI Chat
+    # A single shell session is required for the installations to ensure the Rust environment
+    # variables are correctly sourced and recognized by subsequent installations.
+    # The `set -o pipefail` option ensures the task fails if any command in the pipeline fails
+    # The use of "/bin/bash" as the executable is specified to guarantee compatibility with `pipefail`.
+    # The default shell on some systems (e.g., Debian) is `dash`, which may not support such options.
+    # The `.cargo/env` file, created by the Rust installation script, acts as a marker indicating
+    # Rust is installed. If this file exists, Ansible skips this task, ensuring idempotency and
+    # avoiding unnecessary reinstallation.
+    - name: Install the latest stable Rust, rust-analyzer, Helix, and AI Chat
       ansible.builtin.shell: >
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        && . "{{ ansible_facts['user_dir'] }}/.cargo/env"
-        && rustup component add rust-analyzer
-        && cargo install --locked --path "{{ helix_src_folder }}/helix-term"
-        && cargo install aichat
+        set -o pipefail &&
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
+        . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
+        rustup component add rust-analyzer &&
+        cargo install --locked --path "{{ helix_src_folder }}/helix-term" &&
+        cargo install aichat
       args:
         creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
+        executable: /bin/bash
 
     # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
     - name: Stow dotfiles
