@@ -6,6 +6,8 @@ theme = "dark_plus"
 G = "goto_file_end" # vim
 Z = { Z = ":wq", Q = ":q!" } # vim
 "F5" = ":reload"
+"@" = ["select_all", ":pipe sort -t@ -k2,2"]
+"+" = ["select_all", ":pipe sort -t+ -k2,2"]
 
 [keys.select]
 G = "goto_file_end" # vim
