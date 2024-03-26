@@ -72,6 +72,7 @@
       ansible.builtin.command: pipx ensurepath
       changed_when: false
 
+    # Maybe included in Debian 13 https://salsa.debian.org/rhansen/keyd
     - name: Clone keyd from GitHub
       ansible.builtin.git:
         repo: https://github.com/rvaiya/keyd
