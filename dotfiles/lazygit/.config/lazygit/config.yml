@@ -1,12 +1,14 @@
 git:
   paging:
-    pager: delta --paging=never
+    colorArg: always
+    pager: delta --dark --paging=never
 
 refresher:
   refreshInterval: 3
 
 gui:
   nerdFontsVersion: "3"
+  enlargedSideViewLocation: "top"
 
 os:
   editPreset: "helix"
