@@ -16,8 +16,6 @@ G = "goto_file_end" # vim
 w = ":write"
 q = ":quit"
 "." = "file_picker_in_current_buffer_directory"
-"@" = ["select_all", ":pipe sort -t@ -k2,2"]
-"+" = ["select_all", ":pipe sort -t+ -k2,2"]
 G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
 
 [keys.normal.C-t]
