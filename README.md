@@ -97,7 +97,7 @@ Select Gnome as the desktop environment. During the installation, do not provide
 
    ```sh
    cd $(dirname $(which lldb-vscode-15))
-   sudo ln -s lldb-vscode-15 lldb-vscode
+   sudo ln -s lldb-vscode-15 lldb-dap
    ```
 
 ## Optional Tweaks
