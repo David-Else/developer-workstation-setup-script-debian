@@ -1,5 +1,5 @@
 # Add to $PATH
-PATH="$HOME/.deno/bin:$HOME/Documents/scripts:$PATH"
+PATH="$HOME/.deno/bin:$HOME/Documents/scripts:$HOME/.cargo/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/kitty.app/bin:$PATH"
 export PATH
 
 # Aliases
