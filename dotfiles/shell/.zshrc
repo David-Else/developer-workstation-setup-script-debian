@@ -25,7 +25,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M vicmd 'U' redo # use Helix redo shortcut
 
 # Add to $PATH
-PATH="$HOME/.deno/bin:$HOME/Documents/scripts:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
+PATH="$HOME/.deno/bin:$HOME/Documents/scripts:$HOME/.cargo/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/kitty.app/bin:$PATH"
 export PATH
 
 # Aliases
