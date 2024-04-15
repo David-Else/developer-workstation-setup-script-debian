@@ -216,6 +216,16 @@ You can run `rtcqs` to analyze your system and detect possible bottlenecks that 
 
 To perform general tweaks, follow these steps:
 
+- Install Kitty (binaries are already linked in `.bashrc` and `.zshrc`)
+
+```sh
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+```
+
 - Setup default applications:
 
 ```sh
