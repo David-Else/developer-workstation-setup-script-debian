@@ -34,7 +34,6 @@
     - name: Download and install GitHub binaries
       become: true
       block:
-        # Included in Debian 13 https://tracker.debian.org/pkg/git-delta
         - name: Download and install marksman and tt
           ansible.builtin.get_url:
             url: "{{ item.url }}"

@@ -75,6 +75,7 @@
           ansible.builtin.apt:
             deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
+        # Included in Debian 13 https://tracker.debian.org/pkg/git-delta
         - name: Download and install delta
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb
