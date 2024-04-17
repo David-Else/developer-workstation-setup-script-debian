@@ -20,12 +20,14 @@
             flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
         - name: Download Mozilla's GPG key
-          ansible.builtin.apt_key:
+          ansible.builtin.get_url:
             url: https://packages.mozilla.org/apt/repo-signing-key.gpg
+            dest: /etc/apt/keyrings/packages.mozilla.org.asc
+            mode: "0644"
 
         - name: Add Mozilla apt repository
           ansible.builtin.apt_repository:
-            repo: deb https://packages.mozilla.org/apt mozilla main
+            repo: deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
             filename: mozilla
 
         - name: Set pin preference for Mozilla packages
