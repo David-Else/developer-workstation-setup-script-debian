@@ -113,28 +113,6 @@
           ansible.builtin.command: fc-cache -vf
           changed_when: false
 
-    # Stow * Stow will fail if you have run kitty or lazygit in advance as they both create non link config files on first run
-    # - name: Stow dotfiles
-    #   block:
-    #     - name: Create ~/.dotfile directory
-    #       ansible.builtin.file:
-    #         path: "{{ ansible_facts['user_dir'] }}/.dotfiles"
-    #         state: directory
-    #         mode: "0755"
-
-    #     - name: Copy dotfiles
-    #       ansible.builtin.copy:
-    #         src: "{{ playbook_dir }}/dotfiles/"
-    #         dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
-
-    #     - name: Run stow
-    #       ansible.builtin.command: >
-    #         stow --dir={{ ansible_facts['user_dir'] }}/.dotfiles
-    #         --target {{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc aichat sidplayfp
-    #         --verbose=2
-    #       register: result
-    #       changed_when: 'result.stderr is search("LINK: ")'
-
     - name: Stow dotfiles after handling pre-existing conflicts
       block:
         - name: Create ~/.dotfile directory
@@ -148,19 +126,19 @@
             src: "{{ playbook_dir }}/dotfiles/"
             dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
 
-        - name: Check for existing Kitty and Lazygit config files
-          ansible.builtin.find:
-            paths: "{{ ansible_facts['user_dir'] }}/.config/"
-            patterns: "kitty, lazygit"
-            file_type: directory
-          register: config_dirs
+        # - name: Check for existing Kitty and Lazygit config files
+        #   ansible.builtin.find:
+        #     paths: "{{ ansible_facts['user_dir'] }}/.config/"
+        #     patterns: "kitty, lazygit"
+        #     file_type: directory
+        #   register: config_dirs
 
-        - name: Remove existing config directories that conflict with Stow
-          ansible.builtin.file:
-            path: "{{ item.path }}"
-            state: absent
-          with_items: "{{ config_dirs.files }}"
-          when: config_dirs.matched > 0
+        # - name: Remove existing config directories that conflict with Stow
+        #   ansible.builtin.file:
+        #     path: "{{ item.path }}"
+        #     state: absent
+        #   with_items: "{{ config_dirs.files }}"
+        #   when: config_dirs.matched > 0
 
         - name: Run stow
           ansible.builtin.command:
@@ -198,3 +176,24 @@
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
       changed_when: false
+
+    - name: Create symlinks based on installed packages
+      become: true
+      block:
+        - name: Gather the package facts
+          ansible.builtin.package_facts:
+            manager: auto
+
+        - name: Create symlink for lldb-vscode-15 as lldb-dap to mirror upstream changes
+          ansible.builtin.file:
+            src: /usr/bin/lldb-vscode-15
+            dest: /usr/bin/lldb-dap
+            state: link
+          when: "'lldb-15' in ansible_facts.packages"
+
+        - name: Create symlink for batcat as bat
+          ansible.builtin.file:
+            src: /usr/bin/batcat
+            dest: /usr/local/bin/bat
+            state: link
+          when: "'bat' in ansible_facts.packages"

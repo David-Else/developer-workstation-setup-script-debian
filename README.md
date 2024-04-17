@@ -88,19 +88,6 @@ firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
     https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
 ```
 
-11. Use `bat` instead of `batcat` to stop `nnn` getting confused:
-
-```sh
-sudo ln -s /usr/bin/batcat /usr/local/bin/bat
-```
-
-12. Create a symbolic link for Helix to access debugging:
-
-```sh
-cd $(dirname $(which lldb-vscode-15))
-sudo ln -s lldb-vscode-15 lldb-dap
-```
-
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
