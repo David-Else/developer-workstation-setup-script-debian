@@ -39,7 +39,7 @@
               Pin-Priority: 1000
             mode: "0644"
 
-    - name: Install Packages
+    - name: Install Packages from repositories
       become: true
       block:
         - name: Update and upgrade all Debian packages
@@ -68,15 +68,18 @@
           args:
             creates: "{{ ansible_facts['user_dir'] }}/.local/pipx/venvs/{{ item }}"
 
-        - name: Install custom nnn .deb with nerd font 3 support from local dir
+    - name: Install specific Debian packages from local drive and Github
+      become: true
+      block:
+        - name: Install custom nnn with nerd font 3 support from local dir
           ansible.builtin.apt:
             deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
-        - name: Download and install specific delta .deb
+        - name: Download and install delta
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb
 
-        - name: Download and install specific rclone .deb
+        - name: Download and install rclone
           ansible.builtin.apt:
             deb: https://github.com/rclone/rclone/releases/download/v1.66.0/rclone-v1.66.0-linux-amd64.deb
 
