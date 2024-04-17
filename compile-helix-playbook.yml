@@ -21,7 +21,9 @@
         - name: Install Helix
           ansible.builtin.shell: >
             set -o pipefail &&
-            cargo install --locked --path "{{ helix_src_folder }}/helix-term" &&
+            cargo install --locked --path "{{ helix_src_folder }}/helix-term"
+          args:
+            executable: /bin/bash
 
         - name: Create Helix editor config symlink
           ansible.builtin.file:
