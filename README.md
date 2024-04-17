@@ -23,7 +23,7 @@ Before running the setup script, follow these steps to install Debian 12 and con
 >
 > 3. Press Ctrl-x or F10 to boot into the text installer which is the same as the GUI version.
 
-Select Gnome as the desktop environment. During the installation, do not provide any details for the root account, your user account will then have administrative rights.
+Leave the default of Gnome as the desktop environment. During the installation, do not provide any details for the root account, your user account will then have administrative rights.
 
 2. Open the terminal and run the following command to install Ansible, Git, and Flatpak:
 
@@ -44,6 +44,9 @@ Select Gnome as the desktop environment. During the installation, do not provide
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
+   ```
+
+   ```sh
    ansible-playbook ./install-binaries-playbook.yml -K
    ```
 
@@ -92,68 +95,14 @@ Depending on your software selection, hardware, and personal preferences, you ma
 
 To set the available sample rates for your audio interface, follow these steps:
 
-1. Find your audio interface(s) and available sample rates by running the following command:
-
-   ```sh
-   cat /proc/asound/cards
-   ```
-
-   Example output:
-
-   ```sh
-   0 [HDMI]: HDA-Intel - HDA ATI HDMI
-              HDA ATI HDMI at 0xf7e60000 irq 31
-   1 [USB ]: USB-Audio - Scarlett 6i6 USB
-                         Focusrite Scarlett 6i6 USB at usb-0000:00:14.0-10, high speed
-   ```
-
-2. Play some audio and examine the stream for your audio interface (in this case `card1`) by running the following command \*note this might not work:
-
-   ```sh
-   cat /proc/asound/card1/stream0
-   ```
-
-   Example output:
-
-   ```sh
-   Focusrite Scarlett 6i6 USB at usb-0000:00:14.0-10, high speed : USB Audio
-
-   Playback:
-     Status: Running
-       Interface = 1
-       Altset = 1
-       Packet Size = 216
-       Momentary freq = 48000 Hz (0x6.0000)
-       Feedback Format = 16.16
-     Interface 1
-       Altset 1
-       Format: S32_LE
-       Channels: 6
-       Endpoint: 0x01 (1 OUT) (ASYNC)
-       Rates: 44100, 48000, 88200, 96000, 176400, 192000
-       Data packet interval: 125 us
-       Bits: 24
-       Channel map: FL FR FC LFE RL RR
-       Sync Endpoint: 0x81 (1 IN)
-       Sync EP Interface: 1
-       Sync EP Altset: 1
-       Implicit Feedback Mode: No
-   ```
-
-   You can view the current playback sample-rate with:
-
-   ```sh
-   cat /proc/asound/card1/pcm0p/sub0/hw_params
-   ```
-
-3. Create a PipeWire user config file by running the following commands:
+1. Create a PipeWire user config file by running the following commands:
 
    ```sh
    mkdir -p ~/.config/pipewire/
    cp /usr/share/pipewire/pipewire.conf ~/.config/pipewire/
    ```
 
-4. Edit the `~/.config/pipewire/pipewire.conf` file to add or modify the available sample rates for your sound card(s). Replace the default line with the desired sample rates, removing the `#` comment:
+2. By default only 48k is supported so other sample-rates are needlessly converted. Edit the `~/.config/pipewire/pipewire.conf` file to add or modify the available sample-rates for your sound card(s). Replace the default line with the desired sample rates, removing the `#` comment:
 
    ```sh
    default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]
@@ -169,33 +118,6 @@ To set the available sample rates for your audio interface, follow these steps:
    and watch the sample rates change per application running `pw-top`.
 
    > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
-
-5. Create a user config file for your PipeWire JACK settings by running the following commands:
-
-   ```sh
-   mkdir -p ~/.config/pipewire/jack.conf.d/
-   cat >~/.config/pipewire/jack.conf.d/jack.conf <<EOF
-   jack.properties = {
-        node.latency       = 512/96000
-        node.rate          = 1/96000
-        node.quantum       = 512/96000
-        node.force-quantum = 512
-   }
-   EOF
-   ```
-
-   > More info can be found at: [docs.pipewire.org configuration-file-jackconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#configuration-file-jackconf)
-
-To make [PipeWire JACK run by default when JACK is called](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#installation):
-
-```sh
-sudo cp /usr/share/doc/pipewire/examples/ld.so.conf.d/pipewire-jack-*.conf /etc/ld.so.conf.d/
-sudo ldconfig
-```
-
-This is needed by Reaper if using `Audio system: JACK`.
-
-You can run `rtcqs` to analyze your system and detect possible bottlenecks that could have a negative impact on the performance of your system when working with Linux audio.
 
 ### General
 
