@@ -75,7 +75,7 @@ npm_packages:
   - bash-language-server@5.1.2
   - browser-sync@3.0.2
   - prettier@3.2.5
-  - pyright@1.1.355
+  # - pyright@1.1.355
   - typescript-language-server@4.3.3
   - typescript@5.4.3
   - vscode-langservers-extracted@4.8.0
