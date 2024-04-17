@@ -40,7 +40,7 @@ Leave the default of Gnome as the desktop environment. During the installation, 
 
 4. Customize the software selection by modifying the `packages.yml` file according to your preferences.
 
-5. Run the installation playbooks:
+5. Run the main installation playbooks:
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
@@ -50,16 +50,16 @@ Leave the default of Gnome as the desktop environment. During the installation, 
    ansible-playbook ./install-binaries-playbook.yml -K
    ```
 
-   ```sh
-   ansible-playbook ./compile-helix-playbook.yml -K
-   ```
-
    > Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
-6. Log out and in, then run the Gnome setup:
+6. Log out and in, then run the Gnome and Helix setup:
 
    ```sh
    ansible-playbook ./gnome-setup-playbook.yml -K
+   ```
+
+   ```sh
+   ansible-playbook ./compile-helix-playbook.yml -K
    ```
 
 7. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
