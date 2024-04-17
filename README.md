@@ -50,6 +50,10 @@ Leave the default of Gnome as the desktop environment. During the installation, 
    ansible-playbook ./install-binaries-playbook.yml -K
    ```
 
+   ```sh
+   ansible-playbook ./compile-helix-playbook.yml -K
+   ```
+
    > Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
 6. Log out and in, then run the Gnome setup:

@@ -2,9 +2,6 @@
   hosts: localhost
   vars:
     user_programs: /usr/local/bin
-    helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
-    helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
-    helix_git_version: "6d363a978d3f4c1973674305f16305f9b8f90707"
     keyd_git_version: "201a077b2ccb8cd01b77396c1f88e07cbcb11d1e"
   tasks:
     # Maybe included in Debian 13
@@ -93,16 +90,6 @@
             dest: "{{ ansible_facts['user_dir'] }}/.local/share"
             remote_src: true
 
-    - name: Clone Helix editor from GitHub
-      # Maybe included in Debian 13 https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1024683
-      ansible.builtin.git:
-        repo: https://github.com/helix-editor/helix
-        dest: "{{ helix_src_folder }}"
-        version: "{{ helix_git_version }}"
-        clone: true
-        update: false
-      register: helix_cloned
-
     # A single shell session is required for the installations to ensure the Rust environment
     # variables are correctly sourced and recognized by subsequent installations.
     # The `set -o pipefail` option ensures the task fails if any command in the pipeline fails
@@ -111,56 +98,16 @@
     # The `.cargo/env` file, created by the Rust installation script, acts as a marker indicating
     # Rust is installed. If this file exists, Ansible skips this task, ensuring idempotency and
     # avoiding unnecessary reinstallation.
-    - name: Install the latest stable Rust, rust-analyzer, Helix, and AI Chat
+    - name: Install the latest stable Rust, Rust-analyzer, and AI Chat
       ansible.builtin.shell: >
         set -o pipefail &&
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
         . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
         rustup component add rust-analyzer &&
-        cargo install --locked --path "{{ helix_src_folder }}/helix-term" &&
         cargo install aichat
       args:
         creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
         executable: /bin/bash
-
-    - name: Setup Helix
-      when: helix_cloned.changed
-      block:
-        - name: Create Helix editor config symlink
-          ansible.builtin.file:
-            src: "{{ helix_src_folder }}/runtime"
-            dest: "{{ helix_config_folder }}/runtime"
-            state: link
-
-        - name: Ensure the icons directory exists
-          ansible.builtin.file:
-            path: "{{ ansible_facts['user_dir'] }}/.icons"
-            state: directory
-            mode: "0755"
-
-        - name: Copy Helix editor icons
-          ansible.builtin.copy:
-            src: "{{ helix_src_folder }}/contrib/helix.png"
-            dest: "{{ ansible_facts['user_dir'] }}/.icons/helix.png"
-
-        - name: Create Helix .desktop file
-          ansible.builtin.copy:
-            dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/helix.desktop"
-            content: |
-              [Desktop Entry]
-              Version=1.0
-              Type=Application
-              Terminal=false
-              Exec=kitty hx %F
-              Name=Helix
-              Comment=Open in Helix using the Kitty terminal
-              Icon=helix
-              Categories=Utility;TerminalEmulator;
-              MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;text/html;application/toml;text/x-python;application/json;application/javascript;
-
-        - name: Update the desktop database
-          ansible.builtin.command: update-desktop-database "{{ ansible_facts['user_dir'] }}/.local/share/applications"
-          changed_when: false
 
     - name: Install Blender
       block:
