@@ -1,0 +1,204 @@
+- name: Install binaries and setup Debian 12
+  hosts: localhost
+  vars:
+    user_programs: /usr/local/bin
+    helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
+    helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
+    helix_git_version: "6d363a978d3f4c1973674305f16305f9b8f90707"
+    keyd_git_version: "201a077b2ccb8cd01b77396c1f88e07cbcb11d1e"
+  tasks:
+    # Maybe included in Debian 13
+    - name: Clone keyd from GitHub
+      ansible.builtin.git:
+        repo: https://github.com/rvaiya/keyd
+        dest: "{{ playbook_dir }}/keyd"
+        version: "{{ keyd_git_version }}"
+        update: false
+
+    - name: Ensure the keyd directory exists
+      become: true
+      ansible.builtin.file:
+        path: /etc/keyd/
+        state: directory
+        mode: "0755"
+
+    - name: Copy keyd default.conf to /etc/keyd/
+      become: true
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/extras/default.conf"
+        dest: /etc/keyd/default.conf
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Download and install GitHub binaries
+      become: true
+      block:
+        # Included in Debian 13 https://tracker.debian.org/pkg/git-delta
+        - name: Download and install marksman and tt
+          ansible.builtin.get_url:
+            url: "{{ item.url }}"
+            dest: "{{ item.dest }}"
+            mode: "{{ item.mode | default(omit) }}"
+          loop:
+            - {
+                url: "https://github.com/artempyanykh/marksman/releases/download/2023-12-09/marksman-linux-x64",
+                dest: "{{ user_programs }}/marksman",
+                mode: "0755",
+              }
+            - {
+                url: "https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux",
+                dest: "{{ user_programs }}/tt",
+                mode: "0755",
+              }
+            - {
+                url: "https://github.com/lemnos/tt/releases/download/v0.4.2/tt.1.gz",
+                dest: "/usr/share/man/man1/tt.1.gz",
+              }
+
+        - name: Download and install ltex-ls, vale and lazygit
+          ansible.builtin.unarchive:
+            src: "{{ item.src }}"
+            dest: "{{ user_programs }}"
+            remote_src: true
+            extra_opts: "{{ item.extra_opts | default(omit) }}"
+            include: "{{ item.include | default(omit) }}"
+          loop:
+            - {
+                src: "https://github.com/valentjn/ltex-ls/releases/download/16.0.0/ltex-ls-16.0.0.tar.gz",
+                extra_opts:
+                  [
+                    "--strip-components=1",
+                    "ltex-ls-16.0.0/bin",
+                    "ltex-ls-16.0.0/lib",
+                  ],
+              }
+            - {
+                src: "https://github.com/errata-ai/vale/releases/download/v2.27.0/vale_2.27.0_Linux_64-bit.tar.gz",
+                include: "vale",
+              }
+            - {
+                src: "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz",
+                include: "lazygit",
+              }
+
+        - name: Create symlink to ltex-ls binary
+          ansible.builtin.file:
+            src: "{{ user_programs }}/bin/ltex-ls"
+            dest: "{{ user_programs }}/ltex-ls"
+            state: link
+
+        - name: Download and install yabridge
+          ansible.builtin.unarchive:
+            src: https://github.com/robbert-vdh/yabridge/releases/download/5.0.5/yabridge-5.0.5.tar.gz
+            dest: "{{ ansible_facts['user_dir'] }}/.local/share"
+            remote_src: true
+
+    - name: Clone Helix editor from GitHub
+      # Maybe included in Debian 13 https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1024683
+      ansible.builtin.git:
+        repo: https://github.com/helix-editor/helix
+        dest: "{{ helix_src_folder }}"
+        version: "{{ helix_git_version }}"
+        clone: true
+        update: false
+      register: helix_cloned
+
+    # A single shell session is required for the installations to ensure the Rust environment
+    # variables are correctly sourced and recognized by subsequent installations.
+    # The `set -o pipefail` option ensures the task fails if any command in the pipeline fails
+    # The use of "/bin/bash" as the executable is specified to guarantee compatibility with `pipefail`.
+    # The default shell on some systems (e.g., Debian) is `dash`, which may not support such options.
+    # The `.cargo/env` file, created by the Rust installation script, acts as a marker indicating
+    # Rust is installed. If this file exists, Ansible skips this task, ensuring idempotency and
+    # avoiding unnecessary reinstallation.
+    - name: Install the latest stable Rust, rust-analyzer, Helix, and AI Chat
+      ansible.builtin.shell: >
+        set -o pipefail &&
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
+        . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
+        rustup component add rust-analyzer &&
+        cargo install --locked --path "{{ helix_src_folder }}/helix-term" &&
+        cargo install aichat
+      args:
+        creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
+        executable: /bin/bash
+
+    - name: Setup Helix
+      when: helix_cloned.changed
+      block:
+        - name: Create Helix editor config symlink
+          ansible.builtin.file:
+            src: "{{ helix_src_folder }}/runtime"
+            dest: "{{ helix_config_folder }}/runtime"
+            state: link
+
+        - name: Ensure the icons directory exists
+          ansible.builtin.file:
+            path: "{{ ansible_facts['user_dir'] }}/.icons"
+            state: directory
+            mode: "0755"
+
+        - name: Copy Helix editor icons
+          ansible.builtin.copy:
+            src: "{{ helix_src_folder }}/contrib/helix.png"
+            dest: "{{ ansible_facts['user_dir'] }}/.icons/helix.png"
+
+        - name: Create Helix .desktop file
+          ansible.builtin.copy:
+            dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/helix.desktop"
+            content: |
+              [Desktop Entry]
+              Version=1.0
+              Type=Application
+              Terminal=false
+              Exec=kitty hx %F
+              Name=Helix
+              Comment=Open in Helix using the Kitty terminal
+              Icon=helix
+              Categories=Utility;TerminalEmulator;
+              MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;text/html;application/toml;text/x-python;application/json;application/javascript;
+
+        - name: Update the desktop database
+          ansible.builtin.command: update-desktop-database "{{ ansible_facts['user_dir'] }}/.local/share/applications"
+          changed_when: false
+
+    - name: Install Blender
+      block:
+        - name: Create directory /usr/local/bin/blender-bin
+          become: true
+          ansible.builtin.file:
+            path: "{{ user_programs }}/blender-bin"
+            state: directory
+
+        - name: Download Blender and extract archive
+          become: true
+          ansible.builtin.unarchive:
+            src: "https://download.blender.org/release/Blender4.1/blender-4.1.1-linux-x64.tar.xz"
+            dest: "{{ user_programs }}/blender-bin"
+            remote_src: true
+            creates: "{{ user_programs }}/blender-bin/blender"
+            extra_opts:
+              - "--strip-components=1"
+
+        - name: Create symlink to Blender binary
+          become: true
+          ansible.builtin.file:
+            src: "{{ user_programs }}/blender-bin/blender"
+            dest: "{{ user_programs }}/blender"
+            state: link
+
+        - name: Copy Blender desktop file
+          ansible.builtin.copy:
+            src: "{{ user_programs }}/blender-bin/blender.desktop"
+            dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/applications/blender.desktop"
+
+        - name: Create ~/.icons directory
+          ansible.builtin.file:
+            path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.icons"
+            state: directory
+
+        - name: Copy Blender icon
+          ansible.builtin.copy:
+            src: "{{ user_programs }}/blender-bin/blender.svg"
+            dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.icons/blender.svg"

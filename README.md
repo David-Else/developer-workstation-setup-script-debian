@@ -44,10 +44,11 @@ Select Gnome as the desktop environment. During the installation, do not provide
 
 4. Customize the software selection by modifying the `packages.yml` file according to your preferences.
 
-5. Run the installation playbook:
+5. Run the installation playbooks:
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
+   ansible-playbook ./install-binaries-playbook.yml -K
    ```
 
    > Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
@@ -79,26 +80,26 @@ Select Gnome as the desktop environment. During the installation, do not provide
 
 10. Install Firefox extensions:
 
-   ```sh
+```sh
 
-   firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
-       https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
-       https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
-       https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
-   ```
+firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
+    https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
+    https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
+    https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
+```
 
 11. Use `bat` instead of `batcat` to stop `nnn` getting confused:
 
-   ```sh
-   sudo ln -s /usr/bin/batcat /usr/local/bin/bat
-   ```
+```sh
+sudo ln -s /usr/bin/batcat /usr/local/bin/bat
+```
 
 12. Create a symbolic link for Helix to access debugging:
 
-   ```sh
-   cd $(dirname $(which lldb-vscode-15))
-   sudo ln -s lldb-vscode-15 lldb-dap
-   ```
+```sh
+cd $(dirname $(which lldb-vscode-15))
+sudo ln -s lldb-vscode-15 lldb-dap
+```
 
 ## Optional Tweaks
 
@@ -199,6 +200,7 @@ To set the available sample rates for your audio interface, follow these steps:
    }
    EOF
    ```
+
    > More info can be found at: [docs.pipewire.org configuration-file-jackconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#configuration-file-jackconf)
 
 To make [PipeWire JACK run by default when JACK is called](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-JACK#installation):
@@ -295,7 +297,7 @@ If you would like to use Code for things that Helix still struggles with (like d
   "window.menuBarVisibility": "hidden", // control the visibility of the menu bar
   "files.restoreUndoStack": false, // don't restore the undo stack when a file is reopened
   "editor.dragAndDrop": false, // controls whether the editor should allow moving selections via drag and drop
-  "telemetry.enableTelemetry": false // disable diagnostic data collection
+  "telemetry.enableTelemetry": false, // disable diagnostic data collection
 }
 ```
 

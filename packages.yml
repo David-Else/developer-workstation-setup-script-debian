@@ -21,6 +21,7 @@ packages_to_install:
   - default-jdk-headless
   - entr
   - ffmpeg
+  - firefox
   - fzf
   - gdb
   - gh
