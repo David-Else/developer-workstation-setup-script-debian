@@ -124,7 +124,7 @@
           ansible.builtin.command: fc-cache -vf
           changed_when: false
 
-    - name: Stow dotfiles after handling pre-existing conflicts
+    - name: Stow dotfiles
       block:
         - name: Create ~/.dotfile directory
           ansible.builtin.file:
@@ -160,10 +160,6 @@
           register: result
           changed_when: 'result.stderr is search("LINK: ")'
           failed_when: 'result.rc != 0 and "Conflicting" in result.stderr'
-
-        - name: Display Stow output
-          ansible.builtin.debug:
-            msg: "{{ result.stdout_lines }}"
 
     - name: Update .bashrc
       ansible.builtin.blockinfile:
