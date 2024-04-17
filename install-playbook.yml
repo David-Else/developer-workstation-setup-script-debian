@@ -3,6 +3,16 @@
   vars_files:
     - packages.yml
   tasks:
+    - name: Comment out 'deb cdrom' entries in /etc/apt/sources.list
+      become: true
+      block:
+        - name: Ensure 'deb cdrom' entries are commented out in sources.list
+          ansible.builtin.lineinfile:
+            path: /etc/apt/sources.list
+            regexp: "^(deb cdrom:.*)$"
+            line: '# \1'
+            backrefs: true
+
     - name: Remove unwanted desktop apps
       become: true
       ansible.builtin.apt:

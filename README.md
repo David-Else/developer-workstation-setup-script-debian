@@ -31,10 +31,6 @@ Select Gnome as the desktop environment. During the installation, do not provide
    sudo apt install ansible git flatpak
    ```
 
-> If you encounter any issues related to the CD-ROM reference in `/etc/apt/sources.list`, remove it or use the Software and Updates App before proceeding.
-
-![Software and Updates App](./images/bookworm_sw_updates_screenshot.png)
-
 3. Clone the repository and navigate to it:
 
    ```sh
