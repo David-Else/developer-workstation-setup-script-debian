@@ -168,7 +168,7 @@ local settings = {
   --these styles will be used for the whole playlist
   --\\q2 style is recommended since filename wrapping may lead to unexpected rendering
   --\\an7 style is recommended to align to top left otherwise, osd-align-x/y is respected
-  style_ass_tags = "{\\q2\\an7}",
+  style_ass_tags = "{\\q2\\an7\\fs16}",
   --paddings for left right and top bottom, depends on alignment 
   text_padding_x = 30,
   text_padding_y = 60,
