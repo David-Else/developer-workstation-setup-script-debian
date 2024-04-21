@@ -127,7 +127,7 @@ To set the available sample rates for your audio interface, follow these steps:
 
 To perform general tweaks, follow these steps:
 
-- Install Kitty (binaries are already linked in `.bashrc` and `.zshrc`)
+- Install Kitty (binary locations are already added to the $PATH in `.bashrc` and `.zshrc`)
 
 ```sh
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
