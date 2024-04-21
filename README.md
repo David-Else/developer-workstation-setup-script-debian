@@ -91,6 +91,16 @@ firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
     https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
 ```
 
+11. Install Kitty (binary locations are already added to the $PATH in `.bashrc` and `.zshrc`)
+
+```sh
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+```
+
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
@@ -111,16 +121,6 @@ Depending on your software selection, hardware, and personal preferences, you ma
 ### General
 
 To perform general tweaks, follow these steps:
-
-- Install Kitty (binary locations are already added to the $PATH in `.bashrc` and `.zshrc`)
-
-```sh
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-```
 
 - Setup default applications:
 
