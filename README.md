@@ -38,9 +38,11 @@ Leave the default of Gnome as the desktop environment. During the installation, 
    cd developer-workstation-setup-script-debian
    ```
 
-4. Customize the software selection by modifying the `packages.yml` file according to your preferences.
+4. Customize the software selection by modifying the `packages.yml` and `install-binaries-playbook.yml` files according to your preferences.
 
 5. Run the main installation playbooks:
+
+   > Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
@@ -49,8 +51,6 @@ Leave the default of Gnome as the desktop environment. During the installation, 
    ```sh
    ansible-playbook ./install-binaries-playbook.yml -K
    ```
-
-   > Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
 6. Log out and in, then run the Gnome and Helix setup:
 
