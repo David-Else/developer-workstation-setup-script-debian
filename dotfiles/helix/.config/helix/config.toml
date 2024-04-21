@@ -16,7 +16,7 @@ G = "goto_file_end" # vim
 w = ":write"
 q = ":quit"
 "." = "file_picker_in_current_buffer_directory"
-G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
+# G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
 
 [keys.normal.C-t]
 l = ":sh kitty @ focus-window --match 'title:lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=lazygit --copy-env lazygit"
@@ -44,6 +44,7 @@ insert = "bar" # change cursor shape in insert mode
 
 [editor.file-picker]
 follow-symlinks = false
+hidden = false # don't ignore hidden files
 
 [editor.statusline]
 center = ["version-control"]
