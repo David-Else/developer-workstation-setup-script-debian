@@ -3,15 +3,13 @@
   vars_files:
     - packages.yml
   tasks:
-    - name: Comment out 'deb cdrom' entries in /etc/apt/sources.list
+    - name: Ensure 'deb cdrom' entries are commented out in sources.list
       become: true
-      block:
-        - name: Ensure 'deb cdrom' entries are commented out in sources.list
-          ansible.builtin.lineinfile:
-            path: /etc/apt/sources.list
-            regexp: "^(deb cdrom:.*)$"
-            line: '# \1'
-            backrefs: true
+      ansible.builtin.lineinfile:
+        path: /etc/apt/sources.list
+        regexp: "^(deb cdrom:.*)$"
+        line: '# \1'
+        backrefs: true
 
     - name: Remove unwanted desktop apps
       become: true
@@ -85,7 +83,7 @@
           ansible.builtin.apt:
             deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
-        # Included in Debian 13 https://tracker.debian.org/pkg/git-delta
+        # Included in Debian 13 as git-delta
         - name: Download and install delta
           ansible.builtin.apt:
             deb: https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb
@@ -94,7 +92,7 @@
           ansible.builtin.apt:
             deb: https://github.com/rclone/rclone/releases/download/v1.66.0/rclone-v1.66.0-linux-amd64.deb
 
-    - name: Setup nnn
+    - name: Download and install nnn plugins
       block:
         - name: Download the latest nnn plugins
           ansible.builtin.get_url:
@@ -161,13 +159,13 @@
           changed_when: 'result.stderr is search("LINK: ")'
           failed_when: 'result.rc != 0 and "Conflicting" in result.stderr'
 
-    - name: Update .bashrc
+    - name: Update .bashrc by appending extra config
       ansible.builtin.blockinfile:
         block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
         path: "{{ ansible_facts['user_dir'] }}/.bashrc"
         backup: true
 
-    - name: Add user to the pipewire group
+    - name: Add user to the pipewire group to get realtime privileges /etc/security/limits.d/95-pipewire.conf
       become: true
       block:
         - name: Create pipewire group
