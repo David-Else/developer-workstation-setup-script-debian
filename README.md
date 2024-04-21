@@ -125,20 +125,40 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 - Setup default applications:
 
 ```sh
+touch ~/.config/mimeapps.list
 cp ~/.config/mimeapps.list ~/.config/mimeapps.list.backup
 cat > ~/.config/mimeapps.list << EOF
 [Default Applications]
 video/x-matroska=mpv.desktop
 video/mp4=mpv.desktop
-text/html=helix.desktop
 audio/x-opus+ogg=mpv.desktop
+text/vnd.trolltech.linguist=helix.desktop
 application/toml=helix.desktop
 text/plain=helix.desktop
 text/x-python=helix.desktop
 application/json=helix.desktop
 application/javascript=helix.desktop
+audio/flac=mpv.desktop
+application/x-shellscript=helix.desktop
+audio/prs.sid=sidplayfp.desktop
+text/csv=libreoffice-calc.desktop
+video/mpeg=mpv.desktop
 
 [Added Associations]
+video/x-matroska=mpv.desktop;
+video/mp4=mpv.desktop;
+audio/x-opus+ogg=mpv.desktop;
+text/vnd.trolltech.linguist=helix.desktop;
+application/toml=helix.desktop;
+text/plain=helix.desktop;
+text/x-python=helix.desktop;
+application/json=helix.desktop;
+application/javascript=helix.desktop;
+audio/flac=mpv.desktop;
+application/x-shellscript=helix.desktop;
+audio/prs.sid=sidplayfp.desktop;
+text/csv=libreoffice-calc.desktop;
+video/mpeg=mpv.desktop;
 EOF
 update-desktop-database ~/.local/share/applications/
 ```
