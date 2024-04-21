@@ -97,29 +97,14 @@ Depending on your software selection, hardware, and personal preferences, you ma
 
 ### Audio
 
-To set the available sample rates for your audio interface, follow these steps:
-
-1. Create a PipeWire user config file by running the following commands:
-
-   ```sh
-   mkdir -p ~/.config/pipewire/
-   cp /usr/share/pipewire/pipewire.conf ~/.config/pipewire/
-   ```
-
-2. By default only 48k is supported so other sample-rates are needlessly converted. Edit the `~/.config/pipewire/pipewire.conf` file to add or modify the available sample-rates for your sound card(s). Replace the default line with the desired sample rates, removing the `#` comment:
-
-   ```sh
-   default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]
-   ```
-
-   You can confirm the settings were changed with:
+   You can confirm the allowed sample rate settings were changed by the playbook with:
 
    ```sh
    systemctl --user restart pipewire.service
    pw-metadata -n settings
    ```
 
-   and watch the sample rates change per application running `pw-top`.
+   Watch the sample rates change per application running `pw-top`.
 
    > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 

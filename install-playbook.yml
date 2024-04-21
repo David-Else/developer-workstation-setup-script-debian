@@ -165,19 +165,6 @@
         path: "{{ ansible_facts['user_dir'] }}/.bashrc"
         backup: true
 
-    - name: Add user to the pipewire group to get realtime privileges /etc/security/limits.d/95-pipewire.conf
-      become: true
-      block:
-        - name: Create pipewire group
-          ansible.builtin.group:
-            name: pipewire
-
-        - name: Add user to the pipewire group
-          ansible.builtin.user:
-            name: "{{ ansible_facts['user_id'] }}"
-            groups: pipewire
-            append: true
-
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
       changed_when: false
@@ -202,3 +189,36 @@
             dest: /usr/local/bin/bat
             state: link
           when: "'bat' in ansible_facts.packages"
+
+    - name: Setup Pipewire audio for realtime privileges and full range of playback sample rates
+      block:
+        - name: Create pipewire group
+          become: true
+          ansible.builtin.group:
+            name: pipewire
+
+        - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/95-pipewire.conf
+          become: true
+          ansible.builtin.user:
+            name: "{{ ansible_facts['user_id'] }}"
+            groups: pipewire
+            append: true
+
+        - name: Ensure ~/.config/pipewire/ directory exists
+          ansible.builtin.file:
+            path: "{{ ansible_env['HOME'] }}/.config/pipewire/"
+            state: directory
+
+        - name: Copy pipewire.conf to user's config directory
+          ansible.builtin.copy:
+            src: "/usr/share/pipewire/pipewire.conf"
+            dest: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
+            force: false
+
+        - name: Update Pipewire allowed sample rates to include 44.1k 48k 88.2k 96k 176.4k and 192k to prevent unwanted resampling
+          ansible.builtin.lineinfile:
+            path: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
+            regexp: '^\s*#\s*default.clock.allowed-rates\s*='
+            line: "default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]"
+            backrefs: true
+          register: samplerates_updated
