@@ -31,26 +31,11 @@
     - name: Download and install GitHub binaries
       become: true
       block:
-        - name: Download and install marksman and tt
+        - name: Download and install marksman
           ansible.builtin.get_url:
-            url: "{{ item.url }}"
-            dest: "{{ item.dest }}"
-            mode: "{{ item.mode | default(omit) }}"
-          loop:
-            - {
-                url: "https://github.com/artempyanykh/marksman/releases/download/2023-12-09/marksman-linux-x64",
-                dest: "{{ user_programs }}/marksman",
-                mode: "0755",
-              }
-            - {
-                url: "https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux",
-                dest: "{{ user_programs }}/tt",
-                mode: "0755",
-              }
-            - {
-                url: "https://github.com/lemnos/tt/releases/download/v0.4.2/tt.1.gz",
-                dest: "/usr/share/man/man1/tt.1.gz",
-              }
+            url: "https://github.com/artempyanykh/marksman/releases/download/2023-12-09/marksman-linux-x64"
+            dest: "{{ user_programs }}/marksman"
+            mode: "0755"
 
         - name: Download and install ltex-ls, vale and lazygit
           ansible.builtin.unarchive:

@@ -101,22 +101,32 @@ sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x2
 sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 ```
 
+12. Compile tt from source:
+
+```sh
+sudo apt install golang
+
+git clone https://github.com/lemnos/tt
+cd tt
+make && sudo make install
+```
+
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
 
 ### Audio
 
-   You can confirm the allowed sample rate settings were changed by the playbook with:
+You can confirm the allowed sample rate settings were changed by the playbook with:
 
-   ```sh
-   systemctl --user restart pipewire.service
-   pw-metadata -n settings
-   ```
+```sh
+systemctl --user restart pipewire.service
+pw-metadata -n settings
+```
 
-   Watch the sample rates change per application running `pw-top`.
+Watch the sample rates change per application running `pw-top`.
 
-   > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
+> More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 
 ### General
 
