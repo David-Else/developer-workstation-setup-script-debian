@@ -69,16 +69,16 @@ flatpak_packages:
   - com.obsproject.Studio.Plugin.MoveTransition
   - org.signal.Signal
 npm_packages:
-  - "@ansible/ansible-language-server@1.2.1"
+  - "@ansible/ansible-language-server@1.2.3"
+  - "@biomejs/biome@1.7.3"
   - "@tailwindcss/language-server@0.0.16"
-  - "@biomejs/biome@1.6.3"
-  - bash-language-server@5.1.2
+  - bash-language-server@5.3.1
   - browser-sync@3.0.2
   - prettier@3.2.5
-  # - pyright@1.1.355
+  # - pyright@1.1.362
   - typescript-language-server@4.3.3
-  - typescript@5.4.3
-  - vscode-langservers-extracted@4.8.0
+  - typescript@5.4.5
+  - vscode-langservers-extracted@4.10.0
   - yaml-language-server@1.14.0
 python_packages:
   - gdbgui
