@@ -8,6 +8,7 @@ Z = { Z = ":wq", Q = ":q!" } # vim
 "F5" = ":reload"
 "@" = ["select_all", ":pipe sort -t@ -k2,2"]
 "+" = ["select_all", ":pipe sort -t+ -k2,2"]
+"A-S-d" = ":pipe date +%Y-%m-%d"
 
 [keys.select]
 G = "goto_file_end" # vim
