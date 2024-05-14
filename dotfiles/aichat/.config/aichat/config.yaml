@@ -1,1 +1,5 @@
-model: gpt-4-turbo # LLM model
+model: openai:gpt-4o
+keybindings: vi
+clients:
+  - type: openai
+    api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

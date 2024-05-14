@@ -75,6 +75,5 @@ alias ytfzf='ytfzf -T kitty'
 eval "$(zoxide init zsh)"
 
 stty -ixon # disable terminal flow control
-export OPENAI_API_KEY="Add your key"
 export EDITOR="hx"
 export SUDO_EDITOR="$HOME/.cargo/bin/hx"

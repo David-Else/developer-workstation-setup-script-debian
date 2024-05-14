@@ -49,4 +49,3 @@ alias ytfzf='ytfzf -T kitty'
 eval "$(zoxide init bash)"
 
 stty -ixon # disable terminal flow control
-export OPENAI_API_KEY="enter your key here"
