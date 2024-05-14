@@ -78,7 +78,7 @@ npm_packages:
   # - pyright@1.1.362
   - typescript-language-server@4.3.3
   - typescript@5.4.5
-  - vscode-langservers-extracted@4.10.0
+  - vscode-langservers-extracted@4.8.0
   - yaml-language-server@1.14.0
 python_packages:
   - gdbgui
