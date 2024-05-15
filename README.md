@@ -10,7 +10,7 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 Before running the setup script, follow these steps to install Debian 12 and configure the desktop environment:
 
-1. Install a fresh copy of Debian 12. Tested with https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-12.5.0-amd64-DVD-1.iso.torrent
+1. Install a fresh copy of Debian 12. Tested with the 12.5 ISO: https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-12.5.0-amd64-DVD-1.iso.torrent
 
 > If you use the default guided partitioner in the Debian installer, [you will get a swap partition of only 1 GB](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=987503). To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
 >
@@ -21,7 +21,7 @@ Before running the setup script, follow these steps to install Debian 12 and con
 >    partman-auto/cap-ram=n
 >    ```
 >
-> 3. Press Ctrl-x or F10 to boot into the text installer which is the same as the GUI version.
+> 3. Press Ctrl-x or F10 to continue.
 
 Leave the default of Gnome as the desktop environment. During the installation, do not provide any details for the root account, your user account will then have administrative rights.
 
