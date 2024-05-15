@@ -70,7 +70,6 @@ flatpak_packages:
   - org.signal.Signal
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
-  - "@biomejs/biome@1.7.3"
   - "@tailwindcss/language-server@0.0.16"
   - bash-language-server@5.2.0
   - browser-sync@3.0.2
