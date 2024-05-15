@@ -11,15 +11,15 @@ alias n="nnn"
 
 # Functions
 md() {
-    filename="${1##*/}"
-    pandoc --self-contained --metadata title="Preview" "$1" -o /tmp/"$filename".html
-    xdg-open /tmp/"$filename".html
+  filename="${1##*/}"
+  pandoc --self-contained --metadata title="Preview" "$1" -o /tmp/"$filename".html
+  xdg-open /tmp/"$filename".html
 }
 
 ghpr() { GH_FORCE_TTY=100% gh pr list --limit 300 |
-    fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window 'down,70%' --header-lines 3 |
-    awk '{print $1}' |
-    xargs gh pr checkout; }
+  fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window 'down,70%' --header-lines 3 |
+  awk '{print $1}' |
+  xargs gh pr checkout; }
 
 wordcount() { pandoc --lua-filter wordcount.lua "$@"; }
 
@@ -40,10 +40,6 @@ export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,.wine}"'
 source /usr/share/doc/fzf/examples/key-bindings.bash
-
-# ytfzf
-export video_pref="bestvideo[height<=?2160]+bestaudio/best"
-alias ytfzf='ytfzf -T kitty'
 
 # zoxide
 eval "$(zoxide init bash)"

@@ -67,10 +67,6 @@ export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,.wine}"'
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 
-# ytfzf
-export video_pref="bestvideo[height<=?2160]+bestaudio/best"
-alias ytfzf='ytfzf -T kitty'
-
 # zoxide
 eval "$(zoxide init zsh)"
 
