@@ -70,7 +70,7 @@ flatpak_packages:
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
   - "@tailwindcss/language-server@0.0.16"
-  - bash-language-server@5.2.0
+  - bash-language-server@5.3.2
   - browser-sync@3.0.2
   - prettier@3.2.5
   - typescript-language-server@4.3.3
