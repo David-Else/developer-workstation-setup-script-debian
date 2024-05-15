@@ -37,7 +37,7 @@ formatter = { command = 'prettier', args = ["--parser", "html"] }
 
 [[language]]
 name = "json"
-formatter = { command = 'prettier', args = ["--parser", "json"] }
+language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome"]
 
 [[language]]
 name = "css"
@@ -51,17 +51,16 @@ auto-format = true
 
 [[language]]
 name = "javascript"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "js"] }
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome"]
 auto-format = true
 
 [[language]]
 name = "typescript"
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "ts"] }
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome"]
 auto-format = true
 
 [[language]]
 name = "bash"
-formatter = { command = 'shfmt', args = ["-i", "4"] }
 auto-format = true
 
 [[language]]
