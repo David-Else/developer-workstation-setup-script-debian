@@ -40,7 +40,6 @@ packages_to_install:
   - lshw
   - lua-socket # dependency for simple-mpv-webui
   - mediainfo
-  # - mkvtoolnix-gui
   - mpv
   - nodejs
   - npm
@@ -52,7 +51,6 @@ packages_to_install:
   - sidplayfp
   - shfmt
   - stow
-  # - tesseract-ocr
   - tldr
   - trash-cli
   - wl-clipboard
@@ -61,7 +59,7 @@ packages_to_install:
   - zoxide
   - zsh
 flatpak_packages:
-  # - com.github.Eloston.UngoogledChromium
+  - com.github.polymeilex.neothesia
   - com.github.tchx84.Flatseal
   - com.obsproject.Studio
   - com.obsproject.Studio.Plugin.DroidCam
