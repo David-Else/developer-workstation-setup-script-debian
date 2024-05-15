@@ -13,6 +13,7 @@ packages_to_remove:
 packages_to_install:
   - adb
   - android-sdk-platform-tools-common
+  - ansible-lint
   - bat
   - borgbackup
   - build-essential
