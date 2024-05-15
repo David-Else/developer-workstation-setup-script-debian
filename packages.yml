@@ -14,7 +14,6 @@ packages_to_install:
   - adb
   - android-sdk-platform-tools-common
   - bat
-  - black
   - borgbackup
   - build-essential
   - curl
@@ -74,7 +73,6 @@ npm_packages:
   - bash-language-server@5.2.0
   - browser-sync@3.0.2
   - prettier@3.2.5
-  # - pyright@1.1.362
   - typescript-language-server@4.3.3
   - typescript@5.4.5
   - vscode-langservers-extracted@4.8.0
