@@ -18,6 +18,7 @@ packages_to_install:
   - borgbackup
   - build-essential
   - curl
+  - ddgr
   - default-jdk-headless
   - entr
   - ffmpeg
