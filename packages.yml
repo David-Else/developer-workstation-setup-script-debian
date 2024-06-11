@@ -80,4 +80,5 @@ npm_packages:
   - yaml-language-server@1.14.0
 python_packages:
   - gdbgui
+  - visidata
   - yt-dlp
