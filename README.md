@@ -198,7 +198,7 @@ update-desktop-database ~/.local/share/applications/
 - Install extras:
 
   ```sh
-  gh extension install yusukebe/gh-markdown-preview`
+  gh extension install yusukebe/gh-markdown-preview
   gh extension install dlvhdr/gh-dash
   hx ~/.config/gh-dash/config.yml # diff: "delta"
   ```
