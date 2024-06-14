@@ -87,7 +87,7 @@ Leave the default of Gnome as the desktop environment. During the installation, 
 
 firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
     https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
-    https://addons.mozilla.org/en-US/firefox/addon/copy-selection-as-markdown/ \
+    https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/ \
     https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
 ```
 
