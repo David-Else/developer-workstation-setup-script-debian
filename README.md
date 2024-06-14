@@ -195,8 +195,15 @@ update-desktop-database ~/.local/share/applications/
   git config --global commit.gpgsign true
   ```
 
-- Install `gh extension install yusukebe/gh-markdown-preview`
-- `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
+- Install extras:
+
+  ```sh
+  gh extension install yusukebe/gh-markdown-preview`
+  gh extension install dlvhdr/gh-dash
+  hx ~/.config/gh-dash/config.yml # diff: "delta"
+  ```
+
+  `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
 
 # FAQ
 
