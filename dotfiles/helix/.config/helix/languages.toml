@@ -57,6 +57,10 @@ formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 auto-format = true
 
 [[language]]
+name = "bash"
+auto-format = true
+
+[[language]]
 name = "git-commit"
 language-servers = ["ltex-ls"]
 
