@@ -10,19 +10,13 @@ zstyle ':vcs_info:git:*' formats '%F{#888888} (%F{#888888}󰘬 %b)%f'
 precmd() { vcs_info }
 PROMPT='%n@%m:%~${vcs_info_msg_0_}%(!.#.$) '
 
-# use the shell's completion feature
-autoload -Uz compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit
-
-# Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+# use zsh-autosuggestions
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bindkey -M vicmd 'U' redo # use Helix redo shortcut
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey '^ ' autosuggest-accept
 
 # Add to $PATH
 PATH="$HOME/.deno/bin:$HOME/Documents/scripts:$HOME/.cargo/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/kitty.app/bin:$PATH"
@@ -33,6 +27,7 @@ alias ls="ls -ltha --color --group-directories-first --hyperlink=auto"
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
 alias ezrc='hx ~/.zshrc && source ~/.zshrc'
 alias ai="aichat"
+alias aif="aichat -r %functions% "
 alias n="nnn"
 
 # Functions

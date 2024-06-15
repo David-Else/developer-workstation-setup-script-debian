@@ -61,6 +61,7 @@ packages_to_install:
   - zathura
   - zoxide
   - zsh
+  - zsh-autosuggestions
 flatpak_packages:
   - com.github.polymeilex.neothesia
   - com.github.tchx84.Flatseal
