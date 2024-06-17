@@ -90,7 +90,7 @@
 
         - name: Download and install rclone
           ansible.builtin.apt:
-            deb: https://github.com/rclone/rclone/releases/download/v1.66.0/rclone-v1.66.0-linux-amd64.deb
+            deb: https://github.com/rclone/rclone/releases/download/v1.67.0/rclone-v1.67.0-linux-amd64.deb
 
     - name: Download and install nnn plugins
       block:
