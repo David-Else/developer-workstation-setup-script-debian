@@ -20,7 +20,8 @@ q = ":quit"
 # G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
 
 [keys.normal.C-t]
-l = ":sh kitty @ focus-window --match 'title:lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=lazygit --copy-env lazygit"
+l = ":sh kitty @ launch --no-response --cwd=current --type=overlay --copy-env lazygit"
+# l = ":sh kitty @ focus-window --match 'title:lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=lazygit --copy-env lazygit"
 t = ":sh kitty @ focus-window --match 'title:terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=terminal"
 i = ":sh kitty @ signal_child --match 'title:terminal and state:parent_active' SIGINT"
 m = { r = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'clear\nmake test\n'"}
