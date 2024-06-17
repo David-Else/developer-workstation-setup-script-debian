@@ -83,7 +83,7 @@
     # The `.cargo/env` file, created by the Rust installation script, acts as a marker indicating
     # Rust is installed. If this file exists, Ansible skips this task, ensuring idempotency and
     # avoiding unnecessary reinstallation.
-    - name: Install the latest stable Rust, Rust-analyzer, and AI Chat
+    - name: Install the latest stable Rust, Rust-analyzer, AIChat and argc
       ansible.builtin.shell: >
         set -o pipefail &&
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
