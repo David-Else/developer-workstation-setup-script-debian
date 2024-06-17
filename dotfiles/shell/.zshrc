@@ -1,22 +1,40 @@
+# History configuration
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Shell options
 unsetopt autocd beep
 bindkey -v
-zstyle :compinstall filename "$HOME/.zshrc"
 setopt PROMPT_SUBST
+
+# Load and configure VCS (Version Control System) information
 autoload -Uz vcs_info
+
+# Configure VCS info style for Git repositories
 zstyle ':vcs_info:git:*' formats '%F{#888888} (%F{#888888}󰘬 %b)%f'
+
+# Function to set VCS information before each prompt
 precmd() { vcs_info }
+
+# Custom prompt including VCS information
 PROMPT='%n@%m:%~${vcs_info_msg_0_}%(!.#.$) '
 
-# use zsh-autosuggestions
+# Completion system initialization
+autoload -Uz compinit
+compinit
+
+# Autosuggestions configuration
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-bindkey -M vicmd 'U' redo # use Helix redo shortcut
+# Key bindings:
+bindkey '^ ' autosuggest-accept
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
-bindkey '^ ' autosuggest-accept
+
+# Redo operation in Vi command mode (using Helix redo shortcut)
+bindkey -M vicmd 'U' redo
 
 # Add to $PATH
 PATH="$HOME/.deno/bin:$HOME/Documents/scripts:$HOME/.cargo/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/kitty.app/bin:$PATH"
