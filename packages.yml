@@ -23,6 +23,7 @@ packages_to_install:
   - entr
   - ffmpeg
   - firefox
+  - fonts-roboto
   - fzf
   - gdb
   - gh
