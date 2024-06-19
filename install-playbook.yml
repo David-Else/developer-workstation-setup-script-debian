@@ -3,14 +3,6 @@
   vars_files:
     - packages.yml
   tasks:
-    - name: Ensure 'deb cdrom' entries are commented out in sources.list
-      become: true
-      ansible.builtin.lineinfile:
-        path: /etc/apt/sources.list
-        regexp: "^(deb cdrom:.*)$"
-        line: '# \1'
-        backrefs: true
-
     - name: Remove unwanted desktop apps
       become: true
       ansible.builtin.apt:
@@ -22,6 +14,10 @@
     - name: Add repositories
       become: true
       block:
+        - name: Add bookworm backports apt repository
+          ansible.builtin.apt_repository:
+            repo: deb http://deb.debian.org/debian bookworm-backports main
+
         - name: Add the Flathub repository
           community.general.flatpak_remote:
             name: flathub
@@ -58,6 +54,12 @@
         - name: Install Debian packages
           ansible.builtin.apt:
             name: "{{ packages_to_install }}"
+
+        - name: Install backports pipewire
+          ansible.builtin.apt:
+            name: pipewire
+            state: latest
+            default_release: bookworm-backports
 
         - name: Install Flatpak packages
           community.general.flatpak:
@@ -197,7 +199,7 @@
           ansible.builtin.group:
             name: pipewire
 
-        - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/95-pipewire.conf
+        - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
           become: true
           ansible.builtin.user:
             name: "{{ ansible_facts['user_id'] }}"
