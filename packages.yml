@@ -68,7 +68,6 @@ flatpak_packages:
   - com.github.tchx84.Flatseal
   - com.obsproject.Studio
   - com.obsproject.Studio.Plugin.DroidCam
-  - com.obsproject.Studio.Plugin.MoveTransition
   - io.github.flattool.Warehouse
   - org.signal.Signal
 npm_packages:
