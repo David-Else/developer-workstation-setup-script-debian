@@ -77,8 +77,8 @@ Leave the default of Gnome as the desktop environment. During the installation, 
    ```sh
    cd extras
    unzip showmethekey-1.12.0-compiled.zip
-   cd showmethekey-1.12.0-compiled
-   sudo install-show-me-the-key.sh
+   cd showmethekey-1.12.0
+   sudo ./install-show-me-the-key.sh
    ```
 
 10. Install Firefox extensions:
@@ -104,7 +104,8 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 12. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
 
 ```sh
-sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
+# download go1.22.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
 git clone https://github.com/lemnos/tt
 cd tt
 make && sudo make install
