@@ -101,11 +101,10 @@ sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x2
 sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 ```
 
-12. Compile tt from source:
+12. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
 
 ```sh
-sudo apt install golang
-
+sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
 git clone https://github.com/lemnos/tt
 cd tt
 make && sudo make install
