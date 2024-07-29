@@ -37,6 +37,7 @@ z = ":toggle gutters.line-numbers.min-width 48 3"
 
 [editor]
 color-modes = true
+end-of-line-diagnostics = "hint"
 
 [editor.whitespace.render]
 newline = "all"
@@ -54,3 +55,6 @@ center = ["version-control"]
 [editor.soft-wrap]
 enable = true
 wrap-at-text-width = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning" # show warnings and errors on the cursorline inline
