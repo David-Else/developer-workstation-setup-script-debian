@@ -10,9 +10,6 @@ gui:
   nerdFontsVersion: "3"
   enlargedSideViewLocation: "top"
 
-os:
-  editPreset: "helix"
-
 customCommands:
   - key: "E"
     context: "files"
