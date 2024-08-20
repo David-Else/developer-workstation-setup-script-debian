@@ -4,7 +4,7 @@
   vars:
     helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
     helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
-    helix_git_version: "8e041c99df8aff8e894263e738faecae41b4cf9b"
+    helix_git_version: "9e7c488ee33eaabab6ee7c3436f4c58b8c647b4f"
   tasks:
     - name: Clone Helix editor from GitHub
       ansible.builtin.git:
