@@ -107,23 +107,6 @@
           args:
             creates: "{{ ansible_facts['user_dir'] }}/.config/nnn/plugins"
 
-    - name: Install and setup nerd fonts
-      block:
-        - name: Create ~/.local/share/fonts directory
-          ansible.builtin.file:
-            path: "{{ ansible_facts['user_dir'] }}/.local/share/fonts"
-            state: directory
-            mode: "0755"
-
-        - name: Copy nerd fonts symbols only
-          ansible.builtin.copy:
-            src: "{{ playbook_dir }}/extras/SymbolsNerdFontMono-Regular.ttf"
-            dest: "{{ ansible_facts['user_dir'] }}/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf"
-
-        - name: Refresh font cache
-          ansible.builtin.command: fc-cache -vf
-          changed_when: false
-
     - name: Stow dotfiles
       block:
         - name: Create ~/.dotfile directory
