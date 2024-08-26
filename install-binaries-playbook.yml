@@ -55,7 +55,7 @@
                   ],
               }
             - {
-                src: "https://github.com/errata-ai/vale/releases/download/v2.27.0/vale_2.27.0_Linux_64-bit.tar.gz",
+                src: "https://github.com/errata-ai/vale/releases/download/v3.7.1/vale_3.7.1_Linux_64-bit.tar.gz",
                 include: "vale",
               }
             - {
