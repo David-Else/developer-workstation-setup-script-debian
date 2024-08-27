@@ -105,6 +105,7 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/sha
 
 ```sh
 # download go1.22.4.linux-amd64.tar.gz
+# add the language server if needed: go install golang.org/x/tools/gopls@latest
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
 git clone https://github.com/lemnos/tt
 cd tt
