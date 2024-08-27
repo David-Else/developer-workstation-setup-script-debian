@@ -3,9 +3,6 @@ git:
     colorArg: always
     pager: delta --paging=never
 
-refresher:
-  refreshInterval: 3
-
 gui:
   nerdFontsVersion: "3"
   enlargedSideViewLocation: "top"
