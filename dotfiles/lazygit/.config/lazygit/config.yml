@@ -6,7 +6,6 @@ git:
 gui:
   nerdFontsVersion: "3"
   enlargedSideViewLocation: "top"
-  windowSize: "half"
 
 customCommands:
   - key: "E"

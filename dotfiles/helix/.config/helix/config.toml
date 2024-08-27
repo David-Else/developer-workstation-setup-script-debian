@@ -21,6 +21,7 @@ q = ":quit"
 
 [keys.normal.C-t]
 l = ":sh kitty @ launch --no-response --cwd=current --type=overlay --copy-env lazygit"
+d = ":sh kitty @ launch --no-response --cwd=current --type=overlay git diff"
 # l = ":sh kitty @ focus-window --match 'title:lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=lazygit --copy-env lazygit"
 t = ":sh kitty @ focus-window --match 'title:terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=terminal"
 i = ":sh kitty @ signal_child --match 'title:terminal and state:parent_active' SIGINT"
