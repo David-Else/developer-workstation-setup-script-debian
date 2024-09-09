@@ -94,7 +94,8 @@ firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
 11. Install Kitty (binary locations are already added to the $PATH in `.bashrc` and `.zshrc`)
 
 ```sh
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin \
+    installer=version-0.36.2 launch=n
 cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
 cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
 sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
