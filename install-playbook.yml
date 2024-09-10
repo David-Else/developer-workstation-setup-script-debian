@@ -138,7 +138,7 @@
           ansible.builtin.command:
             chdir: "{{ ansible_facts['user_dir'] }}/.dotfiles"
             cmd: >
-              stow --target={{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc aichat sidplayfp
+              stow --target={{ ansible_facts['user_dir'] }} autostart helix mpv shell pandoc kitty lazygit keepassxc aichat sidplayfp marksman
               --verbose=2
           register: result
           changed_when: 'result.stderr is search("LINK: ")'
