@@ -28,6 +28,7 @@ packages_to_install:
   - gdb
   - gh
   - gnome-boxes
+  - gnome-screenshot
   - gnome-shell-extension-autohidetopbar
   - gnome-shell-extension-caffeine
   - gnome-shell-pomodoro
