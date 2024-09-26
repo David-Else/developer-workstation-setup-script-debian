@@ -113,6 +113,13 @@ cd tt
 make && sudo make install
 ```
 
+13. Setup Hugo completions and man page:
+
+```sh
+hugo completion zsh > "${fpath[1]}/_hugo"
+sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
+```
+
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
