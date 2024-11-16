@@ -1,5 +1,4 @@
-model: openai:gpt-4o-2024-08-06
-function_calling: true
+model: openai:gpt-4o
 keybindings: vi
 clients:
   - type: openai
