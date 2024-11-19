@@ -106,7 +106,7 @@
         - name: Download Blender and extract archive
           become: true
           ansible.builtin.unarchive:
-            src: "https://download.blender.org/release/Blender4.1/blender-4.1.1-linux-x64.tar.xz"
+            src: "https://download.blender.org/release/Blender4.2/blender-4.2.3-linux-x64.tar.xz"
             dest: "{{ user_programs }}/blender-bin"
             remote_src: true
             creates: "{{ user_programs }}/blender-bin/blender"
