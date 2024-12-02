@@ -85,11 +85,6 @@
           ansible.builtin.apt:
             deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
-        # Included in Debian 13 as git-delta
-        - name: Download and install delta
-          ansible.builtin.apt:
-            deb: https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb
-
         - name: Download and install rclone
           ansible.builtin.apt:
             deb: https://github.com/rclone/rclone/releases/download/v1.68.2/rclone-v1.68.2-linux-amd64.deb
@@ -166,9 +161,9 @@
           ansible.builtin.package_facts:
             manager: auto
 
-        - name: Create symlink for lldb-vscode-15 as lldb-dap to mirror upstream changes
+        - name: Create symlink for lldb-dap-19 as lldb-dap
           ansible.builtin.file:
-            src: /usr/bin/lldb-vscode-15
+            src: /usr/bin/lldb-dap-19
             dest: /usr/bin/lldb-dap
             state: link
           when: "'lldb-15' in ansible_facts.packages"

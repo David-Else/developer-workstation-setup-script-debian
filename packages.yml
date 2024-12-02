@@ -27,6 +27,7 @@ packages_to_install:
   - fzf
   - gdb
   - gh
+  - git-delta
   - gnome-boxes
   - gnome-screenshot
   - gnome-shell-extension-autohidetopbar
@@ -41,7 +42,7 @@ packages_to_install:
   - keepassxc
   - krita
   - libvirt-daemon-system # dependency for gnome-boxes
-  - lldb-15 # to supply lldb-vscode-15 for Helix debugging
+  - lldb-19 # to supply lldb-dap-19 for Helix debugging
   - lshw
   - mediainfo
   - mpv
