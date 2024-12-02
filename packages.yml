@@ -39,7 +39,7 @@ packages_to_install:
   - heif-thumbnailer
   - imagemagick
   - jq
-  - keepassxc
+  - keepassxc-full
   - kitty
   - krita
   - libvirt-daemon-system # dependency for gnome-boxes
