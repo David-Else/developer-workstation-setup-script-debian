@@ -1,4 +1,4 @@
-- name: Install Debian, Flatpak, NPM and Python packages, and setup Debian 12
+- name: Install Debian, Flatpak, NPM and Python packages, and setup Debian 13
   hosts: localhost
   vars_files:
     - packages.yml
@@ -156,7 +156,7 @@
             src: /usr/bin/lldb-dap-19
             dest: /usr/bin/lldb-dap
             state: link
-          when: "'lldb-15' in ansible_facts.packages"
+          when: "'lldb-19' in ansible_facts.packages"
 
         - name: Create symlink for batcat as bat
           ansible.builtin.file:
