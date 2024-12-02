@@ -14,10 +14,6 @@
     - name: Add repositories
       become: true
       block:
-        - name: Add bookworm backports apt repository
-          ansible.builtin.apt_repository:
-            repo: deb http://deb.debian.org/debian bookworm-backports main
-
         - name: Add the Flathub repository
           community.general.flatpak_remote:
             name: flathub
@@ -54,12 +50,6 @@
         - name: Install Debian packages
           ansible.builtin.apt:
             name: "{{ packages_to_install }}"
-
-        - name: Install backports pipewire
-          ansible.builtin.apt:
-            name: pipewire
-            state: latest
-            default_release: bookworm-backports
 
         - name: Install Flatpak packages
           community.general.flatpak:
