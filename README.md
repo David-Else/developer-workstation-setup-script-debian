@@ -2,7 +2,7 @@
 
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 12 "bookworm". The setup scripts automate the installation of necessary software and configurations.
+This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie". The setup scripts automate the installation of necessary software and configurations.
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
@@ -10,25 +10,14 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 Before running the setup script, follow these steps to install Debian 12 and configure the desktop environment:
 
-1. Install a fresh copy of Debian 12. Tested with the 12.5 ISO: https://cdimage.debian.org/debian-cd/current/amd64/bt-dvd/debian-12.5.0-amd64-DVD-1.iso.torrent
-
-> If you use the default guided partitioner in the Debian installer, [you will get a swap partition of only 1 GB](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=987503). To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
->
-> 1. Press "e" to edit the default installation option.
-> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
->
->    ```sh
->    partman-auto/cap-ram=n
->    ```
->
-> 3. Press Ctrl-x or F10 to continue.
+1. Install a fresh copy of Debian 13 from the ISO.
 
 Leave the default of Gnome as the desktop environment. During the installation, do not provide any details for the root account, your user account will then have administrative rights.
 
 2. Open the terminal and run the following command to install Ansible, Git, and Flatpak:
 
    ```
-   sudo apt install ansible git flatpak
+   sudo apt install ansible flatpak
    ```
 
 3. Clone the repository and navigate to it:
@@ -89,17 +78,6 @@ firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
     https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
     https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/ \
     https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
-```
-
-11. Install Kitty (binary locations are already added to the $PATH in `.bashrc` and `.zshrc`)
-
-```sh
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin \
-    installer=version-0.36.2 launch=n
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 ```
 
 12. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):

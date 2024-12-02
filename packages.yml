@@ -40,6 +40,7 @@ packages_to_install:
   - imagemagick
   - jq
   - keepassxc
+  - kitty
   - krita
   - libvirt-daemon-system # dependency for gnome-boxes
   - lldb-19 # to supply lldb-dap-19 for Helix debugging
