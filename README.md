@@ -1,5 +1,13 @@
 # Developer Workstation Setup Script Debian Edition
 
+TODO:
+
+- recompile nnn with nerd fonts
+- recompile showmethekey
+- use upcomiing keyd package and redone installing config
+- use upcoming Helix package
+- use upcoming Blender package
+
 ![Debian_logo](./images/debian_logo.svg)
 
 This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie". The setup scripts automate the installation of necessary software and configurations.
@@ -14,7 +22,7 @@ Before running the setup script, follow these steps to install Debian 12 and con
 
 Leave the default of Gnome as the desktop environment. During the installation, do not provide any details for the root account, your user account will then have administrative rights.
 
-2. Open the terminal and run the following command to install Ansible, Git, and Flatpak:
+2. Open the terminal and run the following command to install Ansible and Flatpak:
 
    ```
    sudo apt install ansible flatpak
