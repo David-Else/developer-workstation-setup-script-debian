@@ -8,6 +8,8 @@ TODO:
 - use upcoming Helix package
 - use upcoming Blender package
 
+- consider hugo package if it gets updates to >=134.3
+
 ![Debian_logo](./images/debian_logo.svg)
 
 This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie". The setup scripts automate the installation of necessary software and configurations.
@@ -16,7 +18,7 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 ## Installation
 
-Before running the setup script, follow these steps to install Debian 12 and configure the desktop environment:
+Before running the setup script, follow these steps to install Debian 13 and configure the desktop environment:
 
 1. Install a fresh copy of Debian 13 from the ISO.
 
