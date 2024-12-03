@@ -238,4 +238,4 @@ You might also like to install `ms-vscode.live-server` for live debugging in Cod
 If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/
 
 > [!NOTE]
-- Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` AND restart the virtual machine to get copy and paste working.
+> Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` AND restart the virtual machine to get copy and paste working.
