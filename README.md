@@ -13,6 +13,7 @@ TODO:
 - set default applications in playbook
 - un-comment android-sdk-platform-tools-common when/if it is out if you still need it
 - firfox mozilla version does not work due to missing lib 3rd dec 24, check ansible is installing correctly
+- remove caffine once you know mpv works in full screen
 
 ![Debian_logo](./images/debian_logo.svg)
 
