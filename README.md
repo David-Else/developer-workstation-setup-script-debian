@@ -2,12 +2,12 @@
 
 TODO:
 
-- recompile nnn with nerd fonts
+- see if nerd fonts gets into debian and remove your install if it does
+- recompile nnn with nerd fonts flag
 - recompile showmethekey
 - use upcomiing keyd package and redone installing config
 - use upcoming Helix package
 - use upcoming Blender package
-
 - consider hugo package if it gets updates to >=134.3
 
 ![Debian_logo](./images/debian_logo.svg)
@@ -32,7 +32,7 @@ Before running the setup scripts, follow these steps to install Debian 13:
    sudo apt install ansible flatpak
    ```
 
-3. Clone the repository and navigate to it:
+3. Clone this repository and navigate to it:
 
    ```sh
    git clone https://github.com/David-Else/developer-workstation-setup-script-debian
