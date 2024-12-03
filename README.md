@@ -11,6 +11,8 @@ TODO:
 - consider hugo package if it gets updates to >=134.3
 - use the built in go and remove references to downloading it in the readme
 - set default applications in playbook
+- un-comment android-sdk-platform-tools-common when/if it is out if you still need it
+- firfox mozilla version does not work due to missing lib 3rd dec 24, check ansible is installing correctly
 
 ![Debian_logo](./images/debian_logo.svg)
 

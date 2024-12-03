@@ -71,9 +71,9 @@
     - name: Install specific Debian packages from local drive and Github
       become: true
       block:
-        - name: Install custom nnn with nerd font 3 support from local dir
-          ansible.builtin.apt:
-            deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
+        # - name: Install custom nnn with nerd font 3 support from local dir
+        #   ansible.builtin.apt:
+        #     deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
 
         - name: Download and install rclone
           ansible.builtin.apt:
@@ -84,18 +84,18 @@
           ansible.builtin.apt:
             deb: https://github.com/gohugoio/hugo/releases/download/v0.134.3/hugo_extended_0.134.3_linux-amd64.deb
 
-    - name: Download and install nnn plugins
-      block:
-        - name: Download the latest nnn plugins
-          ansible.builtin.get_url:
-            url: https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs
-            dest: /tmp/getplugs
-            mode: "0755"
+    # - name: Download and install nnn plugins
+    #   block:
+    #     - name: Download the latest nnn plugins
+    #       ansible.builtin.get_url:
+    #         url: https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs
+    #         dest: /tmp/getplugs
+    #         mode: "0755"
 
-        - name: Install nnn plugins
-          ansible.builtin.command: /tmp/getplugs
-          args:
-            creates: "{{ ansible_facts['user_dir'] }}/.config/nnn/plugins"
+    #     - name: Install nnn plugins
+    #       ansible.builtin.command: /tmp/getplugs
+    #       args:
+    #         creates: "{{ ansible_facts['user_dir'] }}/.config/nnn/plugins"
 
     - name: Stow dotfiles
       block:
