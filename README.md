@@ -18,7 +18,7 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 ## Installation
 
-Before running the setup script, follow these steps to install Debian 13 and configure the desktop environment:
+Before running the setup scripts, follow these steps to install Debian 13:
 
 1. Install a fresh copy of Debian 13 from the ISO.
 
@@ -126,6 +126,7 @@ pw-metadata -n settings
 
 Watch the sample rates change per application running `pw-top`.
 
+> [!NOTE]
 > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 
 ### General
@@ -236,4 +237,5 @@ You might also like to install `ms-vscode.live-server` for live debugging in Cod
 
 If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/
 
+> [!NOTE]
 - Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` AND restart the virtual machine to get copy and paste working.
