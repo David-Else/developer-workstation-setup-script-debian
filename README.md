@@ -9,6 +9,8 @@ TODO:
 - use upcoming Helix package
 - use upcoming Blender package
 - consider hugo package if it gets updates to >=134.3
+- use the built in go and remove references to downloading it in the readme
+- set default applications in playbook
 
 ![Debian_logo](./images/debian_logo.svg)
 
