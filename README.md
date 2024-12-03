@@ -22,8 +22,9 @@ Before running the setup script, follow these steps to install Debian 13 and con
 
 1. Install a fresh copy of Debian 13 from the ISO.
 
-> [!IMPORTANT]
-> Leave the default of Gnome as the desktop environment. During the installation, do not provide any details for the root account, your user account will then have administrative rights.
+> [!NOTE]
+> - Do not provide any details for the root account, your user account will then have administrative rights.
+> - Leave the default of Gnome as the desktop environment.
 
 2. Open the terminal and run the following command to install Ansible and Flatpak:
 
@@ -42,8 +43,8 @@ Before running the setup script, follow these steps to install Debian 13 and con
 
 5. Run the main installation playbooks:
 
-> [!IMPORTANT]
-> Note: When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
+> [!NOTE]
+> When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
