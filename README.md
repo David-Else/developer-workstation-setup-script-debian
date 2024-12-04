@@ -30,6 +30,7 @@ Before running the setup scripts, follow these steps to install Debian 13:
 > [!NOTE]
 > - Do not provide any details for the root account, your user account will then have administrative rights.
 > - Leave Gnome as the default desktop environment.
+> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 
 2. Open the terminal and run the following command to install Ansible and Flatpak:
 
