@@ -31,7 +31,6 @@ packages_to_install:
   - gnome-boxes
   - gnome-screenshot
   - gnome-shell-extension-autohidetopbar
-  - gnome-shell-extension-caffeine
   - gnome-shell-pomodoro
   - gnome-tweaks
   - handbrake
