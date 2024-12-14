@@ -25,5 +25,4 @@
           loop:
             - auto-move-windows@gnome-shell-extensions.gcampax.github.com
             - hidetopbar@mathieu.bidon.ca
-            - caffeine@patapon.info
           when: item not in enabled_extensions.stdout
