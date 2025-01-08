@@ -37,7 +37,7 @@
             dest: "{{ user_programs }}/marksman"
             mode: "0755"
 
-        - name: Download and install vale and lazygit
+        - name: Download and install lazygit
           ansible.builtin.unarchive:
             src: "{{ item.src }}"
             dest: "{{ user_programs }}"
@@ -45,10 +45,6 @@
             extra_opts: "{{ item.extra_opts | default(omit) }}"
             include: "{{ item.include | default(omit) }}"
           loop:
-            - {
-                src: "https://github.com/errata-ai/vale/releases/download/v3.7.1/vale_3.7.1_Linux_64-bit.tar.gz",
-                include: "vale",
-              }
             - {
                 src: "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz",
                 include: "lazygit",

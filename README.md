@@ -181,14 +181,6 @@ EOF
 update-desktop-database ~/.local/share/applications/
 ```
 
-- Setup Vale by changing the global `.vale.ini` file in your `$HOME` directory. Update the `StylesPath` to point to an empty directory where you want to store your styles. For example:
-
-  ```sh
-  StylesPath = ~/Documents/styles
-  ```
-
-  After making the change, run `vale sync`. You can create a new config file using the [Config Generator](https://vale.sh/generator).
-
 - Configure Git by setting your email and name. Run the following commands:
 
   ```sh
