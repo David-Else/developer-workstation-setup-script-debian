@@ -1,3 +1,10 @@
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+[language-server.harper-ls.config.harper-ls]
+diagnosticSeverity = "warning"
+
 [language-server.rust-analyzer.config]
 check.command = "clippy"
 
@@ -10,7 +17,7 @@ ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
 name = "markdown"
 text-width = 80
 soft-wrap = { wrap-at-text-width = true }
-language-servers = ["ltex-ls", "marksman"]
+language-servers = ["harper-ls", "marksman"]
 formatter = { command = 'prettier', args = [
   "--parser",
   "markdown",
@@ -54,7 +61,7 @@ auto-format = true
 
 [[language]]
 name = "git-commit"
-language-servers = ["ltex-ls"]
+language-servers = ["harper-ls"]
 
 [[language]]
 name = "python"
