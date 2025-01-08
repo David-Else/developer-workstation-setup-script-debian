@@ -33,7 +33,7 @@
       block:
         - name: Download and install marksman
           ansible.builtin.get_url:
-            url: "https://github.com/artempyanykh/marksman/releases/download/2023-12-09/marksman-linux-x64"
+            url: "https://github.com/artempyanykh/marksman/releases/download/2024-12-18/marksman-linux-x64"
             dest: "{{ user_programs }}/marksman"
             mode: "0755"
 
