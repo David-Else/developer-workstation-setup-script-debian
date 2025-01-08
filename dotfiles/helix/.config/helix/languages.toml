@@ -8,10 +8,10 @@ diagnosticSeverity = "warning"
 [language-server.rust-analyzer.config]
 check.command = "clippy"
 
-[language-server.ltex-ls.config]
-ltex.diagnosticSeverity = "warning"
-ltex.disabledRules = { "en-US" = ["PROFANITY"], "en-GB" = ["PROFANITY"] }
-ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
+# [language-server.ltex-ls-plus.config]
+# ltex.diagnosticSeverity = "warning"
+# ltex.disabledRules = { "en-US" = ["PROFANITY"], "en-GB" = ["PROFANITY"] }
+# ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
 
 [[language]]
 name = "markdown"
