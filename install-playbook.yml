@@ -79,7 +79,7 @@
           ansible.builtin.apt:
             deb: https://github.com/rclone/rclone/releases/download/v1.68.2/rclone-v1.68.2-linux-amd64.deb
 
-        # Must be at least 134.3 to work with Helix
+        # Must be at least 134.3 to work with Helix https://packages.debian.org/trixie/hugo
         - name: Download and install hugo
           ansible.builtin.apt:
             deb: https://github.com/gohugoio/hugo/releases/download/v0.134.3/hugo_extended_0.134.3_linux-amd64.deb
