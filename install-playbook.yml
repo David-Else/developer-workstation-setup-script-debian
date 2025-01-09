@@ -82,7 +82,7 @@
         # Must be at least 134.3 to work with Helix https://packages.debian.org/trixie/hugo
         - name: Download and install hugo
           ansible.builtin.apt:
-            deb: https://github.com/gohugoio/hugo/releases/download/v0.134.3/hugo_extended_0.134.3_linux-amd64.deb
+            deb: https://github.com/gohugoio/hugo/releases/download/v0.140.2/hugo_extended_0.140.2_linux-amd64.deb
 
     # - name: Download and install nnn plugins
     #   block:

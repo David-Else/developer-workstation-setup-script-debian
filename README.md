@@ -2,19 +2,19 @@
 
 TODO:
 
-- see if nerd fonts gets into debian and remove your install if it does
-- recompile nnn with nerd fonts flag
-- recompile showmethekey
-- use upcomiing keyd package and redone installing config
-- use upcoming Helix package or build .deb with the new crate
-- use upcoming Blender package
-- consider hugo package if it gets updates to >=134.3 or Helix allows changing .bak filename
-- use the built in go and remove references to downloading it in the readme
-- set default applications in playbook
-- un-comment android-sdk-platform-tools-common when/if it is out if you still need it
-- firfox mozilla version does not work due to missing lib 3rd dec 24, check ansible is installing correctly
+- See if nerd fonts gets into Debian and remove your install if it does
+- Recompile nnn with nerd fonts flag
+- Recompile showmethekey
+- Use upcomiing keyd package and redone installing config
+- Use upcoming Helix package or build .deb with the new crate
+- Use upcoming Blender package
+- Consider hugo package if it gets updates to >=134.3 or Helix allows changing .bak filename
+- Use the built in go and remove references to downloading it in the readme
+- Set default applications in playbook
+- Un-comment android-sdk-platform-tools-common when/if it is out if you still need it
+- Firfox mozilla version does not work due to missing lib 3rd dec 24, check ansible is installing correctly
 - 14th dec after playbook run gnome-extensions list shows nothing inc non of the apt installed extensions, the extensions gui shows nothing. wait for fix.
-- fix mpv gamepad now you removed file browser script
+- Fix mpv gamepad now you removed file browser script
 
 ![Debian_logo](./images/debian_logo.svg)
 
