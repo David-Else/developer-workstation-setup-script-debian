@@ -6,15 +6,15 @@ TODO:
 - recompile nnn with nerd fonts flag
 - recompile showmethekey
 - use upcomiing keyd package and redone installing config
-- use upcoming Helix package
+- use upcoming Helix package or build .deb with the new crate
 - use upcoming Blender package
 - consider hugo package if it gets updates to >=134.3 or Helix allows changing .bak filename
 - use the built in go and remove references to downloading it in the readme
 - set default applications in playbook
 - un-comment android-sdk-platform-tools-common when/if it is out if you still need it
 - firfox mozilla version does not work due to missing lib 3rd dec 24, check ansible is installing correctly
-- consider moving to https://github.com/ltex-plus/ltex-ls-plus which needs java 21
 - 14th dec after playbook run gnome-extensions list shows nothing inc non of the apt installed extensions, the extensions gui shows nothing. wait for fix.
+- fix mpv gamepad now you removed file browser script
 
 ![Debian_logo](./images/debian_logo.svg)
 
