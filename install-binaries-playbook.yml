@@ -49,6 +49,12 @@
               - "ltex-ls-plus-18.4.0/lib"
             creates: "{{ user_programs }}/bin/ltex-ls-plus"
 
+        - name: Create symlink to ltex-ls binary
+          ansible.builtin.file:
+            src: "{{ user_programs }}/bin/ltex-ls-plus"
+            dest: "{{ user_programs }}/ltex-ls-plus"
+            state: link
+
         - name: Download and install lazygit
           ansible.builtin.unarchive:
             src: "https://github.com/jesseduffield/lazygit/releases/download/v0.45.0/lazygit_0.45.0_Linux_x86_64.tar.gz"
