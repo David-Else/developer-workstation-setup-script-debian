@@ -10,7 +10,7 @@ ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
 name = "markdown"
 text-width = 80
 soft-wrap = { wrap-at-text-width = true }
-language-servers = ["ltex-ls-plus", "marksman"]
+language-servers = ["marksman", "ltex-ls-plus"]
 formatter = { command = 'prettier', args = [
   "--parser",
   "markdown",
