@@ -8,7 +8,7 @@ C-l     = "goto_next_buffer"
 C-h     = "goto_previous_buffer"
 "tab"   = "expand_selection"
 "S-tab" = "shrink_selection"
-"F5"    = [":config-reload", ":reload"]
+"F5"    = ":reload"
 Z       = { Z = ":wq", Q = ":q!" }
 
 [keys.select]
@@ -25,7 +25,7 @@ f   = ":toggle auto-format"
 "." = ":toggle file-picker.hidden" # toggles ignoring hidden files
 i   = ":toggle lsp.display-inlay-hints"
 s   = ":toggle soft-wrap.enable"
-z   = ":toggle gutters.line-numbers.min-width 48 3"
+z   = ":toggle gutters.line-numbers.min-width 52 3"
 b   = ":toggle bufferline multiple never"
 
 [keys.normal.C-space]
