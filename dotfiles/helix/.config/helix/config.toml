@@ -36,7 +36,8 @@ g = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | aicha
 p = "@:sh pandoc --resource-path <C-r>%<C-w> --self-contained --metadata title='Preview' <C-r>% -o /tmp/md-preview.html && xdg-open /tmp/md-preview.html<ret>"
 d = ":pipe echo -n $(date +%d-%m-%Y)"
 t = ":sh kitty @ focus-window --match 'title:terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=terminal"
-a = ":sh kitty @ launch --no-response --title=aichat aichat --role technical-writer" i = ":sh kitty @ signal-child --match 'title:terminal and state:parent_active' SIGINT"
+a = ":sh kitty @ launch --no-response --title=aichat aichat --role technical-writer"
+i = ":sh kitty @ signal-child --match 'title:terminal and state:parent_active' SIGINT"
 m = { r = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'clear\nmake test\n'"}
 s = ":pipe-to xargs -I {} kitty @ send-text --match title:terminal and state:parent_active '{}\n'"
 
