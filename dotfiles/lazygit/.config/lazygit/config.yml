@@ -1,11 +1,13 @@
 git:
   paging:
     colorArg: always
-    pager: delta --paging=never
+    pager: delta --paging=never --side-by-side
 
 gui:
   nerdFontsVersion: "3"
-  enlargedSideViewLocation: "top"
+  screenMode: half
+  enlargedSideViewLocation: top
+  showCommandLog: false
 
 customCommands:
   - key: "E"
