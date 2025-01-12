@@ -73,14 +73,13 @@ flatpak_packages:
   - org.signal.Signal
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
-  - "@tailwindcss/language-server@0.0.16"
-  - bash-language-server@5.3.3
-  - browser-sync@3.0.2
-  - prettier@3.3.3
+  - "@tailwindcss/language-server@0.12.18"
+  - bash-language-server@5.4.3
+  - prettier@3.4.2
   - typescript-language-server@4.3.3
-  - typescript@5.4.5
+  - typescript@5.7.3
   - vscode-langservers-extracted@4.8.0
-  - yaml-language-server@1.14.0
+  - yaml-language-server@1.15.0
 python_packages:
   - ansi2html
   - gdbgui
