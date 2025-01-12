@@ -1,50 +1,55 @@
 theme = "dark_plus"
 
 [keys.normal]
-"tab" = "expand_selection"
+C-j     = "page_down"
+C-k     = ["page_up", "goto_window_top"]
+G       = "goto_file_end"
+C-l     = "goto_next_buffer"
+C-h     = "goto_previous_buffer"
+"tab"   = "expand_selection"
 "S-tab" = "shrink_selection"
-G = "goto_file_end" # vim
-Z = { Z = ":wq", Q = ":q!" } # vim
-"F5" = ":reload"
-"@" = ["select_all", ":pipe sort -t@ -k2,2"]
-"+" = ["select_all", ":pipe sort -t+ -k2,2"]
-"A-S-d" = ":pipe echo -n $(date +%Y-%m-%d)"
+"F5"    = [":config-reload", ":reload"]
+Z       = { Z = ":wq", Q = ":q!" }
 
 [keys.select]
-G = "goto_file_end" # vim
+G = "goto_file_end"
 
 [keys.normal.space]
-w = ":write"
-q = ":quit"
+w   = ":write"
+q   = ":quit"
 "." = "file_picker_in_current_buffer_directory"
-# G = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | sgpt --role tr --no-cache 'Improve this writing'"]
-
-[keys.normal.C-t]
-l = ":sh kitty @ launch --no-response --cwd=current --type=overlay --copy-env lazygit"
-d = ":sh kitty @ launch --no-response --cwd=current --type=overlay git diff"
-# l = ":sh kitty @ focus-window --match 'title:lazygit and state:parent_active' || kitty @ launch --no-response --cwd=current --title=lazygit --copy-env lazygit"
-t = ":sh kitty @ focus-window --match 'title:terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=terminal"
-i = ":sh kitty @ signal_child --match 'title:terminal and state:parent_active' SIGINT"
-m = { r = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'clear\nmake test\n'"}
-s = ":pipe-to xargs -I {} kitty @ send-text --match title:terminal and state:parent_active '{}\n'"
+l   = ":sh kitty @ launch --no-response --cwd=current --type=overlay --copy-env lazygit"
 
 [keys.normal.space.t]
-f = ":toggle auto-format"
-"." = ":toggle file-picker.hidden"
-i = ":toggle lsp.display-inlay-hints"
-s = ":toggle soft-wrap.enable"
-n = ":toggle whitespace.render.newline all none"
-z = ":toggle gutters.line-numbers.min-width 48 3"
+f   = ":toggle auto-format"
+"." = ":toggle file-picker.hidden" # toggles ignoring hidden files
+i   = ":toggle lsp.display-inlay-hints"
+s   = ":toggle soft-wrap.enable"
+z   = ":toggle gutters.line-numbers.min-width 48 3"
+b   = ":toggle bufferline multiple never"
+
+[keys.normal.C-space]
+n = "@:o <C-r>%<C-w>"
+x = "@:sh rm <C-r>%"
+r = "@:sh mv <C-r>% <C-r>%<C-w>"
+g = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | aichat --role technical-writer"]
+p = "@:sh pandoc --resource-path <C-r>%<C-w> --self-contained --metadata title='Preview' <C-r>% -o /tmp/md-preview.html && xdg-open /tmp/md-preview.html<ret>"
+d = ":pipe echo -n $(date +%d-%m-%Y)"
+t = ":sh kitty @ focus-window --match 'title:terminal and state:parent_active' || kitty @ launch --no-response --keep-focus --cwd=current --title=terminal"
+a = ":sh kitty @ launch --no-response --title=aichat aichat --role technical-writer" i = ":sh kitty @ signal-child --match 'title:terminal and state:parent_active' SIGINT"
+m = { r = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make run\n'", b = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'make build\n'", t = ":sh kitty @ send-text --match 'title:terminal and state:parent_active' 'clear\nmake test\n'"}
+s = ":pipe-to xargs -I {} kitty @ send-text --match title:terminal and state:parent_active '{}\n'"
 
 [editor]
 color-modes = true
 end-of-line-diagnostics = "hint"
+bufferline = "multiple"
 
 [editor.whitespace.render]
 newline = "all"
 
 [editor.cursor-shape]
-insert = "bar" # change cursor shape in insert mode
+insert = "bar"
 
 [editor.file-picker]
 follow-symlinks = false
@@ -58,4 +63,4 @@ enable = true
 wrap-at-text-width = true
 
 [editor.inline-diagnostics]
-cursor-line = "warning" # show warnings and errors on the cursorline inline
+cursor-line = "warning"
