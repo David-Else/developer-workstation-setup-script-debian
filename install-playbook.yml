@@ -1,4 +1,4 @@
-- name: Install Debian, Flatpak, NPM and Python packages
+- name: Install packages and set up Debian 13
   hosts: localhost
   vars_files:
     - packages.yml
