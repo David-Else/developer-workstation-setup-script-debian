@@ -2,7 +2,6 @@
 packages_to_remove:
   - cheese
   - evolution
-  - firefox-esr
   - gnome-games
   - gnome-music
   - gnome-software
@@ -22,7 +21,6 @@ packages_to_install:
   - default-jdk-headless
   - entr
   - ffmpeg
-  - firefox
   - fonts-roboto
   - fzf
   - gdb
