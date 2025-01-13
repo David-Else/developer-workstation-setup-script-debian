@@ -1,4 +1,4 @@
-- name: Install Debian, Flatpak, NPM and Python packages, and setup Debian 13
+- name: Install Debian, Flatpak, NPM and Python packages
   hosts: localhost
   vars_files:
     - packages.yml
@@ -18,26 +18,6 @@
           community.general.flatpak_remote:
             name: flathub
             flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-
-        - name: Download Mozilla's GPG key
-          ansible.builtin.get_url:
-            url: https://packages.mozilla.org/apt/repo-signing-key.gpg
-            dest: /etc/apt/keyrings/packages.mozilla.org.asc
-            mode: "0644"
-
-        - name: Add Mozilla apt repository
-          ansible.builtin.apt_repository:
-            repo: deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main
-            filename: mozilla
-
-        - name: Set pin preference for Mozilla packages
-          ansible.builtin.copy:
-            dest: /etc/apt/preferences.d/mozilla
-            content: |
-              Package: *
-              Pin: origin packages.mozilla.org
-              Pin-Priority: 1000
-            mode: "0644"
 
     - name: Install Packages from repositories
       become: true
@@ -68,7 +48,7 @@
           args:
             creates: "{{ ansible_facts['user_dir'] }}/.local/pipx/venvs/{{ item }}"
 
-    - name: Install specific Debian packages from local drive and Github
+    - name: Install Debian packages directly from Github
       become: true
       block:
         # - name: Install custom nnn with nerd font 3 support from local dir
@@ -105,7 +85,7 @@
             state: directory
             mode: "0755"
 
-        - name: Copy dotfiles
+        - name: Copy dotfiles to home directory
           ansible.builtin.copy:
             src: "{{ playbook_dir }}/dotfiles/"
             dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
@@ -134,17 +114,7 @@
           changed_when: 'result.stderr is search("LINK: ")'
           failed_when: 'result.rc != 0 and "Conflicting" in result.stderr'
 
-    - name: Update .bashrc by appending extra config
-      ansible.builtin.blockinfile:
-        block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
-        path: "{{ ansible_facts['user_dir'] }}/.bashrc"
-        backup: true
-
-    - name: Run pipx ensurepath
-      ansible.builtin.command: pipx ensurepath
-      changed_when: false
-
-    - name: Create symlinks based on installed packages
+    - name: Create symlinks if packages are installed
       become: true
       block:
         - name: Gather the package facts
@@ -197,3 +167,13 @@
             line: "default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]"
             backrefs: true
           register: samplerates_updated
+
+    - name: Update .bashrc by appending extra config
+      ansible.builtin.blockinfile:
+        block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
+        path: "{{ ansible_facts['user_dir'] }}/.bashrc"
+        backup: true
+
+    - name: Run pipx ensurepath
+      ansible.builtin.command: pipx ensurepath
+      changed_when: false
