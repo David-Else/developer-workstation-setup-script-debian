@@ -27,7 +27,7 @@
             name: flathub
             flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
-    - name: Install Packages from repositories
+    - name: Install packages from repositories
       become: true
       block:
         - name: Update and upgrade all Debian packages
