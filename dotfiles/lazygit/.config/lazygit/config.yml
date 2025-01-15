@@ -9,6 +9,11 @@ gui:
   enlargedSideViewLocation: top
   showCommandLog: false
 
+keybinding:
+  universal:
+    scrollUpMain-alt1: <c-k>
+    scrollDownMain-alt1: <c-j>
+
 customCommands:
   - key: "E"
     context: "files"
