@@ -2,7 +2,6 @@
   hosts: localhost
   vars:
     user_programs: /usr/local/bin
-    keyd_git_version: "201a077b2ccb8cd01b77396c1f88e07cbcb11d1e"
     marksman_version: "2024-12-18"
     marksman_shasum: "b9cb666c643dfd9b699811fdfc445ed4c56be65c1d878c21d46847f0d7b0e475"
     ltex_ls_plus_version: "18.4.0"
@@ -10,30 +9,6 @@
     yabridge_version: "5.0.5"
 
   tasks:
-    # Maybe included in Debian 13
-    - name: Clone keyd from GitHub
-      ansible.builtin.git:
-        repo: https://github.com/rvaiya/keyd
-        dest: "{{ playbook_dir }}/keyd"
-        version: "{{ keyd_git_version }}"
-        update: false
-
-    - name: Ensure the keyd directory exists
-      become: true
-      ansible.builtin.file:
-        path: /etc/keyd/
-        state: directory
-        mode: "0755"
-
-    - name: Copy keyd default.conf to /etc/keyd/
-      become: true
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/extras/default.conf"
-        dest: /etc/keyd/default.conf
-        owner: root
-        group: root
-        mode: "0644"
-
     - name: Download and install GitHub binaries
       become: true
       block:
@@ -80,17 +55,16 @@
     # variables are correctly sourced and recognized by subsequent installations.
     # The `set -o pipefail` option ensures the task fails if any command in the pipeline fails
     # The use of "/bin/bash" as the executable is specified to guarantee compatibility with `pipefail`.
-    # The default shell on some systems (e.g., Debian) is `dash`, which may not support such options.
+    # The default shell on some systems on Debian is `dash`, which does not support such options.
     # The `.cargo/env` file, created by the Rust installation script, acts as a marker indicating
     # Rust is installed. If this file exists, Ansible skips this task, ensuring idempotency and
     # avoiding unnecessary reinstallation.
-    - name: Install the latest stable Rust, Rust-analyzer, AIChat and argc
+    - name: Install the latest stable Rust, Rust-analyzer, and AIChat
       ansible.builtin.shell: >
         set -o pipefail &&
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
         . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
         rustup component add rust-analyzer &&
-        cargo install argc &&
         cargo install aichat &&
       args:
         creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
