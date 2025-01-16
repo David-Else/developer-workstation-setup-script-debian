@@ -45,6 +45,7 @@ s = ":pipe-to xargs -I {} kitty @ send-text --match title:terminal and state:par
 color-modes = true
 end-of-line-diagnostics = "hint"
 bufferline = "multiple"
+default-yank-register = "+"
 
 [editor.whitespace.render]
 newline = "all"
