@@ -46,7 +46,7 @@ Before running the setup scripts, follow these steps to install Debian 13:
    cd developer-workstation-setup-script-debian
    ```
 
-4. Customize the software selection by modifying the `packages.yml` and `install-binaries-playbook.yml` files according to your preferences.
+4. Customize the software selection by modifying `packages.yml` according to your preferences.
 
 5. Run the main installation playbooks:
 
@@ -55,10 +55,6 @@ Before running the setup scripts, follow these steps to install Debian 13:
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
-   ```
-
-   ```sh
-   ansible-playbook ./install-binaries-playbook.yml -K
    ```
 
 6. Log out and in, then run the Gnome and Helix setup:
