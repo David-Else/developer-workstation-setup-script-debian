@@ -48,7 +48,7 @@ Before running the setup scripts, follow these steps to install Debian 13:
 
 4. Customize the software selection by modifying `packages.yml` according to your preferences.
 
-5. Run the main installation playbooks:
+5. Run the main installation playbook:
 
 > [!NOTE]
 > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
