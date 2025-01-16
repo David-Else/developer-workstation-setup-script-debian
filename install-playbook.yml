@@ -1,4 +1,3 @@
-# i want you to refactor this playbook by splitting it up into seperate task files. this playbook should import them all in the correct order. AI!
 - name: Install packages and set up Debian 13
   hosts: localhost
   vars_files:
