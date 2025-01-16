@@ -1,7 +1,7 @@
 - name: Install packages from repositories
+  become: true
   vars_files:
     - packages.yml
-  become: true
   block:
     - name: Add Flathub repository
       block:
