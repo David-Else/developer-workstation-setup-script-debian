@@ -136,47 +136,6 @@ Watch the sample rates change per application running `pw-top`.
 
 To perform general tweaks, follow these steps:
 
-- Setup default applications:
-
-```sh
-touch ~/.config/mimeapps.list
-cp ~/.config/mimeapps.list ~/.config/mimeapps.list.backup
-cat > ~/.config/mimeapps.list << EOF
-[Default Applications]
-video/x-matroska=mpv.desktop
-video/mp4=mpv.desktop
-audio/x-opus+ogg=mpv.desktop
-text/vnd.trolltech.linguist=helix.desktop
-application/toml=helix.desktop
-text/plain=helix.desktop
-text/x-python=helix.desktop
-application/json=helix.desktop
-application/javascript=helix.desktop
-audio/flac=mpv.desktop
-application/x-shellscript=helix.desktop
-audio/prs.sid=sidplayfp.desktop
-text/csv=libreoffice-calc.desktop
-video/mpeg=mpv.desktop
-
-[Added Associations]
-video/x-matroska=mpv.desktop;
-video/mp4=mpv.desktop;
-audio/x-opus+ogg=mpv.desktop;
-text/vnd.trolltech.linguist=helix.desktop;
-application/toml=helix.desktop;
-text/plain=helix.desktop;
-text/x-python=helix.desktop;
-application/json=helix.desktop;
-application/javascript=helix.desktop;
-audio/flac=mpv.desktop;
-application/x-shellscript=helix.desktop;
-audio/prs.sid=sidplayfp.desktop;
-text/csv=libreoffice-calc.desktop;
-video/mpeg=mpv.desktop;
-EOF
-update-desktop-database ~/.local/share/applications/
-```
-
 - Configure Git by setting your email and name. Run the following commands:
 
   ```sh

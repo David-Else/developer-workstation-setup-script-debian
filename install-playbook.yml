@@ -2,15 +2,16 @@
   hosts: localhost
 
   tasks:
-    - import_tasks: tasks/remove_unwanted_apps.yml
-    - import_tasks: tasks/install_repo_packages.yml
-    - import_tasks: tasks/install_github_packages.yml
-    - import_tasks: tasks/install_github_binaries.yml
-    - import_tasks: tasks/stow_dotfiles.yml
-    - import_tasks: tasks/create_symlinks.yml
-    - import_tasks: tasks/setup_pipewire.yml
-    - import_tasks: tasks/update_bashrc.yml
-    - import_tasks: tasks/install_rust.yml
+    - ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
+    - ansible.builtin.import_tasks: tasks/install_repo_packages.yml
+    - ansible.builtin.import_tasks: tasks/install_github_packages.yml
+    - ansible.builtin.import_tasks: tasks/install_github_binaries.yml
+    - ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
+    - ansible.builtin.import_tasks: tasks/create_symlinks.yml
+    - ansible.builtin.import_tasks: tasks/setup_pipewire.yml
+    - ansible.builtin.import_tasks: tasks/update_bashrc.yml
+    - ansible.builtin.import_tasks: tasks/install_rust.yml
+    - ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
 
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
