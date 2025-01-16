@@ -1,5 +1,7 @@
 - name: Install packages and set up Debian 13
   hosts: localhost
+  vars_files:
+    - packages.yml
 
   tasks:
     - ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
