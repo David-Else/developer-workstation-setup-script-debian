@@ -1,10 +1,5 @@
 - name: Configure MIME applications
   block:
-    - name: Ensure MIME config directory exists
-      ansible.builtin.file:
-        path: "~/.config"
-        state: directory
-
     - name: Ensure mimeapps.list exists
       ansible.builtin.file:
         path: "~/.config/mimeapps.list"
