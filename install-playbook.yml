@@ -19,17 +19,16 @@
         autoremove: true
         purge: true
 
-    - name: Add repositories
-      become: true
-      block:
-        - name: Add the Flathub repository
-          community.general.flatpak_remote:
-            name: flathub
-            flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-
     - name: Install packages from repositories
       become: true
       block:
+        - name: Add Flathub repository
+          block:
+            - name: Add the Flathub repository
+              community.general.flatpak_remote:
+                name: flathub
+                flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
         - name: Update and upgrade all Debian packages
           ansible.builtin.apt:
             upgrade: dist
@@ -56,7 +55,7 @@
           args:
             creates: "{{ ansible_facts['user_dir'] }}/.local/pipx/venvs/{{ item }}"
 
-    - name: Install Debian packages directly from Github
+    - name: Install packages directly from Github
       become: true
       block:
         # - name: Install custom nnn with nerd font 3 support from local dir
@@ -163,7 +162,7 @@
           changed_when: 'result.stderr is search("LINK: ")'
           failed_when: 'result.rc != 0 and "Conflicting" in result.stderr'
 
-    - name: Create symlinks if packages are installed
+    - name: Create symlinks
       become: true
       block:
         - name: Gather the package facts
