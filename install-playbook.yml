@@ -1,12 +1,5 @@
 - name: Install packages and set up Debian 13
   hosts: localhost
-  vars:
-    bin_install_dir: /usr/local/bin
-    marksman_version: "2024-12-18"
-    marksman_shasum: "b9cb666c643dfd9b699811fdfc445ed4c56be65c1d878c21d46847f0d7b0e475"
-    ltex_ls_plus_version: "18.4.0"
-    lazygit_version: "0.45.0"
-    yabridge_version: "5.0.5"
 
   tasks:
     - import_tasks: tasks/remove_unwanted_apps.yml
