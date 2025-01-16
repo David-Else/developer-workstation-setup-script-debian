@@ -1,7 +1,5 @@
 - name: Install packages and set up Debian 13
   hosts: localhost
-  vars_files:
-    - packages.yml
   vars:
     bin_install_dir: /usr/local/bin
     marksman_version: "2024-12-18"
