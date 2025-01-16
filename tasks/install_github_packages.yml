@@ -1,0 +1,15 @@
+- name: Install packages directly from Github
+  become: true
+  block:
+    # - name: Install custom nnn with nerd font 3 support from local dir
+    #   ansible.builtin.apt:
+    #     deb: "{{ playbook_dir }}/extras/nnn_4.9-1_amd64.deb"
+
+    - name: Download and install rclone
+      ansible.builtin.apt:
+        deb: https://github.com/rclone/rclone/releases/download/v1.68.2/rclone-v1.68.2-linux-amd64.deb
+
+    # Must be at least 134.3 to work with Helix https://packages.debian.org/trixie/hugo
+    - name: Download and install hugo
+      ansible.builtin.apt:
+        deb: https://github.com/gohugoio/hugo/releases/download/v0.140.2/hugo_extended_0.140.2_linux-amd64.deb

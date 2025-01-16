@@ -1,0 +1,18 @@
+# A single shell session is required for the installations to ensure the Rust environment
+# variables are correctly sourced and recognized by subsequent installations.
+# The `set -o pipefail` option ensures the task fails if any command in the pipeline fails
+# The use of "/bin/bash" as the executable is specified to guarantee compatibility with `pipefail`.
+# The default shell on some systems on Debian is `dash`, which does not support such options.
+# The `.cargo/env` file, created by the Rust installation script, acts as a marker indicating
+# Rust is installed. If this file exists, Ansible skips this task, ensuring idempotency and
+# avoiding unnecessary reinstallation.
+- name: Install the latest stable Rust, Rust-analyzer, and AIChat
+  ansible.builtin.shell: >
+    set -o pipefail &&
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
+    . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
+    rustup component add rust-analyzer &&
+    cargo install aichat &&
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
+    executable: /bin/bash

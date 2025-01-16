@@ -1,0 +1,35 @@
+- name: Install packages from repositories
+  become: true
+  block:
+    - name: Add Flathub repository
+      block:
+        - name: Add the Flathub repository
+          community.general.flatpak_remote:
+            name: flathub
+            flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: Update and upgrade all Debian packages
+      ansible.builtin.apt:
+        upgrade: dist
+        update_cache: true
+
+    - name: Install Debian packages
+      ansible.builtin.apt:
+        name: "{{ packages_to_install }}"
+
+    - name: Install Flatpak packages
+      community.general.flatpak:
+        name: "{{ flatpak_packages }}"
+
+    - name: Install NPM global packages
+      loop: "{{ npm_packages }}"
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+
+    - name: Install Python packages
+      become: false
+      ansible.builtin.command: pipx install {{ item }}
+      loop: "{{ python_packages }}"
+      args:
+        creates: "{{ ansible_facts['user_dir'] }}/.local/pipx/venvs/{{ item }}"

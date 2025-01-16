@@ -1,0 +1,20 @@
+- name: Create symlinks
+  become: true
+  block:
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Create symlink for lldb-dap-19 as lldb-dap
+      ansible.builtin.file:
+        src: /usr/bin/lldb-dap-19
+        dest: /usr/bin/lldb-dap
+        state: link
+      when: "'lldb-19' in ansible_facts.packages"
+
+    - name: Create symlink for batcat as bat
+      ansible.builtin.file:
+        src: /usr/bin/batcat
+        dest: /usr/local/bin/bat
+        state: link
+      when: "'bat' in ansible_facts.packages"
