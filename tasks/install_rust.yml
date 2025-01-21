@@ -12,7 +12,7 @@
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
     . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
     rustup component add rust-analyzer &&
-    cargo install aichat &&
+    cargo install aichat
   args:
     creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
     executable: /bin/bash
