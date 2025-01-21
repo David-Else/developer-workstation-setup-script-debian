@@ -15,7 +15,7 @@
         mode: "0755"
         checksum: "sha256:{{ marksman_shasum }}"
 
-    - name: Download and install ltex-ls-plus, depends on Java 21 or higher
+    - name: Download and install ltex-ls-plus for Debian 13, depends on Java 21 or higher
       ansible.builtin.unarchive:
         src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}.tar.gz"
         dest: "{{ bin_install_dir }}"
