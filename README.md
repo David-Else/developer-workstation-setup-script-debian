@@ -2,6 +2,7 @@
 
 TODO:
 
+- ditch zsh and use https://unix.stackexchange.com/questions/245548/git-ps1-current-branch-in-bash-prompt-is-always-out-of-date-somehow
 - alter the helix deb to run kitty as the default terminal
 - See if nerd fonts gets into Debian and remove your install if it does
 - Recompile nnn with nerd fonts flag
