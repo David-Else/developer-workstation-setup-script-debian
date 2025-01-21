@@ -25,6 +25,21 @@
           - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
           - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
         creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
+      when: ansible_distribution == "Debian" and ansible_distribution_major_version == "13"
+
+    # doesn't work probbaly due to annoying /./ difference
+    - name: Download and install ltex-ls-plus for Debian 12, including built-in Java Runtime
+      ansible.builtin.unarchive:
+        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
+        dest: "{{ bin_install_dir }}"
+        remote_src: true
+        extra_opts:
+          - "--strip-components=1"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/jdk-21.0.4+7"
+        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
+      when: ansible_distribution == "Debian" and ansible_distribution_major_version == "12"
 
     - name: Create symlink to ltex-ls-plus binary
       ansible.builtin.file:
