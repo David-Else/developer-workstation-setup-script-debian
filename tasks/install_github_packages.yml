@@ -15,7 +15,7 @@
           - "ltex-ls-plus-{{ ltex_ls_plus_version }}/jdk-21.0.4+7"
         creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
 
-    - name: Download and install delta on Debian 12
+    - name: Download and install delta
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
 
