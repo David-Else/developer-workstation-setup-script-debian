@@ -1,12 +1,9 @@
-- name: Install packages from repositories
-  become: true
+- name: Install packages from various repositories
   block:
     - name: Add Flathub repository
-      block:
-        - name: Add the Flathub repository
-          community.general.flatpak_remote:
-            name: flathub
-            flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+      community.general.flatpak_remote:
+        name: flathub
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
     - name: Update and upgrade all Debian packages
       ansible.builtin.apt:
@@ -22,10 +19,16 @@
         name: "{{ flatpak_packages }}"
 
     - name: Install NPM global packages
-      loop: "{{ npm_packages }}"
       community.general.npm:
-        name: "{{ item }}"
+        name: "{{ npm_packages }}"
         global: true
+
+    # maybe needed
+    # - name: Install NPM global packages
+    #   loop: "{{ npm_packages }}"
+    #   community.general.npm:
+    #     name: "{{ item }}"
+    #     global: true
 
     - name: Install Python packages
       become: false

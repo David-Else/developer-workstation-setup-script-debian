@@ -47,7 +47,7 @@
               Version=1.0
               Type=Application
               Terminal=false
-              Exec={{ ansible_env.HOME }}/.local/kitty.app/bin/kitty {{ ansible_env.HOME }}/.cargo/bin/hx %F
+              Exec={{ ansible_env['HOME'] }}/.local/kitty.app/bin/kitty {{ ansible_env['HOME'] }}/.cargo/bin/hx %F
               Name=Helix
               Comment=Open in Helix using the Kitty terminal
               Icon={{ ansible_env.HOME }}/.icons/helix.png

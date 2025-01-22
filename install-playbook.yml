@@ -1,5 +1,6 @@
 - name: Install packages and set up Debian 13
   hosts: localhost
+  become: true
   vars_files:
     - packages.yml
 

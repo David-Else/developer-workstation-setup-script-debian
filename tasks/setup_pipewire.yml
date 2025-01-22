@@ -1,4 +1,5 @@
 - name: Setup Pipewire audio for realtime privileges and full range of playback sample rates
+  become: false
   block:
     - name: Create pipewire group
       become: true

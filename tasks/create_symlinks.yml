@@ -1,5 +1,4 @@
 - name: Create symlinks
-  become: true
   block:
     - name: Gather the package facts
       ansible.builtin.package_facts:

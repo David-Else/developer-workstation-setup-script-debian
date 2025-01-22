@@ -1,14 +1,12 @@
 - name: Configure MIME applications
+  become: false
   block:
-    - name: Ensure mimeapps.list exists
-      ansible.builtin.file:
-        path: "~/.config/mimeapps.list"
-        state: touch
-
-    - name: Backup mimeapps.list
+    - name: Ensure mimeapps.list exists and is backed up
       ansible.builtin.copy:
-        src: "~/.config/mimeapps.list"
-        dest: "~/.config/mimeapps.list.backup"
+        src: "{{ ansible_env['HOME'] }}/.config/mimeapps.list"
+        dest: "{{ ansible_env['HOME'] }}/.config/mimeapps.list.backup"
+        force: false
+        mode: "0644"
 
     - name: Write default and added associations to mimeapps.list
       ansible.builtin.blockinfile:
