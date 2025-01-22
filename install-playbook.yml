@@ -11,7 +11,7 @@
     - name: Install repository packages
       ansible.builtin.import_tasks: tasks/install_repo_packages.yml
 
-    - name: Install GitHub packages
+    - name: Install GitHub packages and binary executables
       ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
     - name: Stow dotfiles
