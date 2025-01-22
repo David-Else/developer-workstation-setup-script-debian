@@ -1,6 +1,6 @@
 - name: Update .bashrc by appending extra config
   become: false
   ansible.builtin.blockinfile:
-    block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
+    block: "{{ lookup('ansible.builtin.file', 'bashrc.bash') }}"
     path: "{{ ansible_env.HOME }}/.bashrc"
     backup: true
