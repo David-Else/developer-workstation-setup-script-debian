@@ -4,15 +4,32 @@
     - packages.yml
 
   tasks:
-    - ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
-    - ansible.builtin.import_tasks: tasks/install_repo_packages.yml
-    - ansible.builtin.import_tasks: tasks/install_github_packages.yml
-    - ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
-    - ansible.builtin.import_tasks: tasks/create_symlinks.yml
-    - ansible.builtin.import_tasks: tasks/setup_pipewire.yml
-    - ansible.builtin.import_tasks: tasks/update_bashrc.yml
-    - ansible.builtin.import_tasks: tasks/install_rust.yml
-    - ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
+    - name: Remove unwanted applications
+      ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
+
+    - name: Install repository packages
+      ansible.builtin.import_tasks: tasks/install_repo_packages.yml
+
+    - name: Install GitHub packages
+      ansible.builtin.import_tasks: tasks/install_github_packages.yml
+
+    - name: Stow dotfiles
+      ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
+
+    - name: Create symlinks
+      ansible.builtin.import_tasks: tasks/create_symlinks.yml
+
+    - name: Set up Pipewire
+      ansible.builtin.import_tasks: tasks/setup_pipewire.yml
+
+    - name: Update bashrc
+      ansible.builtin.import_tasks: tasks/update_bashrc.yml
+
+    - name: Install Rust
+      ansible.builtin.import_tasks: tasks/install_rust.yml
+
+    - name: Configure MIME applications
+      ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
 
     - name: Run pipx ensurepath
       ansible.builtin.command: pipx ensurepath
