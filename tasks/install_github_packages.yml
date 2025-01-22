@@ -1,21 +1,46 @@
+- name: Debian 12 specific tasks
+  become: true
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "12"
+  block:
+    # Broken due to ././ nonsense
+    - name: Download and install ltex-ls-plus with jdk
+      ansible.builtin.unarchive:
+        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
+        dest: "{{ bin_install_dir }}"
+        remote_src: true
+        extra_opts:
+          - "--strip-components=1"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/jdk-21.0.4+7"
+        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
+
+    - name: Download and install delta on Debian 12
+      ansible.builtin.apt:
+        deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
+
+- name: Debian 13 specific tasks
+  become: true
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "13"
+  block:
+    - name: Download and install ltex-ls-plus without jdk
+      ansible.builtin.unarchive:
+        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}.tar.gz"
+        dest: "{{ bin_install_dir }}"
+        remote_src: true
+        extra_opts:
+          - "--strip-components=1"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
+          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
+        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
+
 - name: Install Debian packages and binaries directly from Github
   become: true
-  vars:
-    rclone_version: "1.68.2"
-    hugo_version: "0.140.2"
-    helix_version: "25.01.1"
-    bin_install_dir: /usr/local/bin
-    marksman_version: "2024-12-18"
-    marksman_shasum: "b9cb666c643dfd9b699811fdfc445ed4c56be65c1d878c21d46847f0d7b0e475"
-    ltex_ls_plus_version: "18.4.0"
-    lazygit_version: "0.45.2"
-    yabridge_version: "5.0.5"
   block:
     - name: Download and install rclone
       ansible.builtin.apt:
         deb: "https://github.com/rclone/rclone/releases/download/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb"
 
-    # Must be at least 134.3 to work with Helix https://packages.debian.org/trixie/hugo
     - name: Download and install hugo
       ansible.builtin.apt:
         deb: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
@@ -30,38 +55,6 @@
         dest: "{{ bin_install_dir }}/marksman"
         mode: "0755"
         checksum: "sha256:{{ marksman_shasum }}"
-
-      # ========================================================================
-      # Debian 13 only
-      # ========================================================================
-    - name: Download and install ltex-ls-plus for Debian 13, depends on Java 21 or higher
-      ansible.builtin.unarchive:
-        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}.tar.gz"
-        dest: "{{ bin_install_dir }}"
-        remote_src: true
-        extra_opts:
-          - "--strip-components=1"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
-        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
-      when: ansible_distribution == "Debian" and ansible_distribution_major_version == "13"
-
-      # ========================================================================
-      # Debian 12 only
-      # ========================================================================
-      # doesn't work probbaly due to annoying /./ difference
-    - name: Download and install ltex-ls-plus for Debian 12, including built-in Java Runtime
-      ansible.builtin.unarchive:
-        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
-        dest: "{{ bin_install_dir }}"
-        remote_src: true
-        extra_opts:
-          - "--strip-components=1"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/jdk-21.0.4+7"
-        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
-      when: ansible_distribution == "Debian" and ansible_distribution_major_version == "12"
 
     - name: Create symlink to ltex-ls-plus binary
       ansible.builtin.file:
