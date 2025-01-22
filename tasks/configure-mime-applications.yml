@@ -6,7 +6,6 @@
         src: "{{ ansible_env['HOME'] }}/.config/mimeapps.list"
         dest: "{{ ansible_env['HOME'] }}/.config/mimeapps.list.backup"
         force: false
-        mode: "0644"
 
     - name: Write default and added associations to mimeapps.list
       ansible.builtin.blockinfile:

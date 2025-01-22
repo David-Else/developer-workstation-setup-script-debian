@@ -5,7 +5,6 @@
       ansible.builtin.file:
         path: "{{ ansible_env.HOME }}/.dotfiles"
         state: directory
-        mode: "0755"
 
     - name: Copy dotfiles to home directory
       ansible.builtin.copy:

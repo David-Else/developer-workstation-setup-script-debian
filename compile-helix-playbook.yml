@@ -32,7 +32,6 @@
           ansible.builtin.file:
             path: "{{ ansible_env.HOME }}/.icons"
             state: directory
-            mode: "0755"
 
         - name: Copy Helix editor icons
           ansible.builtin.copy:

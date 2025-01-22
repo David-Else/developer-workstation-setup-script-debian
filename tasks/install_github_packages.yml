@@ -57,7 +57,6 @@
       ansible.builtin.get_url:
         url: "https://github.com/artempyanykh/marksman/releases/download/{{ marksman_version }}/marksman-linux-x64"
         dest: "{{ bin_install_dir }}/marksman"
-        mode: "0755"
         checksum: "sha256:{{ marksman_shasum }}"
 
     - name: Download and install lazygit
