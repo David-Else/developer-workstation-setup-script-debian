@@ -69,6 +69,7 @@
         creates: "{{ bin_install_dir }}/lazygit"
 
     - name: Download and install yabridge
+      become: false
       ansible.builtin.unarchive:
         src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
         dest: "{{ ansible_facts['user_dir'] }}/.local/share"
