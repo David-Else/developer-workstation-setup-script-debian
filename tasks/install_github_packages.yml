@@ -72,9 +72,9 @@
       become: false
       ansible.builtin.unarchive:
         src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
-        dest: "{{ ansible_facts['user_dir'] }}/.local/share"
+        dest: "{{ ansible_env.HOME }}/.local/share"
         remote_src: true
-        creates: "{{ ansible_facts['user_dir'] }}/.local/share/yabridge/yabridgectl"
+        creates: "{{ ansible_env.HOME }}/.local/share/yabridge/yabridgectl"
 
     - name: Install third-party packages from GitHub releases
       block:

@@ -35,4 +35,4 @@
       ansible.builtin.command: pipx install {{ item }}
       loop: "{{ python_packages }}"
       args:
-        creates: "{{ ansible_facts['user_dir'] }}/.local/pipx/venvs/{{ item }}"
+        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"

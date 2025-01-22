@@ -1,20 +1,20 @@
 - name: Stow dotfiles
   become: false
   block:
-    - name: Create ~/.dotfile directory
+    - name: Create ~/.dotfiles directory
       ansible.builtin.file:
-        path: "{{ ansible_facts['user_dir'] }}/.dotfiles"
+        path: "{{ ansible_env.HOME }}/.dotfiles"
         state: directory
         mode: "0755"
 
     - name: Copy dotfiles to home directory
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/dotfiles/"
-        dest: "{{ ansible_facts['user_dir'] }}/.dotfiles/"
+        dest: "{{ ansible_env.HOME }}/.dotfiles/"
 
     # - name: Check for existing Kitty and Lazygit config files
     #   ansible.builtin.find:
-    #     paths: "{{ ansible_facts['user_dir'] }}/.config/"
+    #     paths: "{{ ansible_env.HOME }}/.config/"
     #     patterns: "kitty, lazygit"
     #     file_type: directory
     #   register: config_dirs
@@ -28,9 +28,9 @@
 
     - name: Run stow
       ansible.builtin.command:
-        chdir: "{{ ansible_facts['user_dir'] }}/.dotfiles"
+        chdir: "{{ ansible_env.HOME }}/.dotfiles"
         cmd: >
-          stow --target={{ ansible_facts['user_dir'] }} */ --verbose=2
+          stow --target={{ ansible_env.HOME }} */ --verbose=2
       register: result
       changed_when: 'result.stderr is search("LINK: ")'
       failed_when: 'result.rc != 0 and "Conflicting" in result.stderr'

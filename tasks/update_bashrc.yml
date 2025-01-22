@@ -2,5 +2,5 @@
   become: false
   ansible.builtin.blockinfile:
     block: "{{ lookup('ansible.builtin.file', './bashrc.bash') }}"
-    path: "{{ ansible_facts['user_dir'] }}/.bashrc"
+    path: "{{ ansible_env.HOME }}/.bashrc"
     backup: true

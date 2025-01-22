@@ -10,9 +10,9 @@
   ansible.builtin.shell: >
     set -o pipefail &&
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
-    . "{{ ansible_facts['user_dir'] }}/.cargo/env" &&
+    . "{{ ansible_env.HOME }}/.cargo/env" &&
     rustup component add rust-analyzer &&
     cargo install aichat
   args:
-    creates: "{{ ansible_facts['user_dir'] }}/.cargo/env"
+    creates: "{{ ansible_env.HOME }}/.cargo/env"
     executable: /bin/bash

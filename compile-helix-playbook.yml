@@ -2,8 +2,8 @@
 - name: Install Helix
   hosts: localhost
   vars:
-    helix_src_folder: "{{ ansible_facts['user_dir'] }}/src/helix"
-    helix_config_folder: "{{ ansible_facts['user_dir'] }}/.config/helix"
+    helix_src_folder: "{{ ansible_env.HOME }}/src/helix"
+    helix_config_folder: "{{ ansible_env.HOME }}/.config/helix"
     helix_git_version: "9e7c488ee33eaabab6ee7c3436f4c58b8c647b4f"
   tasks:
     - name: Clone Helix editor from GitHub
@@ -30,18 +30,18 @@
 
         - name: Ensure the icons directory exists
           ansible.builtin.file:
-            path: "{{ ansible_facts['user_dir'] }}/.icons"
+            path: "{{ ansible_env.HOME }}/.icons"
             state: directory
             mode: "0755"
 
         - name: Copy Helix editor icons
           ansible.builtin.copy:
             src: "{{ helix_src_folder }}/contrib/helix.png"
-            dest: "{{ ansible_facts['user_dir'] }}/.icons/helix.png"
+            dest: "{{ ansible_env.HOME }}/.icons/helix.png"
 
         - name: Create Helix .desktop file
           ansible.builtin.copy:
-            dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/helix.desktop"
+            dest: "{{ ansible_env.HOME }}/.local/share/applications/helix.desktop"
             content: |
               [Desktop Entry]
               Version=1.0
@@ -55,5 +55,5 @@
               MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;text/html;application/toml;text/x-python;application/json;application/javascript;
 
         - name: Update the desktop database
-          ansible.builtin.command: update-desktop-database "{{ ansible_facts['user_dir'] }}/.local/share/applications"
+          ansible.builtin.command: update-desktop-database "{{ ansible_env.HOME }}/.local/share/applications"
           changed_when: false
