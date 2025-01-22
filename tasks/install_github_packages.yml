@@ -1,55 +1,29 @@
 - name: Debian 12 specific tasks
   when: ansible_distribution == "Debian" and ansible_distribution_major_version == "12"
   block:
-    # Broken due to ././ nonsense
-    # - name: Download and install ltex-ls-plus with jdk
-    #   ansible.builtin.unarchive:
-    #     src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
-    #     dest: "{{ bin_install_dir }}"
-    #     remote_src: true
-    #     extra_opts:
-    #       - "--strip-components=1"
-    #       - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
-    #       - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
-    #       - "ltex-ls-plus-{{ ltex_ls_plus_version }}/jdk-21.0.4+7"
-    #     creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
-
-    - name: Download and install ltex-ls-plus with jdk
-      ansible.builtin.unarchive:
-        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
-        dest: "{{ bin_install_dir }}"
-        remote_src: true
-        extra_opts:
-          - "--strip-components=2"
-          - "--transform=s|^\\./||" # Properly escaped backslash
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./bin"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./lib"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./jdk-21.0.4+7"
-        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
-
     - name: Download and install delta
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
 
-- name: Debian 13 specific tasks
-  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "13"
-  block:
-    - name: Download and install ltex-ls-plus without jdk
-      ansible.builtin.unarchive:
-        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}.tar.gz"
-        dest: "{{ bin_install_dir }}"
-        remote_src: true
-        extra_opts:
-          - "--strip-components=1"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/bin"
-          - "ltex-ls-plus-{{ ltex_ls_plus_version }}/lib"
-        creates: "{{ bin_install_dir }}/bin/ltex-ls-plus"
+- name: Download and install ltex-ls-plus with jdk
+  ansible.builtin.unarchive:
+    src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
+    dest: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}" # Versioned directory
+    remote_src: true
+    extra_opts:
+      - "--strip-components=2"
+      - "--transform=s|^\\./||"
+      - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./bin"
+      - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./lib"
+      - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./jdk-21.0.4+7"
+    creates: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
 
-- name: Create symlink to ltex-ls-plus binary
+- name: Create direct symlink to versioned binary
   ansible.builtin.file:
-    src: "{{ bin_install_dir }}/bin/ltex-ls-plus"
+    src: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
     dest: "{{ bin_install_dir }}/ltex-ls-plus"
     state: link
+    force: true
 
 - name: Install binary executables
   block:
@@ -65,7 +39,6 @@
         dest: "{{ bin_install_dir }}"
         remote_src: true
         include: "lazygit"
-        creates: "{{ bin_install_dir }}/lazygit"
 
     - name: Download and install yabridge
       become: false
@@ -73,7 +46,6 @@
         src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
         dest: "{{ ansible_env.HOME }}/.local/share"
         remote_src: true
-        creates: "{{ ansible_env.HOME }}/.local/share/yabridge/yabridgectl"
 
     - name: Install third-party packages from GitHub releases
       block:
