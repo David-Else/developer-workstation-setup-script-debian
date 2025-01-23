@@ -10,9 +10,20 @@
         upgrade: dist
         update_cache: true
 
-    - name: Install Debian packages
+    # - name: Install Debian packages
+    #   ansible.builtin.apt:
+    #     name: "{{ packages_to_install }}"
+
+    - name: Install Debian packages (exclude Debian 13 packages on Debian 12)
       ansible.builtin.apt:
-        name: "{{ packages_to_install }}"
+        name: >-
+          {{
+            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '13')
+            | ternary(
+                packages_to_install + packages_to_install_debian_13,
+                packages_to_install
+              )
+          }}
 
     - name: Install Flatpak packages
       community.general.flatpak:

@@ -20,6 +20,7 @@ packages_to_remove:
   - gnome-sound-recorder
   - rhythmbox
   - totem
+
 packages_to_install:
   - adb
   # - android-sdk-platform-tools-common
@@ -34,7 +35,6 @@ packages_to_install:
   - fzf
   - gdb
   - gh
-  - git-delta
   - gnome-boxes
   - gnome-screenshot
   - gnome-shell-extension-autohidetopbar
@@ -45,8 +45,7 @@ packages_to_install:
   - heif-thumbnailer
   - imagemagick
   - jq
-  - keepassxc-full
-  - kitty
+  - keepassxc
   - krita
   - libvirt-daemon-system # dependency for gnome-boxes
   - lldb-19 # to supply lldb-dap-19 for Helix debugging
@@ -71,6 +70,11 @@ packages_to_install:
   - zoxide
   - zsh
   - zsh-autosuggestions
+
+packages_to_install_debian_13:
+  - git-delta
+  - kitty
+
 flatpak_packages:
   - com.github.polymeilex.neothesia
   - com.github.tchx84.Flatseal
@@ -78,6 +82,7 @@ flatpak_packages:
   - com.obsproject.Studio.Plugin.DroidCam
   - io.github.flattool.Warehouse
   - org.signal.Signal
+
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
   - "@tailwindcss/language-server@0.12.18"
@@ -87,6 +92,7 @@ npm_packages:
   - typescript@5.7.3
   - vscode-langservers-extracted@4.8.0
   - yaml-language-server@1.15.0
+
 python_packages:
   - ansi2html
   - gdbgui
