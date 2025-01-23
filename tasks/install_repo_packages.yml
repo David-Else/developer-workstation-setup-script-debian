@@ -18,10 +18,10 @@
       ansible.builtin.apt:
         name: >-
           {{
-            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '13')
+            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
             | ternary(
-                packages_to_install + packages_to_install_debian_13,
-                packages_to_install
+                packages_to_install,
+                packages_to_install + packages_to_install_debian_13
               )
           }}
 
@@ -40,10 +40,3 @@
     #   community.general.npm:
     #     name: "{{ item }}"
     #     global: true
-
-    - name: Install Python packages
-      become: false
-      ansible.builtin.command: pipx install {{ item }}
-      loop: "{{ python_packages }}"
-      args:
-        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"

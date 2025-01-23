@@ -1,5 +1,4 @@
 - name: Stow dotfiles
-  become: false
   block:
     - name: Create ~/.dotfiles directory
       ansible.builtin.file:

@@ -1,5 +1,4 @@
 - name: Configure MIME applications
-  become: false
   block:
     - name: Ensure mimeapps.list exists and is backed up
       ansible.builtin.copy:
