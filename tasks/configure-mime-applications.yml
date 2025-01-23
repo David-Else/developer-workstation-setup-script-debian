@@ -9,7 +9,7 @@
 
     - name: Write default and added associations to mimeapps.list
       ansible.builtin.blockinfile:
-        path: "~/.config/mimeapps.list"
+        path: "{{ ansible_env['HOME'] }}/.config/mimeapps.list"
         block: |
           [Default Applications]
           video/x-matroska=mpv.desktop
