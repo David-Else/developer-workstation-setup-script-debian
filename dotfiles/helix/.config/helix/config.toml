@@ -17,7 +17,6 @@ G = "goto_file_end"
 [keys.normal.space]
 w   = ":write"
 q   = ":quit"
-"." = "file_picker_in_current_buffer_directory"
 l   = ":sh kitty @ launch --no-response --cwd=current --type=overlay --copy-env lazygit"
 
 [keys.normal.space.t]
