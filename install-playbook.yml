@@ -3,7 +3,6 @@
   become: true
   vars_files:
     - packages.yml
-
   tasks:
     - name: Remove unwanted applications
       ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
@@ -20,16 +19,11 @@
     - name: Install Rust
       ansible.builtin.import_tasks: tasks/install_rust.yml
 
-    - name: Run pipx ensurepath
-      ansible.builtin.command: pipx ensurepath
-      changed_when: false
-
 - name: Install packages and set up Debian 13 as user
   hosts: localhost
   become: false
   vars_files:
     - packages.yml
-
   tasks:
     - name: Stow dotfiles
       ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
@@ -43,8 +37,14 @@
     - name: Configure MIME applications
       ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
 
-    - name: Install Python packages
-      ansible.builtin.command: pipx install {{ item }}
-      loop: "{{ python_packages }}"
-      args:
-        creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
+    - name: Install Python packages and run ensurepath
+      block:
+        - name: Install packages with pipx
+          ansible.builtin.command: pipx install {{ item }}
+          loop: "{{ python_packages }}"
+          args:
+            creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
+
+        - name: Run pipx ensurepath
+          ansible.builtin.command: pipx ensurepath
+          changed_when: false
