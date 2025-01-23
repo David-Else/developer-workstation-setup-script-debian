@@ -6,17 +6,25 @@
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
 
 - name: Download and install ltex-ls-plus with jdk
-  ansible.builtin.unarchive:
-    src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
-    dest: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}" # Versioned directory
-    remote_src: true
-    extra_opts:
-      - "--strip-components=2"
-      - "--transform=s|^\\./||"
-      - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./bin"
-      - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./lib"
-      - "ltex-ls-plus-{{ ltex_ls_plus_version }}/./jdk-21.0.4+7"
-    creates: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
+  block:
+    - name: Create versioned installation directory
+      ansible.builtin.file:
+        path: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}"
+        state: directory
+        mode: "0755"
+
+    - name: Extract ltex-ls-plus
+      ansible.builtin.unarchive:
+        src: "https://github.com/ltex-plus/ltex-ls-plus/releases/download/{{ ltex_ls_plus_version }}/ltex-ls-plus-{{ ltex_ls_plus_version }}-linux-x64.tar.gz"
+        dest: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}"
+        remote_src: true
+        extra_opts:
+          - "--strip-components=2" # removes /./ltex-ls-plus-18.4.0/
+          - "--wildcards"
+          - "*/bin/*" # */ is needed to deal with strange /./ structure
+          - "*/lib/*"
+          - "*/jdk-*/*"
+        creates: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
 
 - name: Create direct symlink to versioned binary
   ansible.builtin.file:
