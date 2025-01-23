@@ -28,8 +28,7 @@ packages_to_install:
   - borgbackup
   - build-essential
   - curl
-  - ddgr
-  - entr
+  - entr # run arbitrary commands when files change
   - ffmpeg
   - fonts-roboto
   - fzf
