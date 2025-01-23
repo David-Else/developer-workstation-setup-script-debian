@@ -29,7 +29,6 @@ packages_to_install:
   - build-essential
   - curl
   - ddgr
-  - default-jdk-headless
   - entr
   - ffmpeg
   - fonts-roboto
