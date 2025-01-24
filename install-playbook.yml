@@ -37,7 +37,7 @@
     - name: Configure MIME applications
       ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
 
-    - name: Install Python packages and run ensurepath
+    - name: Install Python packages
       block:
         - name: Install packages with pipx
           ansible.builtin.command: pipx install {{ item }}
@@ -48,3 +48,9 @@
         - name: Run pipx ensurepath
           ansible.builtin.command: pipx ensurepath
           changed_when: false
+
+    - name: Download and install yabridge
+      ansible.builtin.unarchive:
+        src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
+        dest: "{{ ansible_env.HOME }}/.local/share"
+        remote_src: true

@@ -48,28 +48,15 @@
         remote_src: true
         include: "lazygit"
 
-    # - name: Download and install yabridge
-    #   become: false
-    #   ansible.builtin.unarchive:
-    #     src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
-    #     dest: "{{ ansible_env.HOME }}/.local/share"
-    #     remote_src: true
-
 - name: Install third-party packages from GitHub releases
   block:
     - name: Install .deb packages
       ansible.builtin.apt:
         deb: "{{ item.url }}"
       loop:
-        - {
-            name: rclone,
-            url: "https://github.com/rclone/rclone/releases/download/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb",
-          }
-        - {
-            name: hugo,
-            url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb",
-          }
-        - {
-            name: helix,
-            url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb",
-          }
+        - name: rclone
+          url: "https://github.com/rclone/rclone/releases/download/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb"
+        - name: hugo
+          url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
+        - name: helix
+          url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
