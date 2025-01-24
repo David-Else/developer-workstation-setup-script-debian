@@ -13,13 +13,13 @@
     - name: Install GitHub packages and binary executables
       ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
-    - name: Create symlinks
+    - name: Create symbolic links
       ansible.builtin.import_tasks: tasks/create_symlinks.yml
 
-    - name: Install Rust
+    - name: Install Rust toolchain
       ansible.builtin.import_tasks: tasks/install_rust.yml
 
-- name: Install packages and set up Debian 13 as user
+- name: Configure user environment
   hosts: localhost
   become: false
   vars_files:
@@ -28,13 +28,13 @@
     - name: Stow dotfiles
       ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
 
-    - name: Set up Pipewire
+    - name: Configure Pipewire
       ansible.builtin.import_tasks: tasks/setup_pipewire.yml
 
     - name: Update bashrc
       ansible.builtin.import_tasks: tasks/update_bashrc.yml
 
-    - name: Configure MIME applications
+    - name: Set MIME associations
       ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
 
     - name: Install Python packages
