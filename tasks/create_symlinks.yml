@@ -1,8 +1,9 @@
 - name: Create symlinks
   block:
-    - name: Gather the package facts
-      ansible.builtin.package_facts:
-        manager: auto
+    # do i need this?
+    # - name: Gather the package facts
+    #   ansible.builtin.package_facts:
+    #     manager: auto
 
     - name: Create symlink for lldb-dap-19 as lldb-dap
       ansible.builtin.file:
@@ -17,3 +18,13 @@
         dest: /usr/local/bin/bat
         state: link
       when: "'bat' in ansible_facts.packages"
+
+    - name: Create pipewire group
+      ansible.builtin.group:
+        name: pipewire
+
+    - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
+      ansible.builtin.user:
+        name: "{{ ansible_facts['user_id'] }}"
+        groups: pipewire
+        append: true

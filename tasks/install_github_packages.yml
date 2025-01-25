@@ -12,7 +12,6 @@
       ansible.builtin.file:
         path: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}"
         state: directory
-        mode: "0755"
 
     - name: Extract ltex-ls-plus
       ansible.builtin.unarchive:
@@ -27,7 +26,7 @@
           - "*/jdk-*/*"
         creates: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
 
-- name: Create direct symlink to versioned binary
+- name: Create symbolic links to versioned binary
   ansible.builtin.file:
     src: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
     dest: "{{ bin_install_dir }}/ltex-ls-plus"

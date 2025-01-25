@@ -1,17 +1,5 @@
-- name: Setup Pipewire audio for realtime privileges and full range of playback sample rates
+- name: Setup Pipewire audio for full range of playback sample rates
   block:
-    - name: Create pipewire group
-      become: true
-      ansible.builtin.group:
-        name: pipewire
-
-    - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
-      become: true
-      ansible.builtin.user:
-        name: "{{ ansible_facts['user_id'] }}"
-        groups: pipewire
-        append: true
-
     - name: Ensure ~/.config/pipewire/ directory exists
       ansible.builtin.file:
         path: "{{ ansible_env['HOME'] }}/.config/pipewire/"

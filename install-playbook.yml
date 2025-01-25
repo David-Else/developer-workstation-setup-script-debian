@@ -1,4 +1,4 @@
-- name: Install packages and set up Debian 13 as root
+- name: Install packages and configure Debian 12/13 as root
   hosts: localhost
   become: true
   vars_files:
@@ -13,11 +13,11 @@
     - name: Install GitHub packages and binary executables
       ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
-    - name: Create symbolic links
-      ansible.builtin.import_tasks: tasks/create_symlinks.yml
-
-    - name: Install Rust toolchain
+    - name: Install Rust toolchain and AIChat.
       ansible.builtin.import_tasks: tasks/install_rust.yml
+
+    - name: Create symbolic links and add user to pipewire group
+      ansible.builtin.import_tasks: tasks/create_symlinks.yml
 
 - name: Configure user environment
   hosts: localhost
@@ -37,7 +37,7 @@
     - name: Set MIME associations
       ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
 
-    - name: Install Python packages
+    - name: Install Python packages as user
       block:
         - name: Install packages with pipx
           ansible.builtin.command: pipx install {{ item }}
@@ -49,7 +49,7 @@
           ansible.builtin.command: pipx ensurepath
           changed_when: false
 
-    - name: Download and install yabridge
+    - name: Download and install yabridge as user
       ansible.builtin.unarchive:
         src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
         dest: "{{ ansible_env.HOME }}/.local/share"
