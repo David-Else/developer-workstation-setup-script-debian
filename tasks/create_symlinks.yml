@@ -1,9 +1,8 @@
 - name: Create symlinks
   block:
-    # do i need this?
-    # - name: Gather the package facts
-    #   ansible.builtin.package_facts:
-    #     manager: auto
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
 
     - name: Create symlink for lldb-dap-19 as lldb-dap
       ansible.builtin.file:
