@@ -4,6 +4,7 @@
     - name: Download and install delta
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
+        # add kitty
 
 - name: Download and install ltex-ls-plus with jdk
   block:
