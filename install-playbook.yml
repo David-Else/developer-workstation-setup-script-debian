@@ -34,9 +34,6 @@
     - name: Update bashrc
       ansible.builtin.import_tasks: tasks/update_bashrc.yml
 
-    - name: Set MIME associations
-      ansible.builtin.import_tasks: tasks/configure-mime-applications.yml
-
     - name: Install Python packages as user
       block:
         - name: Install packages with pipx
