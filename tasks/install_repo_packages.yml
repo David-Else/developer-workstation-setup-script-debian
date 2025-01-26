@@ -24,6 +24,7 @@
     name: "{{ flatpak_packages }}"
 
 - name: Install NPM global packages
+  loop: "{{ npm_packages }}"
   community.general.npm:
-    name: "{{ npm_packages }}"
+    name: "{{ item }}"
     global: true
