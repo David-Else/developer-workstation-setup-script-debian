@@ -1,12 +1,12 @@
 - name: Debian 12 specific tasks
   when: ansible_distribution == "Debian" and ansible_distribution_major_version == "12"
   block:
-    - name: Download and install delta
+    - name: Install delta
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
         # add kitty
 
-- name: Download and install ltex-ls-plus with jdk
+- name: Install ltex-ls-plus with jdk
   block:
     - name: Create versioned installation directory
       ansible.builtin.file:
@@ -35,13 +35,13 @@
 
 - name: Install binary executables
   block:
-    - name: Download and install marksman
+    - name: Install marksman
       ansible.builtin.get_url:
         url: "https://github.com/artempyanykh/marksman/releases/download/{{ marksman_version }}/marksman-linux-x64"
         dest: "{{ bin_install_dir }}/marksman"
         checksum: "sha256:{{ marksman_shasum }}"
 
-    - name: Download and install lazygit
+    - name: Install lazygit
       ansible.builtin.unarchive:
         src: "https://github.com/jesseduffield/lazygit/releases/download/v{{ lazygit_version }}/lazygit_{{ lazygit_version }}_Linux_x86_64.tar.gz"
         dest: "{{ bin_install_dir }}"
