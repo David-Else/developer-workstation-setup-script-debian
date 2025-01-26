@@ -2,8 +2,6 @@
 
 TODO:
 
-- debian 12 needs kitty installing from the web
-- the rust task should probably be run as user?
 - mpv settings are debian version dependant
 
 - ditch zsh and use https://stackoverflow.com/questions/15883416/adding-git-branch-on-the-bash-command-prompt
