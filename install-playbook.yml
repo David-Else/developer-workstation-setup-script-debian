@@ -7,11 +7,13 @@
     - name: Remove unwanted applications
       ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
 
-    - name: Install repository packages
-      ansible.builtin.import_tasks: tasks/install_repo_packages.yml
+    - name: Install packages
+      block:
+        - name: Install repository packages
+          ansible.builtin.import_tasks: tasks/install_repo_packages.yml
 
-    - name: Install GitHub packages and binary executables
-      ansible.builtin.import_tasks: tasks/install_github_packages.yml
+        - name: Install GitHub packages and binary executables
+          ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
     - name: Create symbolic links and add user to pipewire group
       ansible.builtin.import_tasks: tasks/create_symlinks.yml
@@ -22,11 +24,13 @@
   vars_files:
     - packages.yml
   tasks:
-    - name: Install Python packages as user
-      ansible.builtin.import_tasks: tasks/install_python_packages.yml
+    - name: Install user packages
+      block:
+        - name: Install Python packages
+          ansible.builtin.import_tasks: tasks/install_python_packages.yml
 
-    - name: Install Rust toolchain and AIChat
-      ansible.builtin.import_tasks: tasks/install_rust.yml
+        - name: Install Rust toolchain and AIChat
+          ansible.builtin.import_tasks: tasks/install_rust.yml
 
     - name: Stow dotfiles
       ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
