@@ -86,3 +86,8 @@ eval "$(zoxide init zsh)"
 stty -ixon # disable terminal flow control
 export EDITOR="hx"
 export SUDO_EDITOR="$HOME/.cargo/bin/hx"
+
+# aichat and aider
+export OPENAI_API_KEY="xxx"
+export TOGETHERAI_API_KEY="xxx"
+export TOGETHER_API_KEY="xxx"
