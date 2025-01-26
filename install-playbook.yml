@@ -13,7 +13,7 @@
     - name: Install GitHub packages and binary executables
       ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
-    - name: Install Rust toolchain and AIChat.
+    - name: Install Rust toolchain and AIChat
       ansible.builtin.import_tasks: tasks/install_rust.yml
 
     - name: Create symbolic links and add user to pipewire group
@@ -35,16 +35,7 @@
       ansible.builtin.import_tasks: tasks/update_bashrc.yml
 
     - name: Install Python packages as user
-      block:
-        - name: Install packages with pipx
-          ansible.builtin.command: pipx install {{ item }}
-          loop: "{{ python_packages }}"
-          args:
-            creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
-
-        - name: Run pipx ensurepath
-          ansible.builtin.command: pipx ensurepath
-          changed_when: false
+      ansible.builtin.import_tasks: tasks/install_python_packages.yml
 
     - name: Download and install yabridge as user
       ansible.builtin.unarchive:
