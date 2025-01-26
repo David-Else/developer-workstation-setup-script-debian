@@ -96,6 +96,6 @@ npm_packages:
 
 python_packages:
   - ansi2html
-  - gdbgui
+  # - gdbgui doesn't seem to work on trixie
   - visidata
   - yt-dlp
