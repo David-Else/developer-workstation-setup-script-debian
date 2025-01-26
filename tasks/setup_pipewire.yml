@@ -1,20 +1,18 @@
-- name: Setup Pipewire audio for full range of playback sample rates
-  block:
-    - name: Ensure ~/.config/pipewire/ directory exists
-      ansible.builtin.file:
-        path: "{{ ansible_env['HOME'] }}/.config/pipewire/"
-        state: directory
+- name: Ensure ~/.config/pipewire/ directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env['HOME'] }}/.config/pipewire/"
+    state: directory
 
-    - name: Copy pipewire.conf to user's config directory
-      ansible.builtin.copy:
-        src: "/usr/share/pipewire/pipewire.conf"
-        dest: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
-        force: false
+- name: Copy pipewire.conf to user's config directory
+  ansible.builtin.copy:
+    src: "/usr/share/pipewire/pipewire.conf"
+    dest: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
+    force: false
 
-    - name: Update Pipewire allowed sample rates to include 44.1k 48k 88.2k 96k 176.4k and 192k to prevent unwanted resampling
-      ansible.builtin.lineinfile:
-        path: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
-        regexp: '^\s*#\s*default.clock.allowed-rates\s*='
-        line: "default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]"
-        backrefs: true
-      register: samplerates_updated
+- name: Update Pipewire allowed sample rates to include 44.1k 48k 88.2k 96k 176.4k and 192k to prevent unwanted resampling
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
+    regexp: '^\s*#\s*default.clock.allowed-rates\s*='
+    line: "default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]"
+    backrefs: true
+  register: samplerates_updated

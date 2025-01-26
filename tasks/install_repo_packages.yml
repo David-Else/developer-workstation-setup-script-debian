@@ -1,42 +1,29 @@
-- name: Install packages from various repositories
-  block:
-    - name: Add Flathub repository
-      community.general.flatpak_remote:
-        name: flathub
-        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+- name: Add Flathub repository
+  community.general.flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
-    - name: Update and upgrade all Debian packages
-      ansible.builtin.apt:
-        upgrade: dist
-        update_cache: true
+- name: Update and upgrade all Debian packages
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: true
 
-    # - name: Install Debian packages
-    #   ansible.builtin.apt:
-    #     name: "{{ packages_to_install }}"
+- name: Install Debian packages (exclude Debian 13 packages on Debian 12)
+  ansible.builtin.apt:
+    name: >-
+      {{
+        (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+        | ternary(
+            packages_to_install,
+            packages_to_install + packages_to_install_debian_13
+          )
+      }}
 
-    - name: Install Debian packages (exclude Debian 13 packages on Debian 12)
-      ansible.builtin.apt:
-        name: >-
-          {{
-            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
-            | ternary(
-                packages_to_install,
-                packages_to_install + packages_to_install_debian_13
-              )
-          }}
+- name: Install Flatpak packages
+  community.general.flatpak:
+    name: "{{ flatpak_packages }}"
 
-    - name: Install Flatpak packages
-      community.general.flatpak:
-        name: "{{ flatpak_packages }}"
-
-    - name: Install NPM global packages
-      community.general.npm:
-        name: "{{ npm_packages }}"
-        global: true
-
-    # maybe needed
-    # - name: Install NPM global packages
-    #   loop: "{{ npm_packages }}"
-    #   community.general.npm:
-    #     name: "{{ item }}"
-    #     global: true
+- name: Install NPM global packages
+  community.general.npm:
+    name: "{{ npm_packages }}"
+    global: true
