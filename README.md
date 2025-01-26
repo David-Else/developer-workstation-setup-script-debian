@@ -4,6 +4,7 @@ TODO:
 
 - debian 12 needs kitty installing from the web
 - the rust task should probably be run as user?
+- mpv settings are debian version dependant
 
 - ditch zsh and use https://stackoverflow.com/questions/15883416/adding-git-branch-on-the-bash-command-prompt
 - alter the helix deb to run kitty as the default terminal
@@ -12,7 +13,6 @@ TODO:
 - Recompile showmethekey
 - Use upcomiing keyd package and redone installing config
 - Use upcoming Blender package
-- Consider hugo package if it gets updates to >=134.3 or Helix allows changing .bak filename
 - Use the built in go and remove references to downloading it in the readme
 - Un-comment android-sdk-platform-tools-common when/if it is out if you still need it
 - 14th dec after playbook run gnome-extensions list shows nothing inc non of the apt installed extensions, the extensions gui shows nothing. wait for fix.

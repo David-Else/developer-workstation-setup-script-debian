@@ -13,9 +13,6 @@
     - name: Install GitHub packages and binary executables
       ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
-    - name: Install Rust toolchain and AIChat
-      ansible.builtin.import_tasks: tasks/install_rust.yml
-
     - name: Create symbolic links and add user to pipewire group
       ansible.builtin.import_tasks: tasks/create_symlinks.yml
 
@@ -25,6 +22,12 @@
   vars_files:
     - packages.yml
   tasks:
+    - name: Install Python packages as user
+      ansible.builtin.import_tasks: tasks/install_python_packages.yml
+
+    - name: Install Rust toolchain and AIChat
+      ansible.builtin.import_tasks: tasks/install_rust.yml
+
     - name: Stow dotfiles
       ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
 
@@ -33,9 +36,6 @@
 
     - name: Update bashrc
       ansible.builtin.import_tasks: tasks/update_bashrc.yml
-
-    - name: Install Python packages as user
-      ansible.builtin.import_tasks: tasks/install_python_packages.yml
 
     - name: Download and install yabridge as user
       ansible.builtin.unarchive:

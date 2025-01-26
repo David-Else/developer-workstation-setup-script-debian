@@ -1,10 +1,9 @@
-# Maybe included in Debian 13 https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1024683
 - name: Install Helix
   hosts: localhost
   vars:
     helix_src_folder: "{{ ansible_env.HOME }}/src/helix"
     helix_config_folder: "{{ ansible_env.HOME }}/.config/helix"
-    helix_git_version: "9e7c488ee33eaabab6ee7c3436f4c58b8c647b4f"
+    helix_git_version: "e7ac2fcdecfdbf43a4f772e7f7c163b43b3d0b9b" # 25.01.1
   tasks:
     - name: Clone Helix editor from GitHub
       ansible.builtin.git:
