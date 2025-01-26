@@ -4,7 +4,10 @@
     - name: Install delta
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
-        # add kitty
+
+    - name: Install kitty
+      ansible.builtin.shell:
+        cmd: "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin installer=version-{{ kitty_version }}"
 
 - name: Install ltex-ls-plus with jdk
   block:
