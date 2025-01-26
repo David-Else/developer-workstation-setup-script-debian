@@ -199,7 +199,7 @@ If you get no bootable device found after installing Debian, try https://itsfoss
 ---
 
 To update to Trixie:
-
+`sudoedit /etc/apt/sources.list`
 ```sh
 deb http://deb.debian.org/debian/ trixie main non-free-firmware
 deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
