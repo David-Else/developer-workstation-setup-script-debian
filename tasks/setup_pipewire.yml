@@ -9,7 +9,7 @@
     dest: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
     force: false
 
-- name: Update Pipewire allowed sample rates to include 44.1k 48k 88.2k 96k 176.4k and 192k to prevent unwanted resampling
+- name: Update Pipewire allowed sample rates
   ansible.builtin.lineinfile:
     path: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
     regexp: '^\s*#\s*default.clock.allowed-rates\s*='
