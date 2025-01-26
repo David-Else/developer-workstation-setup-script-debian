@@ -195,3 +195,18 @@ If you get no bootable device found after installing Debian, try https://itsfoss
 
 > [!NOTE]
 > Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
+
+---
+
+To update to Trixie:
+
+```sh
+deb http://deb.debian.org/debian/ trixie main non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
+
+deb http://security.debian.org/debian-security trixie-security main non-free-firmware
+deb-src http://security.debian.org/debian-security trixie-security main non-free-firmware
+
+deb http://deb.debian.org/debian/ trixie-updates main non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie-updates main non-free-firmware
+```
