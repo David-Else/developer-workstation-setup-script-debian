@@ -36,11 +36,11 @@ debian_packages:
   - gdb
   - gh
   - gnome-boxes
-  - gnome-screenshot
+  # - gnome-screenshot
   - gnome-shell-extension-autohidetopbar
   - gnome-shell-pomodoro
   - gnome-tweaks
-  - handbrake
+  # - handbrake
   - heif-gdk-pixbuf
   - heif-thumbnailer
   - imagemagick
