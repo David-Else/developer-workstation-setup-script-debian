@@ -100,11 +100,6 @@
           capslock = overload(control, esc)
         dest: /etc/keyd/default.conf
 
-    # - name: Build and install keyd
-    #   ansible.builtin.shell:
-    #     cmd: "make && make install"
-    #     chdir: "/tmp/keyd"
-
     - name: Build keyd
       community.general.make:
         chdir: /tmp/keyd
@@ -119,3 +114,8 @@
         name: keyd
         enabled: true
         state: started
+
+    - name: Clean up temporary directory
+      ansible.builtin.file:
+        path: "/tmp/keyd"
+        state: absent
