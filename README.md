@@ -3,14 +3,11 @@
 TODO:
 
 - mpv settings are debian version dependant
-
 - ditch zsh and use https://stackoverflow.com/questions/15883416/adding-git-branch-on-the-bash-command-prompt
 - alter the helix deb to run kitty as the default terminal
 - See if nerd fonts gets into Debian and remove your install if it does
 - Recompile nnn with nerd fonts flag
 - Recompile showmethekey
-- Use upcomiing keyd package and redone installing config
-- Use upcoming Blender package
 - Use the built in go and remove references to downloading it in the readme
 - Un-comment android-sdk-platform-tools-common when/if it is out if you still need it
 - 14th dec after playbook run gnome-extensions list shows nothing inc non of the apt installed extensions, the extensions gui shows nothing. wait for fix.
