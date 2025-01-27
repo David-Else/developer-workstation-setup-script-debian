@@ -57,14 +57,10 @@ Before running the setup scripts, follow these steps to install Debian 13:
    ansible-playbook ./install-playbook.yml -K
    ```
 
-6. Log out and in, then run the Gnome and Helix setup:
+6. Log out and in, then run the Gnome setup:
 
    ```sh
    ansible-playbook ./gnome-setup-playbook.yml -K
-   ```
-
-   ```sh
-   ansible-playbook ./compile-helix-playbook.yml -K
    ```
 
 7. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
