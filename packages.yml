@@ -78,11 +78,15 @@ debian_13_packages:
 
 flatpak_packages:
   - com.github.polymeilex.neothesia
-  - com.github.tchx84.Flatseal
-  - com.obsproject.Studio
-  - com.obsproject.Studio.Plugin.DroidCam
+  - com.github.tchx84.Flatseal # TODO should be in trixie https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=982784
+  - com.obsproject.Studio # TODO in trixie
+  - com.obsproject.Studio.Plugin.DroidCam # TODO in trixie
   - io.github.flattool.Warehouse
   - org.signal.Signal
+
+debian_12_flatpak_packages:
+  - org.gnome.Calendar # TODO is deb installed by default on 12, seems so on 13?
+  - org.gnome.Maps # TODO is deb installed by default on 12, seems so on 13?
 
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"

@@ -19,9 +19,20 @@
           )
       }}
 
+# - name: Install Flatpak packages
+#   community.general.flatpak:
+#     name: "{{ flatpak_packages }}"
+
 - name: Install Flatpak packages
   community.general.flatpak:
-    name: "{{ flatpak_packages }}"
+    name: >-
+      {{
+        (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+        | ternary(
+            flatpak_packages + debian_12_flatpak_packages,
+            flatpak_packages
+          )
+      }}
 
 - name: Install NPM global packages
   loop: "{{ npm_packages }}"
