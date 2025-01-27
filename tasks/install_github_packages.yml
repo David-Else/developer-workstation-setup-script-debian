@@ -100,10 +100,19 @@
           capslock = overload(control, esc)
         dest: /etc/keyd/default.conf
 
-    - name: Build and install keyd
-      ansible.builtin.shell:
-        cmd: "make && make install"
-        chdir: "/tmp/keyd"
+    # - name: Build and install keyd
+    #   ansible.builtin.shell:
+    #     cmd: "make && make install"
+    #     chdir: "/tmp/keyd"
+
+    - name: Build keyd
+      community.general.make:
+        chdir: /tmp/keyd
+
+    - name: Install keyd
+      community.general.make:
+        chdir: /tmp/keyd
+        target: install
 
     - name: Enable and start keyd service
       ansible.builtin.systemd:
