@@ -98,6 +98,7 @@ make && sudo make install
 hugo completion zsh > "${fpath[1]}/_hugo"
 sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
 ```
+14. Update MPV config file for Debian 13 by uncommenting sections
 
 ## Optional Tweaks
 
