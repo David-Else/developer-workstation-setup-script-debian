@@ -41,7 +41,7 @@
     - name: Update bashrc
       ansible.builtin.import_tasks: tasks/update_bashrc.yml
 
-    - name: Download and install yabridge as user
+    - name: Download and install yabridge
       ansible.builtin.unarchive:
         src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
         dest: "{{ ansible_env.HOME }}/.local/share"
