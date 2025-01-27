@@ -10,6 +10,7 @@ lazygit_version: "0.45.2"
 yabridge_version: "5.0.5"
 delta_version: "0.18.2"
 kitty_version: "0.39.0" # for Debian 12
+keyd_git_version: "f33dca879a3f871ee2e0fa9c1efd6e8dabb21ed3" # 2.5.0
 
 packages_to_remove:
   - cheese
