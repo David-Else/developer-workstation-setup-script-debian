@@ -23,7 +23,7 @@
 #   community.general.flatpak:
 #     name: "{{ flatpak_packages }}"
 
-- name: Install Flatpak packages
+- name: Install Flatpak packages (include extra packages on Debian 12)
   community.general.flatpak:
     name: >-
       {{
