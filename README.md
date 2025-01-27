@@ -65,15 +65,7 @@ Before running the setup scripts, follow these steps to install Debian 13:
 
 7. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
 
-8. Install keyd:
-
-   ```sh
-   cd keyd
-   make && sudo make install
-   sudo systemctl enable keyd && sudo systemctl start keyd
-   ```
-
-9. Install showmethekey:
+8. Install showmethekey:
 
    ```sh
    cd extras
@@ -82,7 +74,7 @@ Before running the setup scripts, follow these steps to install Debian 13:
    sudo ./install-show-me-the-key.sh
    ```
 
-10. Install Firefox extensions:
+9. Install Firefox extensions:
 
 ```sh
 
@@ -92,7 +84,7 @@ firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
     https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
 ```
 
-12. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
+10. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
 
 ```sh
 # download go1.22.4.linux-amd64.tar.gz
