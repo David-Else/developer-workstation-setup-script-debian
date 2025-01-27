@@ -22,7 +22,7 @@ packages_to_remove:
   - rhythmbox
   - totem
 
-packages_to_install:
+debian_packages:
   - adb
   # - android-sdk-platform-tools-common
   - ansible-lint
@@ -72,7 +72,7 @@ packages_to_install:
   - zsh
   - zsh-autosuggestions
 
-packages_to_install_debian_13:
+debian_13_packages:
   - git-delta
   - kitty
 
