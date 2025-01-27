@@ -30,7 +30,6 @@ debian_packages:
   - borgbackup
   - build-essential
   - curl
-  - entr # run arbitrary commands when files change
   - ffmpeg
   - fonts-roboto
   - fzf
