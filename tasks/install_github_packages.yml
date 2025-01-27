@@ -39,12 +39,12 @@
           - "*/jdk-*/*"
         creates: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
 
-- name: Create symbolic links to versioned binary
-  ansible.builtin.file:
-    src: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
-    dest: "{{ bin_install_dir }}/ltex-ls-plus"
-    state: link
-    force: true
+    - name: Create symbolic links to versioned binary
+      ansible.builtin.file:
+        src: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}/bin/ltex-ls-plus"
+        dest: "{{ bin_install_dir }}/ltex-ls-plus"
+        state: link
+        force: true
 
 - name: Install binary executables
   block:
