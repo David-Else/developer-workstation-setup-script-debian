@@ -18,13 +18,13 @@
         state: link
       when: "'bat' in ansible_facts.packages"
 
-# TODO i don't think this works from the testing of debian 13
+# TODO test using ansible_user fixes the bug debian 13
 - name: Create pipewire group
   ansible.builtin.group:
     name: pipewire
 
 - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
   ansible.builtin.user:
-    name: "{{ ansible_facts['user_id'] }}"
+    name: "{{ ansible_user }}"
     groups: pipewire
     append: true
