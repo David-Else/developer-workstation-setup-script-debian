@@ -74,6 +74,7 @@
         - name: helix
           url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
 
+# TODO This should be in trixie, then you can add to debian 13 packages and move the below to the debian 12 section
 - name: Install keyd from source
   block:
     - name: Clone keyd from GitHub
