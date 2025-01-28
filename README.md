@@ -2,8 +2,6 @@
 
 TODO:
 
-- mpv settings are debian version dependant
-- ditch zsh and use https://stackoverflow.com/questions/15883416/adding-git-branch-on-the-bash-command-prompt
 - alter the helix deb to run kitty as the default terminal
 - See if nerd fonts gets into Debian and remove your install if it does
 - Recompile nnn with nerd fonts flag
