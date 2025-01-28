@@ -1,5 +1,18 @@
-model: openai:gpt-4o
+# model: openai:gpt-4o
+model: together:meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
 keybindings: vi
+
 clients:
   - type: openai
-    api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+  - type: openai-compatible
+    name: together
+
+  - type: openai-compatible
+    name: together
+    models:
+      - name: meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
+        max_input_tokens: 131072
+        input_price: 0
+        output_price: 0
+        supports_function_calling: true
