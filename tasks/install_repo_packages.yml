@@ -8,34 +8,45 @@
     upgrade: dist
     update_cache: true
 
-- name: Install Debian packages (exclude Debian 13 packages on Debian 12)
-  ansible.builtin.apt:
-    name: >-
-      {{
-        (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
-        | ternary(
-            debian_packages,
-            debian_packages + debian_13_packages
-          )
-      }}
+- name: Install packages
+  block:
+    - name: Install Debian packages (exclude Debian 13 packages on Debian 12)
+      ansible.builtin.apt:
+        name: >-
+          {{
+            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+            | ternary(
+                debian_packages,
+                debian_packages + debian_13_packages
+              )
+          }}
 
-# - name: Install Flatpak packages
-#   community.general.flatpak:
-#     name: "{{ flatpak_packages }}"
+    - name: Install Flatpak packages (include extra packages on Debian 12)
+      community.general.flatpak:
+        name: >-
+          {{
+            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+            | ternary(
+                flatpak_packages + debian_12_flatpak_packages,
+                flatpak_packages
+              )
+          }}
 
-- name: Install Flatpak packages (include extra packages on Debian 12)
-  community.general.flatpak:
-    name: >-
-      {{
-        (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
-        | ternary(
-            flatpak_packages + debian_12_flatpak_packages,
-            flatpak_packages
-          )
-      }}
+    - name: Install NPM global packages
+      loop: "{{ npm_packages }}"
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
 
-- name: Install NPM global packages
-  loop: "{{ npm_packages }}"
-  community.general.npm:
-    name: "{{ item }}"
-    global: true
+- name: Install pipewire backport for Debian 12
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version == "12"
+  block:
+    - name: Add bookworm backports apt repository
+      ansible.builtin.apt_repository:
+        repo: deb http://deb.debian.org/debian bookworm-backports main
+
+    - name: Install backports pipewire
+      ansible.builtin.apt:
+        name: pipewire
+        state: latest
+        default_release: bookworm-backports
