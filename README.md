@@ -27,7 +27,8 @@ Before running the setup scripts, follow these steps to install Debian:
 > [!NOTE]
 > - Do not provide any details for the root account, your user account will then have administrative rights.
 > - Leave Gnome as the default desktop environment.
-> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
+> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation. Use the `Software & Updates` application or the terminal.
+> ![Software & Updates](./images/sources.png)
 
 2. Open the terminal and run the following command to install Ansible, git, and Flatpak:
    ```sh
