@@ -1,8 +1,8 @@
-# Developer Workstation Setup Script Debian Edition
+# Debian Developer Workstation Setup Script
 
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased). The setup scripts automate the installation of necessary software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
+This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased). The setup scripts automate the installation of software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
@@ -13,7 +13,7 @@ Before running the setup scripts, follow these steps to install Debian:
 1. Install a fresh copy of Debian from the full DVD ISO.
 
 > [!NOTE]
-> In Debian 12 only there is a bug, if you use the default guided partitioner in the Debian installer, you will get a swap partition of only 1 GB. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+> In Debian 12 there is a bug, if you use the default guided partitioner in the Debian installer, you will get a swap partition of only 1 GB. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
 >
 > 1. Press "e" to edit the default installation option.
 > 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
@@ -114,12 +114,13 @@ Watch the sample rates change per application running `pw-top`.
 ### General
 
 To perform general tweaks, follow these steps:
+
 - Configure Git by setting your email and name. Run the following commands:
   ```sh
   git config --global user.email "you@example.com"
   git config --global user.name "Your Name"
   ```
-  If you want to enable GPG signing for commits, use the following commands:
+  Enable GPG signing for commits:
   ```sh
   git config --global user.signingkey key
   git config --global commit.gpgsign true
@@ -130,7 +131,7 @@ To perform general tweaks, follow these steps:
   gh extension install dlvhdr/gh-dash
   hx ~/.config/gh-dash/config.yml # diff: "delta"
   ```
-  `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
+-  `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
 
 ## FAQ
 
