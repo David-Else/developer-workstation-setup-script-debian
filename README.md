@@ -1,5 +1,4 @@
 # Developer Workstation Setup Script Debian Edition
-=====================================================
 
 ![Debian_logo](./images/debian_logo.svg)
 
@@ -8,7 +7,6 @@ This guide provides instructions for setting up a developer workstation using De
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
 ## Installation
-------------
 
 Before running the setup scripts, follow these steps to install Debian:
 
@@ -79,7 +77,6 @@ sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
 12. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
 ## Optional Tweaks
------------------
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
 
@@ -116,7 +113,6 @@ To perform general tweaks, follow these steps:
   `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
 
 ## FAQ
-----
 
 If you would like to use Code for things that Helix still struggles with (like debugging), and still use all the modal keyboard shortcuts, I suggest installing `silverquark.dancehelix` or `asvetliakov.vscode-neovim` and using these settings:
 ```jsonc
@@ -146,7 +142,6 @@ If you get no bootable device found after installing Debian, try https://itsfoss
 > Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
 
 ## Updating to Trixie
---------------------
 
 To update to Trixie:
 `sudoedit /etc/apt/sources.list`
