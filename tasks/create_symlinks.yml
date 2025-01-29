@@ -25,6 +25,6 @@
 
 - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ ansible_env.USER }}"
     groups: pipewire
     append: true
