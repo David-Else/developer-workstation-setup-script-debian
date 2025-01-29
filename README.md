@@ -12,7 +12,8 @@ Before running the setup scripts, follow these steps to install Debian:
 
 1. Install a fresh copy of Debian from the full DVD ISO.
 
-> [!NOTE] In Debian 12 only there is a bug, if you use the default guided partitioner in the Debian installer, you will get a swap partition of only 1 GB. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+> [!NOTE]
+> In Debian 12 only there is a bug, if you use the default guided partitioner in the Debian installer, you will get a swap partition of only 1 GB. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
 >
 > 1. Press "e" to edit the default installation option.
 > 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
@@ -24,19 +25,16 @@ Before running the setup scripts, follow these steps to install Debian:
 > 3. Press Ctrl-x or F10 to continue.
 
 > [!NOTE]
->
 > - Do not provide any details for the root account, your user account will then have administrative rights.
 > - Leave Gnome as the default desktop environment.
 > - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 
 2. Open the terminal and run the following command to install Ansible, git, and Flatpak:
-
    ```sh
    sudo apt install ansible git flatpak
    ```
 
 3. Clone this repository and navigate to it:
-
    ```sh
    git clone https://github.com/David-Else/developer-workstation-setup-script-debian
    cd developer-workstation-setup-script-debian
@@ -45,8 +43,8 @@ Before running the setup scripts, follow these steps to install Debian:
 4. Customize the software selection by modifying `packages.yml` according to your preferences.
 
 5. Run the main installation playbook:
-
-   > [!NOTE] When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
+> [!NOTE]
+> When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
@@ -79,21 +77,22 @@ Before running the setup scripts, follow these steps to install Debian:
    ```
 
 10. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
-    > [!NOTE] You will need to install golang
+> [!NOTE]
+> You will need to install golang
 
-```sh
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
-git clone https://github.com/lemnos/tt
-cd tt
-make && sudo make install
-```
+   ```sh
+   sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
+   git clone https://github.com/lemnos/tt
+   cd tt
+   make && sudo make install
+   ```
 
 11. Setup Hugo completions and man page:
 
-```sh
-hugo completion zsh > "${fpath[1]}/_hugo"
-sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
-```
+   ```sh
+   hugo completion zsh > "${fpath[1]}/_hugo"
+   sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
+   ```
 
 12. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
@@ -104,20 +103,17 @@ Depending on your software selection, hardware, and personal preferences, you ma
 ### Audio
 
 You can confirm the allowed sample rate settings were changed by the playbook with:
-
 ```sh
 systemctl --user restart pipewire.service
 pw-metadata -n settings
 ```
-
 Watch the sample rates change per application running `pw-top`.
-
-> [!NOTE] More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
+> [!NOTE]
+> More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 
 ### General
 
 To perform general tweaks, follow these steps:
-
 - Configure Git by setting your email and name. Run the following commands:
   ```sh
   git config --global user.email "you@example.com"
@@ -139,7 +135,6 @@ To perform general tweaks, follow these steps:
 ## FAQ
 
 If you would like to use Code for things that Helix still struggles with (like debugging), and still use all the modal keyboard shortcuts, I suggest installing `silverquark.dancehelix` or `asvetliakov.vscode-neovim` and using these settings:
-
 ```jsonc
 {
   // font size
@@ -160,17 +155,16 @@ If you would like to use Code for things that Helix still struggles with (like d
   "telemetry.enableTelemetry": false, // disable diagnostic data collection
 }
 ```
-
 You might also like to install `ms-vscode.live-server` for live debugging in Code or the browser.
 
 If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as trusted EFI file to be executed.
-
-> [!NOTE] Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
+> [!NOTE]
+> Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
 
 ## Updating to Trixie
 
-To update to Trixie: `sudoedit /etc/apt/sources.list`
-
+To update to Trixie:
+`sudoedit /etc/apt/sources.list`
 ```sh
 deb http://deb.debian.org/debian/ trixie main non-free-firmware
 deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
