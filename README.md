@@ -13,7 +13,7 @@ Before running the setup scripts, follow these steps to install Debian:
 1. Install a fresh copy of Debian from the full DVD ISO.
 
 > [!NOTE]
-> In Debian 12 there is a bug, if you use the default guided partitioner in the Debian installer, you will get a swap partition of only 1 GB. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+> There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
 >
 > 1. Press "e" to edit the default installation option.
 > 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
