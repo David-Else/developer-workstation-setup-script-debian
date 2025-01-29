@@ -6,10 +6,10 @@
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
 
     - name: Install and configure kitty
+      become: false
       ansible.builtin.shell: >
         set -o pipefail &&
         curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin installer=version-{{ kitty_version }} &&
-        ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/ &&
         cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/ &&
         cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/ &&
         sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop &&
@@ -18,6 +18,18 @@
       args:
         creates: "{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty"
         executable: /bin/bash
+
+    - name: Create symbolic link for kitty
+      ansible.builtin.file:
+        src: ~/.local/kitty.app/bin/kitty
+        dest: "{{ bin_install_dir }}/kitty"
+        state: link
+
+    - name: Create symbolic link for kitten
+      ansible.builtin.file:
+        src: ~/.local/kitty.app/bin/kitten
+        dest: "{{ bin_install_dir }}/kitten"
+        state: link
 
 - name: Install ltex-ls-plus with jdk
   block:
