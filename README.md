@@ -1,37 +1,26 @@
 # Developer Workstation Setup Script Debian Edition
 
-TODO:
-
-- alter the helix deb to run kitty as the default terminal
-- See if nerd fonts gets into Debian and remove your install if it does
-- Recompile nnn with nerd fonts flag
-- Recompile showmethekey
-- Use the built in go and remove references to downloading it in the readme
-- Un-comment android-sdk-platform-tools-common when/if it is out if you still need it
-- 14th dec after playbook run gnome-extensions list shows nothing inc non of the apt installed extensions, the extensions gui shows nothing. wait for fix.
-- Fix mpv gamepad now you removed file browser script
-
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie". The setup scripts automate the installation of necessary software and configurations.
+This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased). The setup scripts automate the installation of necessary software and configurations. Your version of Debian is detected and the best package options are chosen for you.
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
 ## Installation
 
-Before running the setup scripts, follow these steps to install Debian 13:
+Before running the setup scripts, follow these steps to install Debian:
 
-1. Install a fresh copy of Debian 13 from the ISO.
+1. Install a fresh copy of Debian from the full DVD ISO.
 
 > [!NOTE]
 > - Do not provide any details for the root account, your user account will then have administrative rights.
 > - Leave Gnome as the default desktop environment.
 > - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 
-2. Open the terminal and run the following command to install Ansible and Flatpak:
+2. Open the terminal and run the following command to install Ansible, git and Flatpak:
 
    ```
-   sudo apt install ansible flatpak
+   sudo apt install ansible git flatpak
    ```
 
 3. Clone this repository and navigate to it:
@@ -81,9 +70,10 @@ firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
 
 10. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
 
+> [!NOTE]
+> You will need to install golang
+
 ```sh
-# download go1.22.4.linux-amd64.tar.gz
-# add the language server if needed: go install golang.org/x/tools/gopls@latest
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
 git clone https://github.com/lemnos/tt
 cd tt
@@ -96,7 +86,7 @@ make && sudo make install
 hugo completion zsh > "${fpath[1]}/_hugo"
 sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
 ```
-14. Update MPV config file for Debian 13 by uncommenting sections
+14. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
 ## Optional Tweaks
 
@@ -173,7 +163,7 @@ If you would like to use Code for things that Helix still struggles with (like d
 
 You might also like to install `ms-vscode.live-server` for live debugging in Code or the browser.
 
-If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/
+If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as trusted EFI file to be executed.
 
 > [!NOTE]
 > Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
