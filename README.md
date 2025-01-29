@@ -51,6 +51,7 @@ Before running the setup scripts, follow these steps to install Debian:
    ```
 
 6. Log out and in, then run the Gnome setup:
+
    ```sh
    ansible-playbook ./gnome-setup-playbook.yml -K
    ```
@@ -67,6 +68,7 @@ Before running the setup scripts, follow these steps to install Debian:
    ```
 
 9. Install Firefox extensions:
+
    ```sh
    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
        https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
