@@ -115,7 +115,7 @@ Watch the sample rates change per application running `pw-top`.
 
 To perform general tweaks, follow these steps:
 
-- Configure Git by setting your email and name. Run the following commands:
+- Configure Git email and name:
   ```sh
   git config --global user.email "you@example.com"
   git config --global user.name "Your Name"
