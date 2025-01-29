@@ -12,10 +12,10 @@ While the software and setup choices are mainly aimed towards developers, it is 
 Before running the setup scripts, follow these steps to install Debian:
 
 1. **Install Debian**: Install a fresh copy of Debian from the full DVD ISO.
-	> [!NOTE]
-	> - Do not provide any details for the root account; your user account will then have administrative rights.
-	> - Leave Gnome as the default desktop environment.
-	> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
+      	> [!NOTE]
+      	> - Do not provide any details for the root account; your user account will then have administrative rights.
+      	> - Leave Gnome as the default desktop environment.
+      	> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 2. **Install required packages**: Open the terminal and run the following command to install Ansible, git, and Flatpak:
    ```sh
    sudo apt install ansible git flatpak
@@ -27,8 +27,8 @@ Before running the setup scripts, follow these steps to install Debian:
    ```
 4. **Customize software selection**: Modify `packages.yml` according to your preferences.
 5. **Run the main installation playbook**: Run the following command, entering your user password when prompted for the `BECOME` password:
-   > [!NOTE]
-   > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
+         > [!NOTE]
+         > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
    ```sh
    ansible-playbook ./install-playbook.yml -K
    ```
@@ -52,9 +52,9 @@ Before running the setup scripts, follow these steps to install Debian:
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 10. **Compile tt from source**: Compile tt from source by running the following commands:
-    * Install golang
-    > [!NOTE]
-    > You will need to install golang
+       * Install golang
+          > [!NOTE]
+          > You will need to install golang
     ```sh
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
     git clone https://github.com/lemnos/tt
@@ -81,8 +81,8 @@ Depending on your software selection, hardware, and personal preferences, you ma
   pw-metadata -n settings
   ```
 * Watch the sample rates change per application running `pw-top`.
-  > [!NOTE]
-  > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
+        > [!NOTE]
+        > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 
 ### General
 
@@ -140,8 +140,8 @@ You might also like to install `ms-vscode.live-server` for live debugging in Cod
 ### No Bootable Device Found
 
 If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as a trusted EFI file to be executed.
-> [!NOTE]
-> Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
+      > [!NOTE]
+      > Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
 
 ## Updating to Trixie
 --------------------
