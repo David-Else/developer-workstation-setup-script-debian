@@ -45,6 +45,7 @@ Before running the setup scripts, follow these steps to install Debian:
 5. Run the main installation playbook:
 > [!NOTE]
 > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
+
    ```sh
    ansible-playbook ./install-playbook.yml -K
    ```
@@ -57,6 +58,7 @@ Before running the setup scripts, follow these steps to install Debian:
 7. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
 
 8. Install showmethekey:
+
    ```sh
    cd extras
    unzip showmethekey-1.12.0-compiled.zip
@@ -65,28 +67,31 @@ Before running the setup scripts, follow these steps to install Debian:
    ```
 
 9. Install Firefox extensions:
-```sh
-firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
-    https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
-    https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/ \
-    https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
-```
+   ```sh
+   firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
+       https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
+       https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/ \
+       https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
+   ```
 
 10. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
 > [!NOTE]
 > You will need to install golang
-```sh
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
-git clone https://github.com/lemnos/tt
-cd tt
-make && sudo make install
-```
+
+   ```sh
+   sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
+   git clone https://github.com/lemnos/tt
+   cd tt
+   make && sudo make install
+   ```
 
 11. Setup Hugo completions and man page:
-```sh
-hugo completion zsh > "${fpath[1]}/_hugo"
-sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
-```
+
+   ```sh
+   hugo completion zsh > "${fpath[1]}/_hugo"
+   sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
+   ```
+
 12. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
 ## Optional Tweaks
