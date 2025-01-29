@@ -16,6 +16,18 @@ Before running the setup scripts, follow these steps to install Debian:
 > - Leave Gnome as the default desktop environment.
 > - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 
+> [!NOTE]
+> In Debian 12 only, if you use the default guided partitioner in the Debian installer, [you will get a swap partition of only 1 GB](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=987503). To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+>
+> 1. Press "e" to edit the default installation option.
+> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
+>
+>    ```sh
+>    partman-auto/cap-ram=n
+>    ```
+>
+> 3. Press Ctrl-x or F10 to continue.
+
 2. Open the terminal and run the following command to install Ansible, git, and Flatpak:
    ```sh
    sudo apt install ansible git flatpak
