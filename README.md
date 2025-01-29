@@ -11,13 +11,9 @@ While the software and setup choices are mainly aimed towards developers, it is 
 Before running the setup scripts, follow these steps to install Debian:
 
 1. Install a fresh copy of Debian from the full DVD ISO.
-> [!NOTE]
-> - Do not provide any details for the root account, your user account will then have administrative rights.
-> - Leave Gnome as the default desktop environment.
-> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 
 > [!NOTE]
-> In Debian 12 only, if you use the default guided partitioner in the Debian installer, [you will get a swap partition of only 1 GB](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=987503). To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+> In Debian 12 only there is a bug, if you use the default guided partitioner in the Debian installer, you will get a swap partition of only 1 GB. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
 >
 > 1. Press "e" to edit the default installation option.
 > 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
@@ -27,6 +23,11 @@ Before running the setup scripts, follow these steps to install Debian:
 >    ```
 >
 > 3. Press Ctrl-x or F10 to continue.
+
+> [!NOTE]
+> - Do not provide any details for the root account, your user account will then have administrative rights.
+> - Leave Gnome as the default desktop environment.
+> - You may need to remove `cdrom` from `/etc/apt/sources.list` after installation.
 
 2. Open the terminal and run the following command to install Ansible, git, and Flatpak:
    ```sh
