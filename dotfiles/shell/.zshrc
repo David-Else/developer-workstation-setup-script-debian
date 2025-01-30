@@ -45,7 +45,6 @@ alias ls="ls -ltha --color --group-directories-first --hyperlink=auto"
 alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
 alias ezrc='hx ~/.zshrc && source ~/.zshrc'
 alias ai="aichat"
-alias aif="aichat -r %functions% "
 alias n="nnn"
 
 # Functions
