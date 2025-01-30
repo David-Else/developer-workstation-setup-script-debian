@@ -3,32 +3,35 @@
   become: false
   vars:
     bin_install_dir: /usr/local/bin
+    blender_version: 4.3.2
+    blender_url: "https://download.blender.org/release/Blender4.3/blender-{{ blender_version }}-linux-x64.tar.xz"
+
   tasks:
-    - name: Install Blender
+    - name: Create directory for Blender
+      become: true
+      ansible.builtin.file:
+        path: "{{ bin_install_dir }}/blender-bin"
+        state: directory
+
+    - name: Download and extract Blender
+      become: true
+      ansible.builtin.unarchive:
+        src: "{{ blender_url }}"
+        dest: "{{ bin_install_dir }}/blender-bin"
+        remote_src: true
+        creates: "{{ bin_install_dir }}/blender-bin/blender"
+        extra_opts:
+          - "--strip-components=1"
+
+    - name: Create symlink to Blender binary
+      become: true
+      ansible.builtin.file:
+        src: "{{ bin_install_dir }}/blender-bin/blender"
+        dest: "{{ bin_install_dir }}/blender"
+        state: link
+
+    - name: Configure Blender desktop file
       block:
-        - name: Create directory /usr/local/bin/blender-bin
-          become: true
-          ansible.builtin.file:
-            path: "{{ bin_install_dir }}/blender-bin"
-            state: directory
-
-        - name: Download Blender and extract archive
-          become: true
-          ansible.builtin.unarchive:
-            src: "https://download.blender.org/release/Blender4.3/blender-4.3.2-linux-x64.tar.xz"
-            dest: "{{ bin_install_dir }}/blender-bin"
-            remote_src: true
-            creates: "{{ bin_install_dir }}/blender-bin/blender"
-            extra_opts:
-              - "--strip-components=1"
-
-        - name: Create symlink to Blender binary
-          become: true
-          ansible.builtin.file:
-            src: "{{ bin_install_dir }}/blender-bin/blender"
-            dest: "{{ bin_install_dir }}/blender"
-            state: link
-
         - name: Copy Blender desktop file
           ansible.builtin.copy:
             src: "{{ bin_install_dir }}/blender-bin/blender.desktop"
