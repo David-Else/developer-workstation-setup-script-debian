@@ -17,14 +17,13 @@
         dest: /usr/local/bin/bat
         state: link
       when: "'bat' in ansible_facts.packages"
+# TODO Not working, adding to root group, but it needs permissions?
+# - name: Create pipewire group
+#   ansible.builtin.group:
+#     name: pipewire
 
-# TODO test using ansible_user fixes the bug debian 13
-- name: Create pipewire group
-  ansible.builtin.group:
-    name: pipewire
-
-- name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    groups: pipewire
-    append: true
+# - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
+#   ansible.builtin.user:
+#     name: "{{ ansible_env.USER }}"
+#     groups: pipewire
+#     append: true
