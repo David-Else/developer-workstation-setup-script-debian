@@ -1,4 +1,4 @@
-# Debian Developer Workstation Setup Script
+# Developer Workstation Setup Script Debian Edition
 
 ![Debian_logo](./images/debian_logo.svg)
 
