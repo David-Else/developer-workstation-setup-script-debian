@@ -5,7 +5,7 @@
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
 
-- name: Install ltex-ls-plus with jdk
+- name: Install ltex-ls-plus with JDK
   block:
     - name: Create versioned installation directory
       ansible.builtin.file:
