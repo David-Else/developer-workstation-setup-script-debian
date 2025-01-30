@@ -103,6 +103,8 @@ Depending on your software selection, hardware, and personal preferences, you ma
 
 ### Audio
 
+- Add yourself to the pipewire group with `sudo usermod -aG pipewire $USER` to get real-time privileges loaded from `/etc/security/limits.d/25-pw-rlimits.conf`.
+
 You can confirm the allowed sample rate settings were changed by the playbook with:
 ```sh
 systemctl --user restart pipewire.service
