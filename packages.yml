@@ -9,7 +9,6 @@ ltex_ls_plus_version: "18.4.0" # won't update without deleting old files
 lazygit_version: "0.45.2"
 yabridge_version: "5.0.5"
 delta_version: "0.18.2"
-kitty_version: "0.39.0" # for Debian 12
 keyd_git_version: "v2.5.0"
 
 packages_to_remove:
