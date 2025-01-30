@@ -116,6 +116,13 @@ Watch the sample rates change per application running `pw-top`.
 
 To perform general tweaks, follow these steps:
 
+- Set Helix to open in Kitty, the desktop file [should use absolute paths](https://docs.helix-editor.com/building-from-source.html#configure-the-desktop-shortcut) if it lives in `~/.local/share/applications/`:
+
+   ```sh
+   Exec=/home/user/.local/kitty.app/bin/kitty --single-instance /home/david/.cargo/bin/hx %F
+   Icon=/home/user/.icons/helix.png
+   ```
+
 - Configure Git email and name:
   ```sh
   git config --global user.email "you@example.com"
