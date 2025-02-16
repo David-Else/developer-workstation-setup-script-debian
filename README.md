@@ -174,6 +174,8 @@ If you get no bootable device found after installing Debian, try https://itsfoss
 
 ## Updating to Trixie
 
+`sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
+
 To update to Trixie:
 `sudoedit /etc/apt/sources.list`
 ```sh
