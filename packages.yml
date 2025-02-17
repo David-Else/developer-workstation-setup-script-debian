@@ -73,11 +73,12 @@ debian_packages:
 
 debian_13_packages:
   - git-delta
+  - keyd
+  - flatseal
   - kitty
 
 flatpak_packages:
   - com.github.polymeilex.neothesia
-  - com.github.tchx84.Flatseal # TODO should be in trixie https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=982784
   - com.obsproject.Studio # TODO in trixie
   - com.obsproject.Studio.Plugin.DroidCam # TODO in trixie
   - io.github.flattool.Warehouse
@@ -85,6 +86,7 @@ flatpak_packages:
 
 debian_12_flatpak_packages:
   - org.gnome.Calendar # TODO is deb installed by default on 12, seems so on 13?
+  - com.github.tchx84.Flatseal
   - org.gnome.Maps # TODO is deb installed by default on 12, seems so on 13?
 
 npm_packages:
