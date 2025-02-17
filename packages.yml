@@ -89,7 +89,7 @@ debian_12_flatpak_packages:
 
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
-  - "@tailwindcss/language-server@0.14.2"
+  - "@tailwindcss/language-server@0.14.4"
   - bash-language-server@5.4.3
   - prettier@3.4.2
   - typescript-language-server@4.3.3
