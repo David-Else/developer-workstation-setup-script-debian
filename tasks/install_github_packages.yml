@@ -5,6 +5,51 @@
       ansible.builtin.apt:
         deb: https://github.com/dandavison/delta/releases/download/{{ delta_version }}/git-delta_{{ delta_version }}_amd64.deb
 
+    - name: Install keyd from source
+      block:
+        - name: Clone keyd from GitHub
+          ansible.builtin.git:
+            repo: https://github.com/rvaiya/keyd
+            dest: "/tmp/keyd"
+            version: "{{ keyd_git_version }}"
+            update: false
+
+        - name: Ensure the keyd directory exists
+          ansible.builtin.file:
+            path: /etc/keyd/
+            state: directory
+
+        - name: Create default.conf
+          ansible.builtin.copy:
+            content: |
+              [ids]
+              *
+
+              [main]
+              # Maps capslock to escape when pressed and control when held.
+              capslock = overload(control, esc)
+            dest: /etc/keyd/default.conf
+
+        - name: Build keyd
+          community.general.make:
+            chdir: /tmp/keyd
+
+        - name: Install keyd
+          community.general.make:
+            chdir: /tmp/keyd
+            target: install
+
+        - name: Enable and start keyd service
+          ansible.builtin.systemd:
+            name: keyd
+            enabled: true
+            state: started
+
+        - name: Clean up temporary directory
+          ansible.builtin.file:
+            path: "/tmp/keyd"
+            state: absent
+
 - name: Install ltex-ls-plus with JDK
   block:
     - name: Create versioned installation directory
@@ -59,49 +104,3 @@
           url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
         - name: helix
           url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
-
-# TODO This should be in trixie, then you can add to debian 13 packages and move the below to the debian 12 section
-- name: Install keyd from source
-  block:
-    - name: Clone keyd from GitHub
-      ansible.builtin.git:
-        repo: https://github.com/rvaiya/keyd
-        dest: "/tmp/keyd"
-        version: "{{ keyd_git_version }}"
-        update: false
-
-    - name: Ensure the keyd directory exists
-      ansible.builtin.file:
-        path: /etc/keyd/
-        state: directory
-
-    - name: Create default.conf
-      ansible.builtin.copy:
-        content: |
-          [ids]
-          *
-
-          [main]
-          # Maps capslock to escape when pressed and control when held.
-          capslock = overload(control, esc)
-        dest: /etc/keyd/default.conf
-
-    - name: Build keyd
-      community.general.make:
-        chdir: /tmp/keyd
-
-    - name: Install keyd
-      community.general.make:
-        chdir: /tmp/keyd
-        target: install
-
-    - name: Enable and start keyd service
-      ansible.builtin.systemd:
-        name: keyd
-        enabled: true
-        state: started
-
-    - name: Clean up temporary directory
-      ansible.builtin.file:
-        path: "/tmp/keyd"
-        state: absent
