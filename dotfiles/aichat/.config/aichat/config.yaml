@@ -1,18 +1,23 @@
 # model: openai:gpt-4o
 model: together:meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
 keybindings: vi
-
 clients:
   - type: openai
 
   - type: openai-compatible
     name: together
-
-  - type: openai-compatible
-    name: together
+    api_base: https://api.together.xyz/v1
     models:
       - name: meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
         max_input_tokens: 131072
         input_price: 0
         output_price: 0
         supports_function_calling: true
+      - name: deepseek-ai/DeepSeek-V3
+        max_input_tokens: 131072
+        input_price: 1.25
+        output_price: 1.25
+      - name: deepseek-ai/DeepSeek-R1
+        max_input_tokens: 163840
+        input_price: 7
+        output_price: 7
