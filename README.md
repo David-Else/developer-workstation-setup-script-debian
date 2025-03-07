@@ -112,7 +112,7 @@ pw-metadata -n settings
 ```
 Watch the sample rates change per application running `pw-top`.
 
-- Enable `pipewire-jack` for Reaper.
+- Enable `pipewire-jack` for Reaper. The following will replace the JACK server libraries with PipeWire's replacements at application runtime, by pointing the dynamic linker at the `/usr/lib/x86_64-linux-gnu/pipewire-0.3/jack/` folder (https://wiki.debian.org/PipeWire#JACK):
 
 ```sh
 sudo cp /usr/share/doc/pipewire/examples/ld.so.conf.d/pipewire-jack-*.conf /etc/ld.so.conf.d/
