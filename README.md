@@ -111,6 +111,14 @@ systemctl --user restart pipewire.service
 pw-metadata -n settings
 ```
 Watch the sample rates change per application running `pw-top`.
+
+- Enable `pipewire-jack` for Reaper.
+
+```sh
+sudo cp /usr/share/doc/pipewire/examples/ld.so.conf.d/pipewire-jack-*.conf /etc/ld.so.conf.d/
+sudo ldconfig
+```
+
 > [!NOTE]
 > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 
