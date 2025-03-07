@@ -104,3 +104,5 @@
           url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
         - name: helix
           url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
+        - name: ALSA scarlett control panel
+          url: "https://github.com/geoffreybennett/alsa-scarlett-gui/releases/download/0.5.0/alsa-scarlett-gui_0.5.0_amd64.deb"
