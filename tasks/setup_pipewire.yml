@@ -9,11 +9,11 @@
     dest: "{{ pipewire_config_dir }}pipewire.conf"
     force: false
 
-- name: Copy jack.conf to user's config directory
-  ansible.builtin.copy:
-    src: "/usr/share/pipewire/jack.conf"
-    dest: "{{ pipewire_config_dir }}jack.conf"
-    force: false
+# - name: Copy jack.conf to user's config directory
+#   ansible.builtin.copy:
+#     src: "/usr/share/pipewire/jack.conf"
+#     dest: "{{ pipewire_config_dir }}jack.conf"
+#     force: false
 
 - name: Update Pipewire allowed sample rates
   ansible.builtin.lineinfile:
