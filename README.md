@@ -97,6 +97,8 @@ Before running the setup scripts, follow these steps to install Debian:
 
 12. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
+13. Change the visudo editor to vim: `sudo update-alternatives --config editor`
+
 ## Optional Tweaks
 
 Depending on your software selection, hardware, and personal preferences, you may want to make the following changes:
