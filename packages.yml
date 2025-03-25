@@ -27,7 +27,7 @@ packages_to_remove:
 
 debian_packages:
   - adb
-  # - android-sdk-platform-tools-common
+  - android-sdk-platform-tools-common
   - ansible-lint
   - bat
   - borgbackup
@@ -39,11 +39,11 @@ debian_packages:
   - gdb
   - gh
   - gnome-boxes
-  # - gnome-screenshot
   - gnome-shell-extension-autohidetopbar
   - gnome-shell-pomodoro
   - gnome-tweaks
-  # - handbrake
+  - golang
+  - handbrake
   - heif-gdk-pixbuf
   - heif-thumbnailer
   - imagemagick

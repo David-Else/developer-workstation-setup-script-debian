@@ -77,12 +77,9 @@ Before running the setup scripts, follow these steps to install Debian:
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
-10. Compile tt from source (`/usr/local/go/bin` is already added to the `$PATH`):
-> [!NOTE]
-> You will need to install golang
+10. Compile tt from source:
 
    ```sh
-   sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
    git clone https://github.com/lemnos/tt
    cd tt
    make && sudo make install
@@ -197,4 +194,18 @@ deb-src http://security.debian.org/debian-security trixie-security main non-free
 
 deb http://deb.debian.org/debian/ trixie-updates main non-free-firmware
 deb-src http://deb.debian.org/debian/ trixie-updates main non-free-firmware
+```
+TODO
+
+```
+TODO Not working, adding to root group, but it needs permissions?
+- name: Create pipewire group
+  ansible.builtin.group:
+    name: pipewire
+
+- name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    groups: pipewire
+    append: true
 ```

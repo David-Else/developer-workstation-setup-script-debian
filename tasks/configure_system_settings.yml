@@ -17,18 +17,21 @@
         dest: /usr/local/bin/bat
         state: link
       when: "'bat' in ansible_facts.packages"
-# TODO Not working, adding to root group, but it needs permissions?
-# - name: Create pipewire group
-#   ansible.builtin.group:
-#     name: pipewire
 
-# - name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
-#   ansible.builtin.user:
-#     name: "{{ ansible_env.USER }}"
-#     groups: pipewire
-#     append: true
-
-- name: Switch to ZSH for the default shell
+- name: Switch to Zsh for the default shell
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
+
+
+- name: Create Hugo Zsh completions
+  block:
+    - name: Generate Hugo completion for zsh
+      ansible.builtin.command: hugo completion zsh
+      register: hugo_completion
+      changed_when: false
+
+    - name: Write Hugo completion to file
+      ansible.builtin.copy:
+        content: "{{ hugo_completion.stdout }}"
+        dest: /usr/share/zsh/vendor-completions/_hugo
