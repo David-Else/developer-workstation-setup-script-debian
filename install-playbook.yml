@@ -38,7 +38,7 @@
     - name: Configure Pipewire
       ansible.builtin.import_tasks: tasks/setup_pipewire.yml
 
-    - name: Update bashrc
+    - name: Update .bashrc and .profile
       ansible.builtin.import_tasks: tasks/update_bashrc.yml
 
     - name: Download and install yabridge
