@@ -7,15 +7,13 @@
     - name: Remove unwanted applications
       ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
 
-    - name: Install packages
-      block:
-        - name: Install repository packages
-          ansible.builtin.import_tasks: tasks/install_repo_packages.yml
+    - name: Install repository packages
+      ansible.builtin.import_tasks: tasks/install_repo_packages.yml
 
-        - name: Install GitHub packages and binary executables
-          ansible.builtin.import_tasks: tasks/install_github_packages.yml
+    - name: Install GitHub packages and binary executables
+      ansible.builtin.import_tasks: tasks/install_github_packages.yml
 
-    - name: Create symbolic links and add user to pipewire group
+    - name: Create symbolic links, add user to pipewire group, and switch shell
       ansible.builtin.import_tasks: tasks/create_symlinks.yml
 
 - name: Configure user environment
