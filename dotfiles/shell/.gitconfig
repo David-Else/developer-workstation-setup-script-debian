@@ -1,13 +1,10 @@
+[core]
+    pager = delta
+
 [delta]
     syntax-theme = "Visual Studio Dark+"
     side-by-side = true
     wrap-max-lines = "unlimited"
-
-[pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
 
 [commit]
 	gpgsign = true
