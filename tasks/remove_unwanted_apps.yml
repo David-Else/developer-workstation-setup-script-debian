@@ -1,6 +1,0 @@
-- name: Remove unwanted desktop apps
-  ansible.builtin.apt:
-    name: "{{ packages_to_remove }}"
-    state: absent
-    autoremove: true
-    purge: true

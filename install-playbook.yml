@@ -4,10 +4,7 @@
   vars_files:
     - packages.yml
   tasks:
-    - name: Remove unwanted applications
-      ansible.builtin.import_tasks: tasks/remove_unwanted_apps.yml
-
-    - name: Install repository packages
+    - name: Install and remove repository packages
       ansible.builtin.import_tasks: tasks/install_repo_packages.yml
 
     - name: Install GitHub packages and binary executables
