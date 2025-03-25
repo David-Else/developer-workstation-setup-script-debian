@@ -27,3 +27,8 @@
 #     name: "{{ ansible_env.USER }}"
 #     groups: pipewire
 #     append: true
+
+- name: Switch to ZSH for the default shell
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: /usr/bin/zsh
