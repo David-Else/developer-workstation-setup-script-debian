@@ -105,4 +105,4 @@
         - name: helix
           url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
         - name: ALSA scarlett control panel
-          url: "https://github.com/geoffreybennett/alsa-scarlett-gui/releases/download/0.5.0/alsa-scarlett-gui_0.5.0_amd64.deb"
+          url: "https://github.com/geoffreybennett/alsa-scarlett-gui/releases/download/{{ scarlett_gui_version }}/alsa-scarlett-gui_{{ scarlett_gui_version }}_amd64.deb"
