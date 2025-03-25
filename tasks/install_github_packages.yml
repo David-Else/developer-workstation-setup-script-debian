@@ -66,7 +66,7 @@
         state: link
         force: true
 
-- name: Install binary executables
+- name: Install executables
   block:
     - name: Install marksman
       ansible.builtin.get_url:
@@ -81,17 +81,15 @@
         remote_src: true
         include: "lazygit"
 
-- name: Install third-party packages from GitHub releases
-  block:
-    - name: Install .deb packages
-      ansible.builtin.apt:
-        deb: "{{ item.url }}"
-      loop:
-        - name: rclone
-          url: "https://github.com/rclone/rclone/releases/download/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb"
-        - name: hugo
-          url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
-        - name: helix
-          url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
-        - name: ALSA scarlett control panel
-          url: "https://github.com/geoffreybennett/alsa-scarlett-gui/releases/download/{{ scarlett_gui_version }}/alsa-scarlett-gui_{{ scarlett_gui_version }}_amd64.deb"
+- name: Install .deb packages
+  ansible.builtin.apt:
+    deb: "{{ item.url }}"
+  loop:
+    - name: rclone
+      url: "https://github.com/rclone/rclone/releases/download/v{{ rclone_version }}/rclone-v{{ rclone_version }}-linux-amd64.deb"
+    - name: hugo
+      url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
+    - name: helix
+      url: "https://github.com/helix-editor/helix/releases/download/{{ helix_version }}/helix_25.1.1-1_amd64.deb"
+    - name: ALSA scarlett control panel
+      url: "https://github.com/geoffreybennett/alsa-scarlett-gui/releases/download/{{ scarlett_gui_version }}/alsa-scarlett-gui_{{ scarlett_gui_version }}_amd64.deb"
