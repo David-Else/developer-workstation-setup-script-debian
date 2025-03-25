@@ -13,6 +13,7 @@
     . "{{ ansible_env.HOME }}/.cargo/env" &&
     rustup component add rust-analyzer &&
     cargo install aichat --version {{ aichat_version }}
+    sudo cp ./extras/_aichat /usr/share/zsh/vendor-completions/
   args:
     creates: "{{ ansible_env.HOME }}/.cargo/env"
     executable: /bin/bash
