@@ -39,17 +39,6 @@
             path: "/tmp/keyd"
             state: absent
 
-- name: Create default.conf for keyd
-  ansible.builtin.copy:
-    content: |
-      [ids]
-      *
-
-      [main]
-      # Maps capslock to escape when pressed and control when held.
-      capslock = overload(control, esc)
-    dest: /etc/keyd/default.conf
-
 - name: Install ltex-ls-plus with JDK
   block:
     - name: Create versioned installation directory

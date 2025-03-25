@@ -23,6 +23,16 @@
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
 
+- name: Create default.conf for keyd
+  ansible.builtin.copy:
+    content: |
+      [ids]
+      *
+
+      [main]
+      # Maps capslock to escape when pressed and control when held.
+      capslock = overload(control, esc)
+    dest: /etc/keyd/default.conf
 
 - name: Create Hugo Zsh completions
   block:
