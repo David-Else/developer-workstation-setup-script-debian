@@ -49,7 +49,7 @@ debian_packages:
   - jq
   - keepassxc
   - krita
-  - libvirt-daemon-system # dependency for gnome-boxes
+  # - libvirt-daemon-system # dependency for gnome-boxes at least in Debian 12
   - lldb-19 # to supply lldb-dap-19 for Helix debugging
   - lshw
   - mediainfo
