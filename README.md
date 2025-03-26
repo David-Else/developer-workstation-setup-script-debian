@@ -102,8 +102,6 @@ Depending on your software selection, hardware, and personal preferences, you ma
 
 ### Audio
 
-- Add yourself to the pipewire group with `sudo usermod -aG pipewire $USER` to get real-time privileges loaded from `/etc/security/limits.d/25-pw-rlimits.conf`.
-
 You can confirm the allowed sample rate settings were changed by the playbook with:
 ```sh
 systemctl --user restart pipewire.service
@@ -194,18 +192,4 @@ deb-src http://security.debian.org/debian-security trixie-security main non-free
 
 deb http://deb.debian.org/debian/ trixie-updates main non-free-firmware
 deb-src http://deb.debian.org/debian/ trixie-updates main non-free-firmware
-```
-TODO
-
-```
-TODO Not working, adding to root group, but it needs permissions?
-- name: Create pipewire group
-  ansible.builtin.group:
-    name: pipewire
-
-- name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    groups: pipewire
-    append: true
 ```
