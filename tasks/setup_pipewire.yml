@@ -5,7 +5,7 @@
 
 - name: Copy pipewire.conf to user's config directory
   ansible.builtin.copy:
-    src: "/usr/share/pipewire/pipewire.conf"
+    src: /usr/share/pipewire/pipewire.conf
     dest: "{{ pipewire_config_dir }}pipewire.conf"
     force: false
 

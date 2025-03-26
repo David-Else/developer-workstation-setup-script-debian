@@ -10,7 +10,7 @@
         - name: Clone keyd from GitHub
           ansible.builtin.git:
             repo: https://github.com/rvaiya/keyd
-            dest: "/tmp/keyd"
+            dest: /tmp/keyd
             version: "{{ keyd_git_version }}"
             update: false
 

@@ -1,4 +1,3 @@
----
 bin_install_dir: /usr/local/bin
 pipewire_config_dir: "{{ ansible_env['HOME'] }}/.config/pipewire/"
 rclone_version: "1.68.2"
