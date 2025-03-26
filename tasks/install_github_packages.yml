@@ -41,7 +41,7 @@
 
 - name: Install ltex-ls-plus with JDK
   block:
-    - name: Create versioned installation directory
+    - name: Create versioned installation directory for ltex-ls-plus
       ansible.builtin.file:
         path: "{{ bin_install_dir }}/ltex-ls-plus-{{ ltex_ls_plus_version }}"
         state: directory

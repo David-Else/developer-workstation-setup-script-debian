@@ -20,7 +20,7 @@
 
 - name: Switch to Zsh for the default shell
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
     shell: /usr/bin/zsh
 
 - name: Create default.conf for keyd
