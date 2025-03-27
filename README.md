@@ -96,7 +96,7 @@ If you already have a clean install of Bookworm and want to update to Trixie bef
    make && sudo make install
    ```
 
-9. Update MPV config file for Debian 13 by uncommenting sections indented for the new version.
+9. Update MPV config file for Debian 13 by uncommenting sections intended for the new version.
 
 10. Change the visudo editor to vim: `sudo update-alternatives --config editor`
 
