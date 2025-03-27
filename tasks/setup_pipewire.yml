@@ -20,9 +20,3 @@
 - name: Create pipewire group
   ansible.builtin.group:
     name: pipewire
-
-- name: Add user to the pipewire group to get realtime privileges from /etc/security/limits.d/25-pw-rlimits.conf
-  ansible.builtin.user:
-    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    groups: pipewire
-    append: true
