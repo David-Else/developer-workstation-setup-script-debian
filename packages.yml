@@ -39,7 +39,6 @@ debian_packages:
   - gh
   - gnome-boxes
   - gnome-shell-extension-autohidetopbar
-  - gnome-shell-pomodoro
   - gnome-tweaks
   - golang
   - handbrake
