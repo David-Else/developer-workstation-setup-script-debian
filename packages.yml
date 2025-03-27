@@ -47,6 +47,7 @@ debian_packages:
   - imagemagick
   - jq
   - keepassxc
+  - kitty
   - krita
   # - libvirt-daemon-system # dependency for gnome-boxes at least in Debian 12
   - lldb-19 # to supply lldb-dap-19 for Helix debugging
@@ -77,7 +78,6 @@ debian_13_packages:
   - git-delta
   - keyd
   - flatseal
-  - kitty
 
 flatpak_packages:
   - com.github.polymeilex.neothesia
@@ -85,11 +85,6 @@ flatpak_packages:
   - com.obsproject.Studio.Plugin.DroidCam # TODO in trixie
   - io.github.flattool.Warehouse
   - org.signal.Signal
-
-debian_12_flatpak_packages:
-  - org.gnome.Calendar # TODO is deb installed by default on 12, seems so on 13?
-  - com.github.tchx84.Flatseal
-  - org.gnome.Maps # TODO is deb installed by default on 12, seems so on 13?
 
 npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
