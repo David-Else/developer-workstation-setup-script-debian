@@ -6,26 +6,24 @@ This guide provides instructions for setting up a developer workstation using De
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
-## Installing Trixie Testing
+## Installation
+
+Before running the setup scripts, follow these steps to install Debian:
+
+### Installing Trixie Testing
 
 You can use the testing installer until Trixie is released this summer:
 
 https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian-testing-amd64-netinst.iso
 
-## Updating from Bookworm to Trixie
+### Updating from Bookworm to Trixie
 
-If you have a clean install of Bookworm and want to update to Trixie before using this playbook:
+If you already have a clean install of Bookworm and want to update to Trixie before using this playbook:
 
 1. Check you have about 5 gig free disk space with `df -h`
 2. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
 3. `sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
 4. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
-
-## Installation
-
-Before running the setup scripts, follow these steps to install Debian:
-
-1. Install a fresh copy of Debian from the full DVD or netinst ISO.
 
 > [!NOTE]
 > There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
@@ -45,20 +43,22 @@ Before running the setup scripts, follow these steps to install Debian:
 > - Use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in Other Software:
 > ![Software & Updates](./images/sources.png)
 
-2. Open the terminal and run the following command to install Ansible, git, and Flatpak:
+## Setting up Debian
+
+1. Open the terminal and run the following command to install Ansible, git, and Flatpak:
    ```sh
    sudo apt install ansible git flatpak
    ```
 
-3. Clone this repository and navigate to it:
+2. Clone this repository and navigate to it:
    ```sh
    git clone https://github.com/David-Else/developer-workstation-setup-script-debian
    cd developer-workstation-setup-script-debian
    ```
 
-4. Customize the software selection by modifying `packages.yml` according to your preferences.
+3. Customize the software selection by modifying `packages.yml` according to your preferences.
 
-5. Run the main installation playbook:
+4. Run the main installation playbook:
 > [!NOTE]
 > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 >
@@ -68,9 +68,9 @@ Before running the setup scripts, follow these steps to install Debian:
    ansible-playbook ./install-playbook.yml -K
    ```
 
-6. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
+5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
 
-7. Install showmethekey:
+6. Install showmethekey:
 
    ```sh
    cd extras
@@ -79,7 +79,7 @@ Before running the setup scripts, follow these steps to install Debian:
    sudo ./install-show-me-the-key.sh
    ```
 
-8. Install Firefox extensions:
+7. Install Firefox extensions:
 
    ```sh
    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
@@ -88,7 +88,7 @@ Before running the setup scripts, follow these steps to install Debian:
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
-9. Compile tt terminal typing test from source:
+8. Compile tt terminal typing test from source:
 
    ```sh
    git clone https://github.com/lemnos/tt
@@ -96,11 +96,11 @@ Before running the setup scripts, follow these steps to install Debian:
    make && sudo make install
    ```
 
-10. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
+9. Update MPV config file for Debian 13 by uncommenting sections indented for the new version.
 
-11. Change the visudo editor to vim: `sudo update-alternatives --config editor`
+10. Change the visudo editor to vim: `sudo update-alternatives --config editor`
 
-12. `sudo reboot`
+11. `sudo reboot`
 
 ## Optional Tweaks
 
