@@ -68,6 +68,8 @@
           ansible.builtin.import_tasks: tasks/setup_pipewire.yml
         - name: Update .bashrc and .profile
           ansible.builtin.import_tasks: tasks/update_bashrc.yml
+        - name: Setup Gnome
+          ansible.builtin.import_tasks: tasks/setup-gnome.yml
         - name: Download and install yabridge
           ansible.builtin.unarchive:
             src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
