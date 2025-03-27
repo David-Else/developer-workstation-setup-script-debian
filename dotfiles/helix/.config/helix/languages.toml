@@ -50,6 +50,7 @@ auto-format = true
 
 [[language]]
 name = "bash"
+formatter = { command = 'shfmt', args = ["-i", "4"] }
 auto-format = true
 
 [[language]]
