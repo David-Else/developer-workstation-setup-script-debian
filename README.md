@@ -2,7 +2,7 @@
 
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased). The setup scripts automate the installation of software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
+This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased). The ansible playbook automates the installation of software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
