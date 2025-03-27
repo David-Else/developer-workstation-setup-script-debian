@@ -88,7 +88,7 @@ Before running the setup scripts, follow these steps to install Debian:
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
-9. Compile tt from source:
+9. Compile tt terminal typing test from source:
 
    ```sh
    git clone https://github.com/lemnos/tt
@@ -99,6 +99,8 @@ Before running the setup scripts, follow these steps to install Debian:
 10. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
 11. Change the visudo editor to vim: `sudo update-alternatives --config editor`
+
+12. `sudo reboot`
 
 ## Optional Tweaks
 
