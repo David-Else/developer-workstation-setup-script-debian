@@ -6,11 +6,26 @@ This guide provides instructions for setting up a developer workstation using De
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
+## Installing Trixie Testing
+
+You can use the testing installer until Trixie is released this summer:
+
+https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian-testing-amd64-netinst.iso
+
+## Updating from Bookworm to Trixie
+
+If you have a clean install of Bookworm and want to update to Trixie before using this playbook:
+
+1. Check you have about 5 gig free disk space with `df -h`
+2. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
+3. `sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
+4. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
+
 ## Installation
 
 Before running the setup scripts, follow these steps to install Debian:
 
-1. Install a fresh copy of Debian from the full DVD ISO.
+1. Install a fresh copy of Debian from the full DVD or netinst ISO.
 
 > [!NOTE]
 > There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
@@ -46,20 +61,16 @@ Before running the setup scripts, follow these steps to install Debian:
 5. Run the main installation playbook:
 > [!NOTE]
 > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
+>
+> You can add `--check` for a test run or `--diff, -vv` to see more info.
 
    ```sh
    ansible-playbook ./install-playbook.yml -K
    ```
 
-6. Log out and in, then run the Gnome setup:
+6. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
 
-   ```sh
-   ansible-playbook ./gnome-setup-playbook.yml -K
-   ```
-
-7. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
-
-8. Install showmethekey:
+7. Install showmethekey:
 
    ```sh
    cd extras
@@ -68,7 +79,7 @@ Before running the setup scripts, follow these steps to install Debian:
    sudo ./install-show-me-the-key.sh
    ```
 
-9. Install Firefox extensions:
+8. Install Firefox extensions:
 
    ```sh
    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
@@ -77,7 +88,7 @@ Before running the setup scripts, follow these steps to install Debian:
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
-10. Compile tt from source:
+9. Compile tt from source:
 
    ```sh
    git clone https://github.com/lemnos/tt
@@ -85,16 +96,9 @@ Before running the setup scripts, follow these steps to install Debian:
    make && sudo make install
    ```
 
-11. Setup Hugo completions and man page:
+10. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
 
-   ```sh
-   hugo completion zsh > "${fpath[1]}/_hugo"
-   sudo hugo gen man --dir /usr/share/man/man1 && sudo mandb
-   ```
-
-12. Update MPV config file for Debian 13 by uncommenting sections indented for the new version
-
-13. Change the visudo editor to vim: `sudo update-alternatives --config editor`
+11. Change the visudo editor to vim: `sudo update-alternatives --config editor`
 
 ## Optional Tweaks
 
@@ -102,19 +106,7 @@ Depending on your software selection, hardware, and personal preferences, you ma
 
 ### Audio
 
-You can confirm the allowed sample rate settings were changed by the playbook with:
-```sh
-systemctl --user restart pipewire.service
-pw-metadata -n settings
-```
-Watch the sample rates change per application running `pw-top`.
-
-- Enable `pipewire-jack` for Reaper. The following will replace the JACK server libraries with PipeWire's replacements at application runtime, by pointing the dynamic linker at the `/usr/lib/x86_64-linux-gnu/pipewire-0.3/jack/` folder (https://wiki.debian.org/PipeWire#JACK):
-
-```sh
-sudo cp /usr/share/doc/pipewire/examples/ld.so.conf.d/pipewire-jack-*.conf /etc/ld.so.conf.d/
-sudo ldconfig
-```
+You can confirm the allowed sample rate settings were changed by the playbook with `pw-metadata -n settings` and watch the sample rates change per application running `pw-top`.
 
 > [!NOTE]
 > More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
@@ -140,6 +132,7 @@ To perform general tweaks, follow these steps:
   git config --global user.signingkey key
   git config --global commit.gpgsign true
   ```
+
 - Install extras:
   ```sh
   gh extension install yusukebe/gh-markdown-preview
@@ -177,19 +170,3 @@ If you get no bootable device found after installing Debian, try https://itsfoss
 > [!NOTE]
 > Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
 
-## Updating to Trixie
-
-`sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
-
-To update to Trixie:
-`sudoedit /etc/apt/sources.list`
-```sh
-deb http://deb.debian.org/debian/ trixie main non-free-firmware
-deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
-
-deb http://security.debian.org/debian-security trixie-security main non-free-firmware
-deb-src http://security.debian.org/debian-security trixie-security main non-free-firmware
-
-deb http://deb.debian.org/debian/ trixie-updates main non-free-firmware
-deb-src http://deb.debian.org/debian/ trixie-updates main non-free-firmware
-```
