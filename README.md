@@ -8,7 +8,7 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 ## Installation
 
-Before running the setup scripts, follow these steps to install Debian:
+Before running the playbook, follow these steps to install Debian:
 
 ### Installing Trixie Testing
 
