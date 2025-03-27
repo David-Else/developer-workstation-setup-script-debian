@@ -40,7 +40,7 @@ If you already have a clean install of Bookworm and want to update to Trixie bef
 > [!NOTE]
 > - Do not provide any details for the root account, your user account will then have administrative rights.
 > - Leave Gnome as the default desktop environment.
-> - Use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in Other Software:
+> - If you installed from a DVD ISO use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in Other Software:
 > ![Software & Updates](./images/sources.png)
 
 ## Setting up Debian
