@@ -32,7 +32,6 @@ debian_packages:
   - build-essential
   - curl
   - ffmpeg
-  - fonts-roboto
   - fzf
   - gdb
   - gh
@@ -46,7 +45,6 @@ debian_packages:
   - heif-thumbnailer
   - imagemagick
   - jq
-  - keepassxc
   - kitty
   - krita
   # - libvirt-daemon-system # dependency for gnome-boxes at least in Debian 12
@@ -76,6 +74,7 @@ debian_packages:
 debian_13_packages:
   - alsa-scarlett-gui
   - git-delta
+  - keepassxc-full
   - keyd
   - flatseal
 
@@ -90,7 +89,7 @@ npm_packages:
   - "@ansible/ansible-language-server@1.2.3"
   - "@tailwindcss/language-server@0.14.11"
   - bash-language-server@5.4.3
-  - prettier@3.4.2
+  - prettier@3.5.3
   - typescript-language-server@4.3.3
   - typescript@5.7.3
   - vscode-langservers-extracted@4.8.0
