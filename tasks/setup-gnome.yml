@@ -7,5 +7,5 @@
 - name: Configure GNOME Auto Move Windows extension workspace rules
   community.general.dconf:
     key: "/org/gnome/shell/extensions/auto-move-windows/application-list"
-    value: "['kitty.desktop:1', 'org.gnome.Calendar.desktop:2', 'org.signal.Signal.desktop:3', 'firefox-esr.desktop:4']"
+    value: "['org.gnome.Calendar.desktop:2', 'org.signal.Signal.desktop:2', 'firefox-esr.desktop:3']"
     state: present
