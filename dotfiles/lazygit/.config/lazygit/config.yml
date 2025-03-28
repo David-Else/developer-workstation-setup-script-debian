@@ -14,11 +14,4 @@ keybinding:
     scrollUpMain-alt1: <c-k>
     scrollDownMain-alt1: <c-j>
 
-customCommands:
-  - key: "E"
-    context: "files"
-    command: "kitty @ launch --cwd=current $EDITOR ."
-    subprocess: true
-    description: "Open terminal editor in a new Kitty window in the current working directory"
-
 promptToReturnFromSubprocess: false
