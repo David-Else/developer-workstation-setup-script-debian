@@ -10,7 +10,6 @@ lazygit_version: "0.48.0"
 yabridge_version: "5.0.5"
 delta_version: "0.18.2"
 keyd_git_version: "v2.5.0"
-aichat_version: "0.28.0"
 
 packages_to_remove:
   - cheese

@@ -18,8 +18,6 @@
       block:
         - name: Install Python packages
           ansible.builtin.import_tasks: tasks/install_python_packages.yml
-        - name: Install Rust toolchain and AIChat
-          ansible.builtin.import_tasks: tasks/install_rust.yml
         - name: Stow dotfiles
           ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
         - name: Configure Pipewire

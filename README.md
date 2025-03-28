@@ -100,6 +100,17 @@ If you already have a clean install of Bookworm and want to update to Trixie bef
 
 10. Change the visudo editor to vim: `sudo update-alternatives --config editor`
 
+11. Install Rust and AIChat:
+
+```sh
+    set -o pipefail &&
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
+    . "$HOME/.cargo/env" &&
+    rustup component add rust-analyzer &&
+    cargo install aichat --version 0.29.0
+    sudo cp ./extras/_aichat /usr/share/zsh/vendor-completions/
+```
+
 11. `sudo reboot`
 
 ## Optional Tweaks
