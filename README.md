@@ -134,6 +134,13 @@ To perform general tweaks, follow these steps:
    Exec=/home/user/.local/kitty.app/bin/kitty --single-instance /home/david/.cargo/bin/hx %F
    Icon=/home/user/.icons/helix.png
    ```
+   
+or `/usr/share/applications/Helix.desktop` should be:
+
+   ```sh
+   Exec=kitty --single-instance hx %F
+   Terminal=false
+   ```
 
 - Configure Git email and name:
   ```sh
