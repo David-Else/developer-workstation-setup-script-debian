@@ -74,13 +74,6 @@
         dest: "{{ bin_install_dir }}/marksman"
         checksum: "sha256:{{ marksman_shasum }}"
 
-    - name: Install lazygit
-      ansible.builtin.unarchive:
-        src: "https://github.com/jesseduffield/lazygit/releases/download/v{{ lazygit_version }}/lazygit_{{ lazygit_version }}_Linux_x86_64.tar.gz"
-        dest: "{{ bin_install_dir }}"
-        remote_src: true
-        include: "lazygit"
-
 - name: Install .deb packages
   ansible.builtin.apt:
     deb: "{{ item.url }}"
