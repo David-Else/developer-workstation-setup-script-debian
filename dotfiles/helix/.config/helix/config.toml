@@ -9,6 +9,8 @@ C-h     = "goto_previous_buffer"
 "tab"   = "expand_selection"
 "S-tab" = "shrink_selection"
 "F5"    = ":reload"
+"@" = ["select_all", ":pipe sort -t@ -k2,2r"]
+"+" = ["select_all", ":pipe sort -t+ -k2,2r"]
 Z       = { Z = ":wq", Q = ":q!" }
 
 [keys.select]
