@@ -21,3 +21,7 @@ clients:
         max_input_tokens: 163840
         input_price: 7
         output_price: 7
+      - name: Qwen/Qwen3-235B-A22B-fp8-tput
+        max_input_tokens: 131072
+        input_price: 0.2
+        output_price: 0.6
