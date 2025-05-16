@@ -1,6 +1,6 @@
 bin_install_dir: /usr/local/bin
 pipewire_config_dir: "{{ ansible_env['HOME'] }}/.config/pipewire/"
-rclone_version: "1.68.2"
+rclone_version: "1.69.2"
 hugo_version: "0.147.2"
 helix_version: "25.01.1"
 marksman_version: "2024-12-18"
