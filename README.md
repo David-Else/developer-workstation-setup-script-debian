@@ -2,7 +2,7 @@
 
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased). The ansible playbook automates the installation of software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
+This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased, but in hard freeze). The Ansible playbook automates the installation of software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
@@ -10,32 +10,11 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 Before running the playbook, follow these steps to install Debian:
 
-### Installing Trixie Testing
+### Installing Debian 12 Bookworm or 13 Trixie Testing
 
 You can use the testing installer until Trixie is released this summer:
 
 https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian-testing-amd64-netinst.iso
-
-### Updating from Bookworm to Trixie
-
-If you already have a clean install of Bookworm and want to update to Trixie before using this playbook:
-
-1. Check you have about 5 gig free disk space with `df -h`
-2. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
-3. `sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
-4. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
-
-> [!NOTE]
-> There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
->
-> 1. Press "e" to edit the default installation option.
-> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
->
->    ```sh
->    partman-auto/cap-ram=n
->    ```
->
-> 3. Press Ctrl-x or F10 to continue.
 
 > [!NOTE]
 > - Do not provide any details for the root account, your user account will then have administrative rights.
@@ -84,7 +63,6 @@ If you already have a clean install of Bookworm and want to update to Trixie bef
    ```sh
    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
        https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
-       https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/ \
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
@@ -96,7 +74,15 @@ If you already have a clean install of Bookworm and want to update to Trixie bef
    make && sudo make install
    ```
 
-9. Update MPV config file for Debian 13 by uncommenting sections intended for the new version.
+9. Downgrade the MPV config file for Debian 12 if needed:
+
+```sh
+profile=gpu-hq
+hwdec=auto-safe
+fullscreen=yes
+input-gamepad=yes
+osd-font-size=25
+```
 
 10. Change the visudo editor to vim: `sudo update-alternatives --config editor`
 
@@ -182,4 +168,25 @@ You might also like to install `ms-vscode.live-server` for live debugging in Cod
 If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as trusted EFI file to be executed.
 > [!NOTE]
 > Bonus: If you are using gnome-boxes don't forget to install `spice-vdagent` only on the guest AND restart the virtual machine to get copy and paste working. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
+
+### Updating from Bookworm to Trixie
+
+If you already have a clean installation of Bookworm and want to update to Trixie before using this playbook:
+
+1. Check you have about 5 gig free disk space with `df -h`
+2. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
+3. `sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
+4. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
+
+> [!NOTE]
+> There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+>
+> 1. Press "e" to edit the default installation option.
+> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
+>
+>    ```sh
+>    partman-auto/cap-ram=n
+>    ```
+>
+> 3. Press Ctrl-x or F10 to continue.
 
