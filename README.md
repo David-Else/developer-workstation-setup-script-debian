@@ -22,6 +22,18 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
 > - If you installed from a DVD ISO use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in Other Software:
 > ![Software & Updates](./images/sources.png)
 
+> [!NOTE]
+> There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
+>
+> 1. Press "e" to edit the default installation option.
+> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
+>
+>    ```sh
+>    partman-auto/cap-ram=n
+>    ```
+>
+> 3. Press Ctrl-x or F10 to continue.
+
 ## Setting up Debian
 
 1. Open the terminal and run the following command to install Ansible, git, and Flatpak:
@@ -177,16 +189,4 @@ If you already have a clean installation of Bookworm and want to update to Trixi
 2. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
 3. `sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
 4. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
-
-> [!NOTE]
-> There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
->
-> 1. Press "e" to edit the default installation option.
-> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
->
->    ```sh
->    partman-auto/cap-ram=n
->    ```
->
-> 3. Press Ctrl-x or F10 to continue.
 
