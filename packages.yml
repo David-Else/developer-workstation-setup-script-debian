@@ -60,7 +60,6 @@ debian_packages:
   - sidplayfp
   - shfmt
   - stow
-  - tldr
   - trash-cli
   - wl-clipboard
   - xdg-desktop-portal-gnome
