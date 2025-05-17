@@ -126,12 +126,12 @@ You can confirm the allowed sample rate settings were changed by the playbook wi
 
 To perform general tweaks, follow these steps:
 
-- Set Helix to open in Kitty, the desktop file [should use absolute paths](https://docs.helix-editor.com/building-from-source.html#configure-the-desktop-shortcut) if it lives in `~/.local/share/applications/`:
+- Set Helix to open in Kitty `sudoedit /usr/share/applications/Helix.desktop`:
 
-   ```sh
-   Exec=/home/user/.local/kitty.app/bin/kitty --single-instance /home/david/.cargo/bin/hx %F
-   Icon=/home/user/.icons/helix.png
-   ```
+  ```sh
+  Exec=kitty --single-instance hx %F
+  Terminal=false
+  ```
 
 - Configure Git email and name:
   ```sh
