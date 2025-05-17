@@ -109,7 +109,7 @@ osd-font-size=25
     sudo cp ./extras/_aichat /usr/share/zsh/vendor-completions/
 ```
 
-11. `sudo reboot`
+12. `sudo reboot`
 
 ## Optional Tweaks
 
@@ -177,7 +177,7 @@ If you would like to use Code for things that Helix still struggles with (like d
 ```
 You might also like to install `ms-vscode.live-server` for live debugging in Code or the browser.
 
-If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as trusted EFI file to be executed.
+If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as a trusted EFI file to be executed.
 > [!NOTE]
 > Bonus: If you are using Debian 12 as a VM don't forget to install `spice-vdagent` AND restart to get copy and paste working. It should be installed by default on a Debian 13 guest. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
 
