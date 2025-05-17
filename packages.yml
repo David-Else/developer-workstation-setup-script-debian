@@ -18,6 +18,7 @@ packages_to_remove:
   - gnome-software
   - gnome-text-editor
   - gnome-sound-recorder
+  - gnome-weather
   - rhythmbox
   - totem
 
