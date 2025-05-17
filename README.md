@@ -59,7 +59,7 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
    ansible-playbook ./install-playbook.yml -K
    ```
 
-5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
+5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file. Install the plugins with `sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"`.
 
 6. Install showmethekey:
 
