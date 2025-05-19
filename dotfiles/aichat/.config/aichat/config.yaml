@@ -19,9 +19,12 @@ clients:
         output_price: 1.25
       - name: deepseek-ai/DeepSeek-R1
         max_input_tokens: 163840
-        input_price: 7
+        input_price: 3
         output_price: 7
       - name: Qwen/Qwen3-235B-A22B-fp8-tput
         max_input_tokens: 131072
         input_price: 0.2
         output_price: 0.6
+        patch:
+          body:
+            chat_template_kwargs: { "enable_thinking": false }
