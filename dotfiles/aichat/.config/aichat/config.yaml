@@ -2,8 +2,7 @@
 model: together:meta-llama/Llama-3.3-70B-Instruct-Turbo-Free
 keybindings: vi
 clients:
-  - type: openai
-
+  # - type: openai
   - type: openai-compatible
     name: together
     api_base: https://api.together.xyz/v1
