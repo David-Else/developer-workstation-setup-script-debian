@@ -73,6 +73,7 @@
         url: "https://github.com/artempyanykh/marksman/releases/download/{{ marksman_version }}/marksman-linux-x64"
         dest: "{{ bin_install_dir }}/marksman"
         checksum: "sha256:{{ marksman_shasum }}"
+        mode: "0755"
 
 - name: Install .deb packages
   ansible.builtin.apt:
