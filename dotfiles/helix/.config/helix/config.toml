@@ -30,9 +30,8 @@ z   = ":toggle gutters.line-numbers.min-width 52 3"
 b   = ":toggle bufferline multiple never"
 
 [keys.normal.C-space]
-n = "@:o <C-r>%<C-w>"
+n = "@:open <C-r>%<C-w>"
 x = "@:sh rm <C-r>%"
-r = "@:sh mv <C-r>% <C-r>%<C-w>"
 g = [":pipe-to cat > /tmp/helix-gpt", ":append-output cat /tmp/helix-gpt | aichat --role technical-writer"]
 p = "@:sh pandoc --resource-path <C-r>%<C-w> --self-contained --metadata title='Preview' <C-r>% -o /tmp/md-preview.html && xdg-open /tmp/md-preview.html<ret>"
 d = ":pipe echo -n $(date +%d-%m-%Y)"
@@ -47,6 +46,7 @@ color-modes = true
 end-of-line-diagnostics = "hint"
 bufferline = "multiple"
 default-yank-register = "+"
+jump-label-alphabet = "jfkdlsacienvurxowtzhgqp"
 
 [editor.whitespace.render]
 newline = "all"
