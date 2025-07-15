@@ -62,7 +62,3 @@ language-servers = ["ltex-ls-plus"]
 name = "python"
 formatter = { command = "black", args = ["--quiet", "-"] }
 auto-format = true
-language-servers = ["pyright"]
-# pyproject.toml
-# [tool.pyright]
-# typeCheckingMode  = "strict"
