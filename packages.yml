@@ -2,7 +2,7 @@ bin_install_dir: /usr/local/bin
 pipewire_config_dir: "{{ ansible_env['HOME'] }}/.config/pipewire/"
 rclone_version: "1.69.2"
 hugo_version: "0.147.9"
-helix_version: "25.07"
+helix_version: "25.07.1"
 marksman_version: "2024-12-18"
 marksman_shasum: "b9cb666c643dfd9b699811fdfc445ed4c56be65c1d878c21d46847f0d7b0e475"
 ltex_ls_plus_version: "18.5.1"
