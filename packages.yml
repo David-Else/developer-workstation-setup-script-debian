@@ -61,6 +61,7 @@ debian_packages:
   - sidplayfp
   - shfmt
   - stow
+  # - systemd-cryptsetup # needed to auto-mount encrypted drives in Trixie TODO check if installed in final release
   - trash-cli
   - wl-clipboard
   - xdg-desktop-portal-gnome
