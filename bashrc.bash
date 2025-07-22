@@ -4,6 +4,7 @@ alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
 alias ebrc='xdg-open ~/.bashrc && source ~/.bashrc'
 alias ai="aichat"
 alias n="nnn"
+alias ssh="kitten ssh"
 
 # Functions
 md() {
