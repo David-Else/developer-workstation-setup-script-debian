@@ -105,7 +105,7 @@ osd-font-size=25
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
     . "$HOME/.cargo/env" &&
     rustup component add rust-analyzer &&
-    cargo install aichat --version 0.29.0
+    cargo install aichat --version 0.30.0
     sudo cp ./extras/_aichat /usr/share/zsh/vendor-completions/
 ```
 
