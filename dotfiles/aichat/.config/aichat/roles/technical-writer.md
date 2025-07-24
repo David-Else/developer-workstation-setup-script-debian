@@ -1,6 +1,5 @@
 ---
 model: together:Qwen/Qwen3-235B-A22B-Instruct-2507-tput
-compress_threshold: 40000
 ---
 Act as a professional technical writer.  
 Revise the following text to correct spelling, grammar, and punctuation.
