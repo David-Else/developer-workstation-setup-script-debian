@@ -133,6 +133,12 @@ To perform general tweaks, follow these steps:
   Terminal=false
   ```
 
+  Or to make Helix open in a tab of a currently running Kitty instance:
+
+  ```sh
+   Exec=sh -c 'kitty @ --to unix:/tmp/kitty launch --type=tab --title="${1##*/}" hx "$@" || kitty --title="${1##*/}" hx "$@"' _ %F
+  ```
+
 - Configure Git email and name:
   ```sh
   git config --global user.email "you@example.com"
