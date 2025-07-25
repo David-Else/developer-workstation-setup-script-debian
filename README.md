@@ -133,10 +133,48 @@ To perform general tweaks, follow these steps:
   Terminal=false
   ```
 
-  Or to make Helix open in a tab of a currently running Kitty instance, `ls -la /tmp/kitty` should be working:
+  Or to make Helix open in a tab of a currently running Kitty instance:
 
   ```sh
-  Exec=sh -c 'kitty @ --to unix:/tmp/kitty launch --type=tab --title="${1##*/}" hx "$@" || kitty --title="${1##*/}" hx "$@"' _ %F
+  Exec=open-in-kitty-helix %F
+  Terminal=false
+  ```
+
+  `open-in-kitty-helix`
+  ```sh
+  #!/bin/bash
+
+  FILE="$1"
+
+  # Find the first kitty socket in /tmp
+  SOCKET_PATH=$(ls /tmp/kitty-* 2>/dev/null | head -1)
+
+  # Function to check if the file is already open in any kitty tab
+  is_file_open() {
+      kitty @ --to "$SOCKET" ls | grep -q "$FILE"
+  }
+
+  # If no socket file found, start new kitty, note the tab is named hx rather than the file name, can't find solution
+  if [ -z "$SOCKET_PATH" ]; then
+      kitty hx "$FILE" &
+      exit 0
+  fi
+
+  SOCKET="unix:$SOCKET_PATH"
+
+  # Check if we can talk to this kitty instance
+  if kitty @ --to "$SOCKET" ls >/dev/null 2>&1; then
+      if is_file_open; then
+          notify-send "File Already Open" "The file '$FILE' is already open in another tab."
+          exit 1
+      else
+          kitty @ --to "$SOCKET" launch --type=tab --title="${FILE##*/}" hx "$FILE"
+      fi
+  else
+      # Only remove the specific socket that's stale
+      rm -f "$SOCKET_PATH"
+      kitty hx "$FILE" &
+  fi
   ```
 
 - Configure Git email and name:
