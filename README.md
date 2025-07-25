@@ -142,19 +142,20 @@ To perform general tweaks, follow these steps:
 
   `open-in-kitty-helix`
   ```sh
-  #!/bin/bash
+    FILE="$1"
 
-  FILE="$1"
+  # If no file is given, treat it as a "new file" with no path
+  if [ -z "$FILE" ]; then
+      FILE=""
+      TITLE="New File"
+  else
+      TITLE="${FILE##*/}" # basename only
+  fi
 
   # Find the first kitty socket in /tmp
   SOCKET_PATH=$(ls /tmp/kitty-* 2>/dev/null | head -1)
 
-  # Function to check if the file is already open in any kitty tab
-  is_file_open() {
-      kitty @ --to "$SOCKET" ls | grep -q "$FILE"
-  }
-
-  # If no socket file found, start new kitty, note the tab is named hx rather than the file name, can't find solution
+  # If no socket found, start kitty with hx
   if [ -z "$SOCKET_PATH" ]; then
       kitty hx "$FILE" &
       exit 0
@@ -162,18 +163,28 @@ To perform general tweaks, follow these steps:
 
   SOCKET="unix:$SOCKET_PATH"
 
-  # Check if we can talk to this kitty instance
+  # Check if kitty is responsive
   if kitty @ --to "$SOCKET" ls >/dev/null 2>&1; then
-      if is_file_open; then
-          notify-send "File Already Open" "The file '$FILE' is already open in another tab."
-          exit 1
+      # Only check for duplicates if a real file is given
+      if [ -n "$FILE" ]; then
+          if kitty @ --to "$SOCKET" ls | grep -qF "$FILE"; then
+              notify-send "File Already Open" "The file '$FILE' is already open."
+              exit 1
+          fi
+          # Launch hx with the file
+          kitty @ --to "$SOCKET" launch --type=tab --title="$TITLE" hx "$FILE"
       else
-          kitty @ --to "$SOCKET" launch --type=tab --title="${FILE##*/}" hx "$FILE"
+          # No file: launch hx with no arguments (so it doesn't open '.')
+          kitty @ --to "$SOCKET" launch --type=tab --title="$TITLE" hx
       fi
   else
-      # Only remove the specific socket that's stale
+      # Stale socket, remove and start fresh
       rm -f "$SOCKET_PATH"
-      kitty hx "$FILE" &
+      if [ -n "$FILE" ]; then
+          kitty hx "$FILE" &
+      else
+          kitty hx &
+      fi
   fi
   ```
 
