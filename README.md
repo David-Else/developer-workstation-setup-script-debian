@@ -142,7 +142,9 @@ To perform general tweaks, follow these steps:
 
   `open-in-kitty-helix`
   ```sh
-    FILE="$1"
+  #!/bin/bash
+
+  FILE="$1"
 
   # If no file is given, treat it as a "new file" with no path
   if [ -z "$FILE" ]; then
