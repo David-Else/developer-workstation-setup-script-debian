@@ -22,6 +22,14 @@ clients:
         input_price: 3
         output_price: 7
       - name: Qwen/Qwen3-235B-A22B-Instruct-2507-tput
-        max_input_tokens: 262144
+        max_input_tokens: 268288
         input_price: 0.2
         output_price: 0.6
+      - name: Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8
+        max_input_tokens: 262144
+        input_price: 2
+        output_price: 2
+      - name: moonshotai/Kimi-K2-Instruct
+        max_input_tokens: 131072
+        input_price: 1
+        output_price: 3
