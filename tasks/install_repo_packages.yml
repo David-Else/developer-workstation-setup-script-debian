@@ -17,16 +17,9 @@
 
 - name: Install packages
   block:
-    - name: Install Debian packages (exclude Debian 13 packages on Debian 12)
+    - name: Install Debian packages
       ansible.builtin.apt:
-        name: >-
-          {{
-            (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
-            | ternary(
-                debian_packages,
-                debian_packages + debian_13_packages
-              )
-          }}
+        name: "{{ debian_packages }}"
 
     - name: Install Flatpak packages
       community.general.flatpak:

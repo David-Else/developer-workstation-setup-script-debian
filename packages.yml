@@ -23,7 +23,10 @@ packages_to_remove:
   - totem
 
 debian_packages:
+  # - libvirt-daemon-system # dependency for gnome-boxes at least in Debian 12
+  # - systemd-cryptsetup # needed to auto-mount encrypted drives in Trixie TODO check if installed in final release
   - adb
+  - alsa-scarlett-gui
   - android-sdk-platform-tools-common
   - ansible-lint
   - bat
@@ -31,12 +34,14 @@ debian_packages:
   - build-essential
   - curl
   - ffmpeg
+  - flatseal
   - fzf
   - gdb
   - gh
+  - git-delta
   - gnome-boxes
-  - gnome-shell-extension-autohidetopbar
   - gnome-shell-extension-auto-move-windows
+  - gnome-shell-extension-autohidetopbar
   - gnome-tweaks
   - golang
   - handbrake
@@ -44,9 +49,11 @@ debian_packages:
   - heif-thumbnailer
   - imagemagick
   - jq
+  - keepassxc-full
+  - keyd
   - kitty
   - krita
-  # - libvirt-daemon-system # dependency for gnome-boxes at least in Debian 12
+  - lazygit
   - lldb-19 # to supply lldb-dap-19 for Helix debugging
   - lshw
   - mediainfo
@@ -58,10 +65,9 @@ debian_packages:
   - qpwgraph
   - ripgrep
   - shellcheck
-  - sidplayfp
   - shfmt
+  - sidplayfp
   - stow
-  # - systemd-cryptsetup # needed to auto-mount encrypted drives in Trixie TODO check if installed in final release
   - trash-cli
   - wl-clipboard
   - xdg-desktop-portal-gnome
@@ -69,14 +75,6 @@ debian_packages:
   - zoxide
   - zsh
   - zsh-autosuggestions
-
-debian_13_packages:
-  - alsa-scarlett-gui
-  - flatseal
-  - git-delta
-  - keepassxc-full
-  - keyd
-  - lazygit
 
 flatpak_packages:
   - com.github.polymeilex.neothesia
