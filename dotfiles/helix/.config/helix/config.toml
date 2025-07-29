@@ -42,6 +42,7 @@ m = { r = ":sh kitty @ send-text --match 'title:terminal and state:parent_active
 s = ":pipe-to xargs -I {} kitty @ send-text --match title:terminal and state:parent_active '{}\n'"
 
 [editor]
+rainbow-brackets = true
 color-modes = true
 end-of-line-diagnostics = "hint"
 bufferline = "multiple"
@@ -64,6 +65,3 @@ center = ["version-control"]
 [editor.soft-wrap]
 enable = true
 wrap-at-text-width = true
-
-[editor.inline-diagnostics]
-cursor-line = "warning"
