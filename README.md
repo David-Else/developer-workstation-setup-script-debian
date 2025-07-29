@@ -38,14 +38,14 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
 3. Customize the software selection by modifying `packages.yml` according to your preferences.
 
 4. Run the main installation playbook:
+   ```sh
+   ansible-playbook ./install-playbook.yml -K
+   ```
+
 > [!NOTE]
 > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 >
 > You can add `--check` for a test run or `--diff, -vv` to see more info.
-
-   ```sh
-   ansible-playbook ./install-playbook.yml -K
-   ```
 
 5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file. Install the plugins with `sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"`.
 
