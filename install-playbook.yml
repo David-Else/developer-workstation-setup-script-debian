@@ -1,4 +1,4 @@
-- name: Install packages and configure Debian 12/13
+- name: Install packages and configure Debian 13
   hosts: localhost
   vars_files:
     - packages.yml
