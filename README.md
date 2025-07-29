@@ -2,7 +2,7 @@
 
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 12 "Bookworm" or 13 "Trixie" (currently unreleased, but in hard freeze). The Ansible playbook automates the installation of software and configurations. Your version of Debian is detected, and the best package options are chosen for you.
+This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie" (currently unreleased, but in hard freeze). The Ansible playbook automates the installation of software and configurations.
 
 While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
@@ -10,9 +10,9 @@ While the software and setup choices are mainly aimed towards developers, it is 
 
 Before running the playbook, follow these steps to install Debian:
 
-### Installing Debian 12 Bookworm or 13 Trixie Testing
+### Installing Debian 13
 
-You can use the testing installer until Trixie is released this summer:
+You can use the testing installer until Trixie is released this August:
 
 https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian-testing-amd64-netinst.iso
 
@@ -21,18 +21,6 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
 > - Leave Gnome as the default desktop environment.
 > - If you installed from a DVD ISO use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in Other Software:
 > ![Software & Updates](./images/sources.png)
-
-> [!NOTE]
-> There is a bug in the Debian 12 installer, if you use the default guided partitioner, you will get a swap partition of only 1 GB regardless of how much RAM you have. To get an uncapped swap partition size, in the grub menu before the Debian installer runs, follow these steps:
->
-> 1. Press "e" to edit the default installation option.
-> 2. In the line that says `linux /install.amd/vmlinuz vga=788 --- quiet`, add the following separated by a space after `vmlinuz`:
->
->    ```sh
->    partman-auto/cap-ram=n
->    ```
->
-> 3. Press Ctrl-x or F10 to continue.
 
 ## Setting up Debian
 
@@ -86,19 +74,9 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
    make && sudo make install
    ```
 
-9. Downgrade the MPV config file for Debian 12 if needed:
+9. Change the visudo editor to vim: `sudo update-alternatives --config editor`
 
-```sh
-profile=gpu-hq
-hwdec=auto-safe
-fullscreen=yes
-input-gamepad=yes
-osd-font-size=25
-```
-
-10. Change the visudo editor to vim: `sudo update-alternatives --config editor`
-
-11. Install Rust and AIChat:
+10. Install Rust and AIChat:
 
 ```sh
     set -o pipefail &&
@@ -109,7 +87,7 @@ osd-font-size=25
     sudo cp ./extras/_aichat /usr/share/zsh/vendor-completions/
 ```
 
-12. `sudo reboot`
+11. `sudo reboot`
 
 ## Optional Tweaks
 
@@ -211,39 +189,7 @@ To perform general tweaks, follow these steps:
 
 ## FAQ
 
-If you would like to use Code for things that Helix still struggles with (like debugging), and still use all the modal keyboard shortcuts, I suggest installing `silverquark.dancehelix` or `asvetliakov.vscode-neovim` and using these settings:
-```jsonc
-{
-  // font size
-  "editor.fontSize": 15,
-  "markdown.preview.fontSize": 15,
-  "terminal.integrated.fontSize": 15,
-  // asvetliakov.vscode-neovim
-  "editor.scrollBeyondLastLine": false,
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim", // for el9 clones, or "/usr/bin/nvim" for Fedora
-  "workbench.list.automaticKeyboardNavigation": false,
-  // various
-  "window.titleBarStyle": "custom", // adjust the appearance of the window title bar for linux
-  "editor.minimap.enabled": false, // controls whether the minimap is shown
-  "workbench.activityBar.visible": false, // controls the visibility of the activity bar in the workbench
-  "window.menuBarVisibility": "hidden", // control the visibility of the menu bar
-  "files.restoreUndoStack": false, // don't restore the undo stack when a file is reopened
-  "editor.dragAndDrop": false, // controls whether the editor should allow moving selections via drag and drop
-  "telemetry.enableTelemetry": false, // disable diagnostic data collection
-}
-```
-You might also like to install `ms-vscode.live-server` for live debugging in Code or the browser.
-
 If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as a trusted EFI file to be executed.
 > [!NOTE]
 > Bonus: If you are using Debian 12 as a VM don't forget to install `spice-vdagent` AND restart to get copy and paste working. It should be installed by default on a Debian 13 guest. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
-
-### Updating from Bookworm to Trixie
-
-If you already have a clean installation of Bookworm and want to update to Trixie before using this playbook:
-
-1. Check you have about 5 gig free disk space with `df -h`
-2. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
-3. `sudo sed -i 's/bookworm/trixie/g' /etc/apt/sources.list`
-4. `sudo apt-get update && sudo apt-get dist-upgrade --autoremove -y`
 
