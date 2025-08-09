@@ -44,3 +44,5 @@
       url: "https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_extended_{{ hugo_version }}_linux-amd64.deb"
     - name: helix
       url: "{{ playbook_dir }}/extras/helix_25.7.1-1_amd64_2d5a19f081da1d04607681fe77bbc62a0e84727c.deb"
+    - name: nnn
+      url: "{{ playbook_dir }}/extras/nnn_5.1_amd64_nerd_fonts.deb"
