@@ -1,9 +1,3 @@
-# - name: Install packages with pipx
-#   ansible.builtin.command: pipx install {{ item }}
-#   loop: "{{ python_packages }}"
-#   args:
-#     creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
-
 - name: Install packages with pipx
   community.general.pipx:
     name: "{{ item }}"
