@@ -188,18 +188,6 @@ To perform general tweaks, follow these steps:
   sudo chmod +x /usr/local/bin/open-in-kitty-helix
   ```
 
-- Configure Git user details:
-  ```sh
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
-  ```
-
-  Enable GPG signing for commits:
-  ```sh
-  git config --global user.signingkey key
-  git config --global commit.gpgsign true
-  ```
-
 - Install GitHub CLI extensions:
   ```sh
   gh extension install yusukebe/gh-markdown-preview
