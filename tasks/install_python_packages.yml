@@ -6,7 +6,7 @@
 
 - name: Install packages with pipx
   community.general.pipx:
-    package: "{{ item }}"
+    name: "{{ item }}"
     executable: pipx
   loop: "{{ python_packages }}"
 
