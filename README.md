@@ -17,19 +17,19 @@ You can use the testing installer until Trixie is released this August:
 https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian-testing-amd64-netinst.iso
 
 > [!NOTE]
-> - Do not provide any details for the root account, your user account will then have administrative rights.
-> - Leave Gnome as the default desktop environment.
-> - If you installed from a DVD ISO use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in Other Software:
+> - Do not provide any details for the root account; your user account will then have administrative rights.
+> - Leave GNOME as the default desktop environment.
+> - If you installed from a DVD ISO, use the Software & Updates application or the terminal to remove `cdrom` from `/etc/apt/sources.list`. Look in the Other Software tab:
 > ![Software & Updates](./images/sources.png)
 
 ## Setting up Debian
 
-1. Open the terminal and run the following command to install Ansible, git, and Flatpak:
+1. Open the terminal and run the following command to install Ansible, Git, and Flatpak:
    ```sh
    sudo apt install ansible git flatpak
    ```
 
-2. Clone this repository and navigate to it:
+2. Clone this repository and navigate into it:
    ```sh
    git clone https://github.com/David-Else/developer-workstation-setup-script-debian
    cd developer-workstation-setup-script-debian
@@ -45,12 +45,14 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
 > [!NOTE]
 > When prompted for the `BECOME` password in Ansible, enter your user password. Your account must have administrative privileges.
 >
-> You can add `--check` for a test run or `--diff, -vv` to see more info.
+> You can add `--check` for a test run or `--diff -vv` to see more information.
 
-5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file. Install the plugins with `sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"`.
+5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file. Install the plugins using:
+   ```sh
+   sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+   ```
 
 6. Install showmethekey:
-
    ```sh
    cd extras
    unzip showmethekey-1.12.0-compiled.zip
@@ -59,35 +61,38 @@ https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian
    ```
 
 7. Install Firefox extensions:
-
    ```sh
    firefox https://addons.mozilla.org/en-GB/firefox/addon/ublock-origin/ \
        https://addons.mozilla.org/en-US/firefox/addon/surfingkeys_ff/ \
        https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/ &
    ```
 
-8. Compile tt terminal typing test from source:
-
+8. Compile the `tt` terminal typing test from source:
    ```sh
    git clone https://github.com/lemnos/tt
    cd tt
    make && sudo make install
    ```
 
-9. Change the visudo editor to vim: `sudo update-alternatives --config editor`
+9. Change the visudo editor to Vim:
+   ```sh
+   sudo update-alternatives --config editor
+   ```
 
 10. Install Rust and AIChat:
-
-```sh
+    ```sh
     set -o pipefail &&
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
     . "$HOME/.cargo/env" &&
     rustup component add rust-analyzer &&
-    cargo install aichat --version 0.30.0
+    cargo install aichat --version 0.30.0 &&
     sudo cp ./extras/_aichat /usr/share/zsh/vendor-completions/
-```
+    ```
 
-11. `sudo reboot`
+11. Reboot the system:
+    ```sh
+    sudo reboot
+    ```
 
 ## Optional Tweaks
 
@@ -95,30 +100,41 @@ Depending on your software selection, hardware, and personal preferences, you ma
 
 ### Audio
 
-You can confirm the allowed sample rate settings were changed by the playbook with `pw-metadata -n settings` and watch the sample rates change per application running `pw-top`.
+Confirm that the allowed sample rate settings were changed by the playbook using:
+```sh
+pw-metadata -n settings
+```
+
+Monitor per-application sample rates dynamically with:
+```sh
+pw-top
+```
 
 > [!NOTE]
-> More info can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
+> More information can be found at: [docs.pipewire.org configuration-file-pipewireconf](https://gitlab.freedesktop.org/pipewire/pipewire/-/wikis/Config-PipeWire#configuration-file-pipewireconf)
 
 ### General
 
 To perform general tweaks, follow these steps:
 
-- Set Helix to open in Kitty `sudoedit /usr/share/applications/Helix.desktop`:
-
+- Set Helix to open in Kitty by editing the desktop entry:
   ```sh
+  sudoedit /usr/share/applications/Helix.desktop
+  ```
+
+  To open Helix in a standalone Kitty instance:
+  ```ini
   Exec=kitty --single-instance hx %F
   Terminal=false
   ```
 
-  Or to make Helix open in a tab of a currently running Kitty instance:
-
-  ```sh
+  Or to open Helix in a tab of an existing Kitty instance:
+  ```ini
   Exec=open-in-kitty-helix %F
   Terminal=false
   ```
 
-  `open-in-kitty-helix`
+  Create the script `open-in-kitty-helix`:
   ```sh
   #!/bin/bash
 
@@ -168,28 +184,46 @@ To perform general tweaks, follow these steps:
   fi
   ```
 
-- Configure Git email and name:
+  Make the script executable:
+  ```sh
+  sudo cp open-in-kitty-helix /usr/local/bin/
+  sudo chmod +x /usr/local/bin/open-in-kitty-helix
+  ```
+
+- Configure Git user details:
   ```sh
   git config --global user.email "you@example.com"
   git config --global user.name "Your Name"
   ```
+
   Enable GPG signing for commits:
   ```sh
   git config --global user.signingkey key
   git config --global commit.gpgsign true
   ```
 
-- Install extras:
+- Install GitHub CLI extensions:
   ```sh
   gh extension install yusukebe/gh-markdown-preview
   gh extension install dlvhdr/gh-dash
-  hx ~/.config/gh-dash/config.yml # diff: "delta"
+  hx ~/.config/gh-dash/config.yml  # Set diff: "delta"
   ```
--  `sudo apt install v4l2loopback-dkms v4l2loopback-utils` for virtual video devices
+
+- Install virtual video device support:
+  ```sh
+  sudo apt install v4l2loopback-dkms v4l2loopback-utils
+  ```
 
 ## FAQ
 
-If you get no bootable device found after installing Debian, try https://itsfoss.com/no-bootable-device-found-ubuntu/. Basically, add `shimx64.efi` as a trusted EFI file to be executed.
-> [!NOTE]
-> Bonus: If you are using Debian as a VM don't forget to install `spice-vdagent` AND restart to get copy and paste working. It should be installed by default on a Debian 13 guest. You can check it is running with `sudo systemctl status spice-vdagent` and enable at boot if needed with `sudo systemctl enable spice-vdagent`.
+If you encounter a "no bootable device found" error after installing Debian, refer to: https://itsfoss.com/no-bootable-device-found-ubuntu/. In short, add `shimx64.efi` as a trusted EFI file to be executed.
 
+> [!NOTE]
+> **Bonus**: If you are using Debian as a virtual machine, install `spice-vdagent` and restart to enable copy and paste functionality. It should be installed by default on a Debian 13 guest. Verify it is running with:
+> ```sh
+> sudo systemctl status spice-vdagent
+> ```
+> Enable it at boot if necessary:
+> ```sh
+> sudo systemctl enable spice-vdagent
+> ```
