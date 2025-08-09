@@ -1,8 +1,14 @@
+# - name: Install packages with pipx
+#   ansible.builtin.command: pipx install {{ item }}
+#   loop: "{{ python_packages }}"
+#   args:
+#     creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
+
 - name: Install packages with pipx
-  ansible.builtin.command: pipx install {{ item }}
+  community.general.pipx:
+    package: "{{ item }}"
+    executable: pipx
   loop: "{{ python_packages }}"
-  args:
-    creates: "{{ ansible_env.HOME }}/.local/pipx/venvs/{{ item }}"
 
 - name: Run pipx ensurepath
   ansible.builtin.command: pipx ensurepath
