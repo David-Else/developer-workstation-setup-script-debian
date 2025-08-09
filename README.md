@@ -2,9 +2,7 @@
 
 ![Debian_logo](./images/debian_logo.svg)
 
-This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie" (currently unreleased, but in hard freeze). The Ansible playbook automates the installation of software and configurations.
-
-While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
+This guide provides instructions for setting up a developer workstation using Debian 13 "Trixie". While the software and setup choices are mainly aimed towards developers, it is also suitable for general use.
 
 ## Installation
 
@@ -12,9 +10,9 @@ Before running the playbook, follow these steps to install Debian:
 
 ### Installing Debian 13
 
-You can use the testing installer until Trixie is released this August:
+You can download the net installer from here:
 
-https://cdimage.debian.org/images/daily-builds/daily/current/amd64/iso-cd/debian-testing-amd64-netinst.iso
+https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
 
 > [!NOTE]
 > - Do not provide any details for the root account; your user account will then have administrative rights.
@@ -219,7 +217,7 @@ To perform general tweaks, follow these steps:
 If you encounter a "no bootable device found" error after installing Debian, refer to: https://itsfoss.com/no-bootable-device-found-ubuntu/. In short, add `shimx64.efi` as a trusted EFI file to be executed.
 
 > [!NOTE]
-> **Bonus**: If you are using Debian as a virtual machine, install `spice-vdagent` and restart to enable copy and paste functionality. It should be installed by default on a Debian 13 guest. Verify it is running with:
+> **Bonus**: If you are using Debian 13 as a virtual machine, `spice-vdagent` should be pre-installed. Verify it is running with:
 > ```sh
 > sudo systemctl status spice-vdagent
 > ```
