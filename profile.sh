@@ -6,6 +6,7 @@ export NNN_TRASH=1 # use trash-cli: https://pypi.org/project/trash-cli/
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_BATTHEME="Visual Studio Dark+"
 export NNN_BATSTYLE="plain"
+# export NNN_RCLONE='rclone mount --vfs-cache-mode full --vfs-cache-max-size 5G'
 export NNN_RCLONE='rclone mount --vfs-cache-mode writes'
 export BAT_THEME="Visual Studio Dark+"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,.wine}"'
