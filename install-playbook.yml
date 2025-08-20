@@ -9,6 +9,8 @@
         - name: Install and remove repository packages
           ansible.builtin.import_tasks: tasks/install_repo_packages.yml
         - name: Install GitHub packages
+          vars:
+            bin_install_dir: /usr/local/bin
           ansible.builtin.import_tasks: tasks/install_github_packages.yml
         - name: Configure system settings and user environment
           ansible.builtin.import_tasks: tasks/configure_system_settings.yml
@@ -19,6 +21,8 @@
         - name: Stow dotfiles
           ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
         - name: Configure Pipewire
+          vars:
+            pipewire_config_dir: "{{ ansible_env['HOME'] }}/.config/pipewire/"
           ansible.builtin.import_tasks: tasks/setup_pipewire.yml
         - name: Update .bashrc and .profile
           ansible.builtin.import_tasks: tasks/update_bashrc.yml
