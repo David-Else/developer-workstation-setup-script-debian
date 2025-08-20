@@ -1,3 +1,22 @@
+- name: Manage existing ~/.dotfiles directory
+  block:
+    - name: Check if ~/.dotfiles directory exists
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.dotfiles"
+      register: dotfiles_dir
+
+    - name: Unstow current dotfiles if ~/.dotfiles exists
+      ansible.builtin.shell:
+        chdir: "{{ ansible_facts['user_dir'] }}/.dotfiles"
+        cmd: stow --target="{{ ansible_facts['user_dir'] }}" --delete *
+      when: dotfiles_dir.stat.exists
+
+    - name: Remove existing ~/.dotfiles directory
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.dotfiles"
+        state: absent
+      when: dotfiles_dir.stat.exists
+
 - name: Create ~/.dotfiles directory
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.dotfiles"
