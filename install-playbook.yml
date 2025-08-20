@@ -8,10 +8,10 @@
       block:
         - name: Install and remove repository packages
           ansible.builtin.import_tasks: tasks/install_repo_packages.yml
-        - name: Install GitHub packages
+        - name: Install user packages and binaires
           vars:
             bin_install_dir: /usr/local/bin
-          ansible.builtin.import_tasks: tasks/install_github_packages.yml
+          ansible.builtin.import_tasks: tasks/install_user_packages.yml
         - name: Configure system settings and user environment
           ansible.builtin.import_tasks: tasks/configure_system_settings.yml
 
