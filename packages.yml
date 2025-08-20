@@ -75,8 +75,8 @@ debian_packages:
 
 flatpak_packages:
   - com.github.polymeilex.neothesia
-  - com.obsproject.Studio # TODO in trixie
-  - com.obsproject.Studio.Plugin.DroidCam # TODO in trixie
+  # - com.obsproject.Studio # TODO in trixie
+  # - com.obsproject.Studio.Plugin.DroidCam # TODO in trixie
   - io.github.flattool.Warehouse
   - org.signal.Signal
 
