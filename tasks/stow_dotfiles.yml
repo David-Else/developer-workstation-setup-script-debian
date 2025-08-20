@@ -14,4 +14,3 @@
     cmd: stow --target="{{ ansible_facts['user_dir'] }}" * --verbose=2
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
-  failed_when: 'result.rc != 0 and "Conflicting" in result.stderr'
