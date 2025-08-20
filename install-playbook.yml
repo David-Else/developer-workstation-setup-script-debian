@@ -16,8 +16,6 @@
     - name: User configuration
       become: false
       block:
-        - name: Install Python packages
-          ansible.builtin.import_tasks: tasks/install_python_packages.yml
         - name: Stow dotfiles
           ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
         - name: Configure Pipewire
@@ -31,3 +29,9 @@
             src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
             dest: "{{ ansible_env.HOME }}/.local/share"
             remote_src: true
+        - name: Install or upgrade Python packages
+          community.general.pipx:
+            name: "{{ item }}"
+            executable: pipx
+            state: latest
+          loop: "{{ python_packages }}"

@@ -1,6 +1,0 @@
-- name: Install or upgrade packages with pipx
-  community.general.pipx:
-    name: "{{ item }}"
-    executable: pipx
-    state: latest
-  loop: "{{ python_packages }}"
