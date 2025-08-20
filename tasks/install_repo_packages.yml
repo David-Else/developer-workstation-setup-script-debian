@@ -15,7 +15,7 @@
     upgrade: dist
     update_cache: true
 
-- name: Install packages
+- name: Install system wide packages
   block:
     - name: Install Debian packages
       ansible.builtin.apt:
@@ -30,3 +30,11 @@
       community.general.npm:
         name: "{{ item }}"
         global: true
+
+- name: Install or upgrade Python user packages
+  become: false
+  community.general.pipx:
+    name: "{{ item }}"
+    executable: pipx
+    state: latest
+  loop: "{{ python_packages }}"

@@ -33,13 +33,6 @@
             dest: "{{ ansible_env.HOME }}/.local/share"
             remote_src: true
 
-        - name: Install or upgrade Python packages
-          community.general.pipx:
-            name: "{{ item }}"
-            executable: pipx
-            state: latest
-          loop: "{{ python_packages }}"
-
         - name: Configure GNOME settings
           community.general.dconf:
             key: "{{ item.key }}"
