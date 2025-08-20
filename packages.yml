@@ -38,7 +38,7 @@ debian_packages:
   - git-delta
   - gnome-boxes
   - gnome-shell-extension-auto-move-windows
-  - gnome-shell-extension-autohidetopbar
+  # - gnome-shell-extension-autohidetopbar
   - gnome-tweaks
   - golang
   - handbrake
