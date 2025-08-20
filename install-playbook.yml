@@ -21,8 +21,6 @@
         - name: Stow dotfiles
           ansible.builtin.import_tasks: tasks/stow_dotfiles.yml
         - name: Configure Pipewire
-          vars:
-            pipewire_config_dir: "{{ ansible_env['HOME'] }}/.config/pipewire/"
           ansible.builtin.import_tasks: tasks/setup_pipewire.yml
         - name: Update .bashrc and .profile
           ansible.builtin.import_tasks: tasks/update_bashrc.yml

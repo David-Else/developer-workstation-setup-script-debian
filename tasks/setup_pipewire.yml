@@ -1,17 +1,17 @@
 - name: Ensure ~/.config/pipewire/ directory exists
   ansible.builtin.file:
-    path: "{{ pipewire_config_dir }}"
+    path: "{{ ansible_env['HOME'] }}/.config/pipewire/"
     state: directory
 
 - name: Copy pipewire.conf to user's config directory
   ansible.builtin.copy:
     src: /usr/share/pipewire/pipewire.conf
-    dest: "{{ pipewire_config_dir }}pipewire.conf"
+    dest: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
     force: false
 
 - name: Update Pipewire allowed sample rates
   ansible.builtin.lineinfile:
-    path: "{{ pipewire_config_dir }}pipewire.conf"
+    path: "{{ ansible_env['HOME'] }}/.config/pipewire/pipewire.conf"
     regexp: '^\s*#\s*default.clock.allowed-rates\s*='
     line: "default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]"
     backrefs: true
