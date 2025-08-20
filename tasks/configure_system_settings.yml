@@ -18,28 +18,26 @@
         state: link
       when: "'bat' in ansible_facts.packages"
 
-- name: Configure Zsh if installed
+- name: Configure Zsh and Hugo Completions
   when:
     - "'zsh' in ansible_facts.packages"
   block:
-    - name: Switch default shell to zsh
+    - name: Switch the default shell to Zsh
       ansible.builtin.user:
         name: "{{ lookup('ansible.builtin.env', 'USER') }}"
         shell: /usr/bin/zsh
 
-    - name: Generate and install Hugo completion for zsh
-      block:
-        - name: Generate Hugo completion for zsh
-          ansible.builtin.command: hugo completion zsh
-          register: hugo_completion
-          changed_when: false
+    - name: Generate Hugo completion for Zsh
+      ansible.builtin.command: hugo completion zsh
+      register: hugo_completion
+      changed_when: false
 
-        - name: Write Hugo completion to system-wide zsh completions
-          ansible.builtin.copy:
-            content: "{{ hugo_completion.stdout }}"
-            dest: /usr/share/zsh/vendor-completions/_hugo
+    - name: Write Hugo completion to system-wide Zsh completions
+      ansible.builtin.copy:
+        content: "{{ hugo_completion.stdout }}"
+        dest: /usr/share/zsh/vendor-completions/_hugo
 
-- name: Create default.conf for keyd
+- name: Create default.conf for keyd to map capslock to escape
   ansible.builtin.copy:
     content: |
       [ids]
