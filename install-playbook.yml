@@ -22,16 +22,30 @@
           ansible.builtin.import_tasks: tasks/setup_pipewire.yml
         - name: Update .bashrc and .profile
           ansible.builtin.import_tasks: tasks/update_bashrc.yml
-        - name: Setup Gnome
-          ansible.builtin.import_tasks: tasks/setup-gnome.yml
+
         - name: Download and install yabridge
           ansible.builtin.unarchive:
             src: "https://github.com/robbert-vdh/yabridge/releases/download/{{ yabridge_version }}/yabridge-{{ yabridge_version }}.tar.gz"
             dest: "{{ ansible_env.HOME }}/.local/share"
             remote_src: true
+
         - name: Install or upgrade Python packages
           community.general.pipx:
             name: "{{ item }}"
             executable: pipx
             state: latest
           loop: "{{ python_packages }}"
+
+        - name: Configure GNOME settings
+          community.general.dconf:
+            key: "{{ item.key }}"
+            value: "{{ item.value }}"
+          loop:
+            - {
+                key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled",
+                value: "true",
+              }
+            - {
+                key: "/org/gnome/shell/extensions/auto-move-windows/application-list",
+                value: "['org.gnome.Calendar.desktop:2', 'org.signal.Signal.desktop:2', 'firefox-esr.desktop:3']",
+              }
