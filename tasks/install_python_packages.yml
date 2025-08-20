@@ -1,9 +1,6 @@
-- name: Install packages with pipx
+- name: Install or upgrade packages with pipx
   community.general.pipx:
     name: "{{ item }}"
     executable: pipx
+    state: latest
   loop: "{{ python_packages }}"
-
-- name: Run pipx ensurepath
-  ansible.builtin.command: pipx ensurepath
-  changed_when: false
