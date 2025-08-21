@@ -24,6 +24,7 @@
   register: plugins_dir
 
 - name: Install nnn plugins if nnn is installed and plugins directory does not exist
+  become: false
   ansible.builtin.shell: sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
   when: "'nnn' in ansible_facts.packages and not plugins_dir.stat.exists"
 
