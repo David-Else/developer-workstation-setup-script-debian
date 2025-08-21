@@ -45,10 +45,7 @@ https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
 >
 > You can add `--check` for a test run or `--diff -vv` to see more information.
 
-5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file. Install the plugins using:
-   ```sh
-   sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
-   ```
+5. To enable the preview feature in the `nnn` file manager, run it once with the `-a` flag to create the FIFO file.
 
 6. Install showmethekey:
    ```sh

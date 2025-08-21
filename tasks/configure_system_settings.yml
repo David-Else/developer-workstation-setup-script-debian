@@ -18,6 +18,15 @@
         state: link
       when: "'bat' in ansible_facts.packages"
 
+- name: Check if nnn plugins directory exists
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.config/nnn/plugins"
+  register: plugins_dir
+
+- name: Install nnn plugins if nnn is installed and plugins directory does not exist
+  ansible.builtin.shell: sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+  when: "'nnn' in ansible_facts.packages and not plugins_dir.stat.exists"
+
 - name: Configure Zsh and Hugo Completions
   when:
     - "'zsh' in ansible_facts.packages"
