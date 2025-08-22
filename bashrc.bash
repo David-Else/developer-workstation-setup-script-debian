@@ -30,7 +30,6 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 eval "$(zoxide init bash)"
 
 # aichat and aider
-export OPENAI_API_KEY="xxx"
 export TOGETHERAI_API_KEY="xxx"
 export TOGETHER_API_KEY="xxx"
 

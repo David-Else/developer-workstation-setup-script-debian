@@ -68,7 +68,6 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 eval "$(zoxide init zsh)"
 
 # aichat and aider
-export OPENAI_API_KEY="xxx"
 export TOGETHERAI_API_KEY="xxx"
 export TOGETHER_API_KEY="xxx"
 
