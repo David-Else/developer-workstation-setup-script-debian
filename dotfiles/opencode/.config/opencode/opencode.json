@@ -1,0 +1,8 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "keybinds": {
+    "leader": "ctrl+space",
+    "messages_page_up": "ctrl+u",
+    "messages_page_down": "ctrl+d"
+  }
+}
