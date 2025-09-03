@@ -42,7 +42,7 @@ alias tree="tree -Catr --noreport --dirsfirst --filelimit 100"
 alias ezrc='hx ~/.zshrc && source ~/.zshrc'
 alias ai="aichat"
 alias n="nnn"
-alias ssh="kitten ssh"
+alias s="kitten ssh"
 
 # Functions
 md() {
