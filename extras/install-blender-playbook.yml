@@ -3,7 +3,7 @@
   become: false
   vars:
     bin_install_dir: /usr/local/bin
-    blender_version: 4.5.2
+    blender_version: 4.5.3
     blender_url: "https://download.blender.org/release/Blender4.5/blender-{{ blender_version }}-linux-x64.tar.xz"
 
   tasks:
