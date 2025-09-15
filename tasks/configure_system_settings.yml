@@ -28,7 +28,7 @@
   ansible.builtin.shell: sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
   when: "'nnn' in ansible_facts.packages and not plugins_dir.stat.exists"
 
-- name: Configure Zsh and Hugo Completions
+- name: Configure Zsh and Zsh Hugo Completions
   when:
     - "'zsh' in ansible_facts.packages"
   block:
@@ -63,3 +63,13 @@
     name: "{{ lookup('ansible.builtin.env', 'USER') }}"
     groups: pipewire
     append: true
+
+- name: Ensure Helix.desktop file is updated to run Helix in Kitty terminal
+  ansible.builtin.lineinfile:
+    path: /usr/share/applications/Helix.desktop
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    backup: true
+  loop:
+    - { regexp: "^Exec=", line: "Exec=kitty --single-instance hx %F" }
+    - { regexp: "^Terminal=", line: "Terminal=false" }
