@@ -112,18 +112,11 @@ pw-top
 
 To perform general tweaks, follow these steps:
 
-- Set Helix to open in Kitty by editing the desktop entry:
+- Set Helix to open in a Kitty tab via a script:
   ```sh
   sudoedit /usr/share/applications/Helix.desktop
   ```
 
-  To open Helix in a standalone Kitty instance:
-  ```ini
-  Exec=kitty --single-instance hx %F
-  Terminal=false
-  ```
-
-  Or to open Helix in a tab of an existing Kitty instance:
   ```ini
   Exec=open-in-kitty-helix %F
   Terminal=false
