@@ -28,6 +28,7 @@ debian_packages:
   - borgbackup
   - build-essential
   - curl
+  - ddcutil
   - fastfetch
   - ffmpeg
   - flatseal

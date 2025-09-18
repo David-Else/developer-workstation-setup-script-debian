@@ -73,3 +73,7 @@
   loop:
     - { regexp: "^Exec=", line: "Exec=kitty --single-instance hx %F" }
     - { regexp: "^Terminal=", line: "Terminal=false" }
+
+- name: Load i2c-dev kernel module on boot for ddcutil to function
+  community.general.modprobe:
+    name: i2c-dev
